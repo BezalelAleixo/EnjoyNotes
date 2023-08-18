@@ -1,5 +1,6 @@
 package enj.appdesktop.vieww;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +30,7 @@ public class JTelaInicial extends JFrame{
 		lblTitulo = new JLabel("ENJOYNOTES");
 		btnCadastrar = new JButton("Cadastre-se");
 		btnEntrar = new JButton("Entrar");
-		
+		btnEntrar.setBackground(Color.PINK);		
 		lblTitulo.setBounds(450,100,120,20);
 		btnCadastrar.setBounds(200, 500, 120, 30);
 		btnEntrar.setBounds(600,500,120,30);
