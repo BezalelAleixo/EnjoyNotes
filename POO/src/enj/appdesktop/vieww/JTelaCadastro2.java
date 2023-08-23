@@ -16,7 +16,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import enj.appdesktop.model.daoo.ConexaoDAOCadastro;
-import enj.appdesktop.model.daoo.ConexaoDAOCadastro02;
 import enj.appdesktop.model.vo.CadastroVO;
 
 /**
@@ -32,6 +31,7 @@ public class JTelaCadastro2 extends JFrame{
 	private JButton btnConcluir;
 	private JButton btnVoltar, btnVoltarInicio;
 	private JCheckBox cksenha;
+	private JTelaCadastro fonte;
 	Font fonte1, fonte2, fonte3;
 	
 	public JTelaCadastro2() {
@@ -114,14 +114,28 @@ public class JTelaCadastro2 extends JFrame{
 				String nomeUsuario, senha;
 				nomeUsuario = tfNome.getText();
 				senha = pfSenha.getText();
+				//String nome, sexo, datanasc;
+				/*CadastroVO dados = new CadastroVO();
+				nome = dados.getNome();
+				sexo = dados.getSexo();
+				datanasc = dados.getDatanasc();*/
 				CadastroVO usuario = new CadastroVO();
+				
+				
+				usuario.setNome(JTelaCadastro.getNome());
+				usuario.setSexo(JTelaCadastro.getSexo());
+				usuario.setDatanasc(JTelaCadastro.getNasc());//2006/07/28
 				usuario.setNomeUsuario(nomeUsuario);
+				usuario.setSenha(senha);
+			
 				if(pfConfSenha.getText().length() == pfSenha.getText().length()) {
-					usuario.setSenha(senha);
+					JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso");
+					ConexaoDAOCadastro dadosusuario = new ConexaoDAOCadastro();
+					dadosusuario.ConexaoDAOCadastro(usuario);
+				}else {
+					JOptionPane.showMessageDialog(null, "Verifique a senha!");
 				}
-				JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso");
-				ConexaoDAOCadastro02 dados = new ConexaoDAOCadastro02();
-				dados.ConexaoDAOCadastro(usuario);
+				
 			}
 		});
 		cksenha.addActionListener(new ActionListener() {
@@ -135,8 +149,6 @@ public class JTelaCadastro2 extends JFrame{
 					pfConfSenha.setEchoChar('*');
 					pfSenha.setEchoChar('*');
 				}
-				
-				
 			}
 		});
 		btnVoltar.addActionListener(new ActionListener() {

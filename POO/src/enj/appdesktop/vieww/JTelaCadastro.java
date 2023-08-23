@@ -28,11 +28,13 @@ public class JTelaCadastro extends JFrame{
 	private JPanel quadro;
 	private JLabel lblDados, lblNome, lblSexo, lblDataNasc;
 	private ButtonGroup escolha;
-	private JRadioButton rbtMasculino, rbtFeminino;
-	private JTextField tfNome, tfDataNasc;
+	private static JRadioButton rbtMasculino, rbtFeminino;
+	private static JTextField tfNome, tfDataNasc;
 	private JButton btnContinuar;
 	private JButton btnVoltar;
 	Font fonte1, fonte2, fonte3;
+	private String nome, sexo, dataN;
+	private String n,s,dn;
 	
 	public JTelaCadastro() {
 		setTitle("Cadastro");
@@ -105,6 +107,8 @@ public class JTelaCadastro extends JFrame{
 		quadro.add(btnVoltar);
 		add(quadro);
 		definirEventos();
+		
+				
 	}
 	private void definirEventos() {
 		btnContinuar.addActionListener(new ActionListener() {
@@ -116,29 +120,23 @@ public class JTelaCadastro extends JFrame{
 				
 			}
 		});		
-		btnContinuar.addActionListener(new ActionListener() {
+		/*btnContinuar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				String nome, sexo = null;
-				String datanasc;
-				nome = tfNome.getText();
+				n= tfNome.getText();
 				if(rbtFeminino.isSelected()) {
-					sexo = "feminino";
+					s = "feminino";
 				}else {
-					sexo = "masculino";
+					s = "masculino";
 				}
-				datanasc = tfDataNasc.getText();
-				CadastroVO usuario = new CadastroVO();
-				usuario.setNome(nome);
-				usuario.setSexo(sexo);
-				usuario.setDatanasc(datanasc);
-				ConexaoDAOCadastro dados = new ConexaoDAOCadastro();
-				dados.ConexaoDAOCadastro(usuario);
+				dn = tfDataNasc.getText();
+
+				
 				
 			}
-		});
+		});*/
+		
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Voltando à tela anterior");
@@ -147,6 +145,37 @@ public class JTelaCadastro extends JFrame{
 			}
 		});
 	}
+	public static String getNome() {
+		String n = tfNome.getText();
+		return n;
+	}
+	//public void setSexo(String sexo) {
+	//	this.sexo = sexo;
+	//}
+	public static String getSexo() {
+		String s;
+		if(rbtFeminino.isSelected()) {
+			s = "feminino";
+		}else {
+			s = "masculino";
+		}
+		return s;
+	}
+	//public void setNasc(String Nasc) {
+	//	this.dataN = Nasc;
+	//}
+	public static String getNasc() {
+		String dn = tfDataNasc.getText();
+		return dn;
+		
+	}
+	//public void setNome(String nome) {
+	//	this.nome = nome;
+	//}
+	
+
+	
+	
 	public static void abrir() {
 		JTelaCadastro frame = new JTelaCadastro();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
