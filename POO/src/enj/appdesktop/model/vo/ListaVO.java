@@ -10,8 +10,15 @@ public class ListaVO {
         this.itens = itens;
         this.id = id;
     }
+    
 
-    public String getTitulo() {
+    public ListaVO(int id) {
+		super();
+		this.id = id;
+	}
+
+
+	public String getTitulo() {
         return titulo;
     }
 

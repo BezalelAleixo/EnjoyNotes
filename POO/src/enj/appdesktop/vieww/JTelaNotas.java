@@ -29,6 +29,7 @@ public class JTelaNotas extends JFrame {
     private JButton editar;
     private JButton deletar;
     private JButton Salvar;
+    private JButton Voltar;
     int id=0;
     
     public JTelaNotas() {
@@ -132,6 +133,11 @@ public class JTelaNotas extends JFrame {
         deletar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	String[] notas = new String[nota.size()];
+                for (int i = 0; i < nota.size(); i++) {
+                    notas[i] = nota.get(i).getTitulo();
+                }
+            	
                 int selectedIndex = JOptionPane.showOptionDialog(
                         JTelaNotas.this,
                         "Selecione a nota que deseja excluir: ",
@@ -139,7 +145,7 @@ public class JTelaNotas extends JFrame {
                         JOptionPane.DEFAULT_OPTION,
                         JOptionPane.PLAIN_MESSAGE,
                         null,
-                        nota.toArray(),
+                        notas,
                         null
                 );
 
@@ -153,17 +159,37 @@ public class JTelaNotas extends JFrame {
                 delete.DeletarNotaDAO(cod);
             }
         });
+        Voltar = new JButton("Voltar ao menu");
+        Voltar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				JTelaNotas.VoltarMenu();
+				
+			}
+		});
         
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(salvar);
         buttonPanel.add(editar);
         buttonPanel.add(deletar); 
         buttonPanel.add(Salvar);
+        buttonPanel.add(Voltar);
 
 
         add(buttonPanel, BorderLayout.SOUTH);
+        
+        
     }
 
+    public static void VoltarMenu(){
+    JTelaMenu menu =  new JTelaMenu();
+    menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    menu.setLocationRelativeTo(menu);
+    menu.setVisible(true);
+    }
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

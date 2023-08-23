@@ -2,6 +2,7 @@ package enj.appdesktop.vieww;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -31,12 +32,15 @@ public class JTelaCadastro extends JFrame{
 	private JTextField tfNome, tfDataNasc;
 	private JButton btnContinuar;
 	private JButton btnVoltar;
+	Font fonte1, fonte2, fonte3;
 	
 	public JTelaCadastro() {
 		setTitle("Cadastro");
 		contentpane = getContentPane();
 		setLayout(null);
 		setBounds(0,0,1000,800);
+        contentpane.setBackground(Color.PINK);
+
 		
 		quadro = new JPanel();
 		quadro.setBackground(Color.WHITE);
@@ -46,24 +50,45 @@ public class JTelaCadastro extends JFrame{
 		lblDataNasc = new JLabel("Data de Nascimento:");
 		tfNome = new JTextField();
 		rbtMasculino = new JRadioButton("masculino");
+		rbtMasculino.setBackground(Color.WHITE);
 		rbtFeminino = new JRadioButton("feminino");
+		rbtFeminino.setBackground(Color.WHITE);
 		escolha = new ButtonGroup();
 		tfDataNasc = new JTextField("YYYY/MM/DD");
 		btnContinuar = new JButton("Continuar");
-		btnVoltar = new JButton("Cancelar");
+		btnVoltar = new JButton("Voltar");
 		
+		
+				//Fontes
+				fonte1 = new Font("Arial", Font.BOLD,30);
+				fonte2 = new Font("Verdana", Font.PLAIN, 19);
+				fonte3 = new Font("Verdana", Font.PLAIN, 16);
+				
+				//Adicionando as fontes aos componentes
+				
+				lblDados.setFont(fonte1);
+				btnContinuar.setFont(fonte2);
+				btnVoltar.setFont(fonte2);
+				lblNome.setFont(fonte3);
+				lblSexo.setFont(fonte3);
+				lblDataNasc.setFont(fonte3);
+				tfNome.setFont(fonte3);
+				rbtFeminino.setFont(fonte3);
+				rbtMasculino.setFont(fonte3);
+				tfDataNasc.setFont(fonte3);
+				
 		quadro.setLayout(null);
 		quadro.setBounds(90,90,800,600);
-		lblDados.setBounds(350,50,140,20);
+		lblDados.setBounds(310,50,250,40);
 		lblNome.setBounds(150,200,110,20);
 		lblSexo.setBounds(150,230,110,20);
-		lblDataNasc.setBounds(150,260,130,20);
-		tfNome.setBounds(400,200,140,20);
+		lblDataNasc.setBounds(150,260,190,20);
+		tfNome.setBounds(400,200,140,30);
 		rbtMasculino.setBounds(400,230,110,20);
 		rbtFeminino.setBounds(510,230,110,20);
-		tfDataNasc.setBounds(400,260,110,20);
-		btnContinuar.setBounds(350,300,90,30);
-		btnVoltar.setBounds(450, 300, 90, 30);
+		tfDataNasc.setBounds(400,260,110,30);
+		btnContinuar.setBounds(220,350,140,30);
+		btnVoltar.setBounds(450, 350, 140, 30);
 		
 		escolha.add(rbtMasculino);
 		escolha.add(rbtFeminino);
