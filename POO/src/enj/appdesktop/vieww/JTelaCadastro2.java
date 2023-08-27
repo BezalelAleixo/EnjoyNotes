@@ -111,9 +111,13 @@ public class JTelaCadastro2 extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String nomeUsuario, senha;
+				String nomeUsuario, senha, consenha;
 				nomeUsuario = tfNome.getText();
 				senha = pfSenha.getText();
+				consenha = pfConfSenha.getText();
+				if(nomeUsuario.isEmpty() || senha.isEmpty() || consenha.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+				}else {
 				//String nome, sexo, datanasc;
 				/*CadastroVO dados = new CadastroVO();
 				nome = dados.getNome();
@@ -135,7 +139,7 @@ public class JTelaCadastro2 extends JFrame{
 				}else {
 					JOptionPane.showMessageDialog(null, "Verifique a senha!");
 				}
-				
+				}
 			}
 		});
 		cksenha.addActionListener(new ActionListener() {

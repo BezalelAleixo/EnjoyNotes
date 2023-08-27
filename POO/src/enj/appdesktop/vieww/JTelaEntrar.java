@@ -63,6 +63,7 @@ public class JTelaEntrar extends JFrame{
 				lblUsuario.setFont(fonte3);
 				lblSenha.setFont(fonte3);
 				pfSenha.setFont(fonte3);
+				tfUsuario.setFont(fonte3);
 				btnEntrar.setFont(fonte2);
 				btnVoltar.setFont(fonte2);
 				

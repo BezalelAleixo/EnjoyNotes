@@ -115,8 +115,15 @@ public class JTelaCadastro extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			
+				String n1 = tfNome.getText();
+				String n2 = tfDataNasc.getText();
+				if(n1.isEmpty() || n2.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+				}else {
 				setVisible(false);
 				JTelaCadastro2.abre();
+				}
 				
 			}
 		});		
@@ -177,6 +184,7 @@ public class JTelaCadastro extends JFrame{
 	
 	
 	public static void abrir() {
+		
 		JTelaCadastro frame = new JTelaCadastro();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(frame);
