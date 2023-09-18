@@ -18,14 +18,27 @@ public class ListaVO {
 	}
 
 
+	public ListaVO() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public String getTitulo() {
         return titulo;
     }
+	
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
     public String getItens() {
         return itens;
     }
-   
+    
+    public void setItens(String itens) {
+		this.itens = itens;
+	}
+    
     public int getId() {
     	return id;
     }

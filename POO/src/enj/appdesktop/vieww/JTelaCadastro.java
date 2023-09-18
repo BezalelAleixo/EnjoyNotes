@@ -1,5 +1,6 @@
 package enj.appdesktop.vieww;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
@@ -8,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +27,7 @@ import enj.appdesktop.model.vo.CadastroVO;
  */
 public class JTelaCadastro extends JFrame{
 	private Container contentpane;
-	private JPanel quadro;
+	private JPanel pnTela;
 	private JLabel lblDados, lblNome, lblSexo, lblDataNasc;
 	private ButtonGroup escolha;
 	private static JRadioButton rbtMasculino, rbtFeminino;
@@ -39,24 +41,28 @@ public class JTelaCadastro extends JFrame{
 	public JTelaCadastro() {
 		setTitle("Cadastro");
 		contentpane = getContentPane();
-		setLayout(null);
-		setBounds(0,0,1000,800);
-        contentpane.setBackground(Color.PINK);
+		setLayout(new BorderLayout());
+		
+		pnTela = new JPanel();
+		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
+        pnTela.setBackground(Color.WHITE);
+        
+        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\cad.jpeg");
+        JLabel mockupLabel = new JLabel(mockupImage);
+        mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 
 		
-		quadro = new JPanel();
-		quadro.setBackground(Color.WHITE);
 		lblDados =  new JLabel("Dados Pessoais");
 		lblNome = new JLabel("Nome:");
 		lblSexo = new JLabel("Sexo:");
 		lblDataNasc = new JLabel("Data de Nascimento:");
 		tfNome = new JTextField();
-		rbtMasculino = new JRadioButton("masculino");
-		rbtMasculino.setBackground(Color.WHITE);
-		rbtFeminino = new JRadioButton("feminino");
-		rbtFeminino.setBackground(Color.WHITE);
+		rbtMasculino = new JRadioButton();
+		/*rbtMasculino.setBackground(Color.WHITE);*/
+		rbtFeminino = new JRadioButton();
+		/*rbtFeminino.setBackground(Color.WHITE);*/
 		escolha = new ButtonGroup();
-		tfDataNasc = new JTextField("YYYY/MM/DD");
+		tfDataNasc = new JTextField();
 		btnContinuar = new JButton("Continuar");
 		btnVoltar = new JButton("Voltar");
 		
@@ -79,38 +85,86 @@ public class JTelaCadastro extends JFrame{
 				rbtMasculino.setFont(fonte3);
 				tfDataNasc.setFont(fonte3);
 				
-		quadro.setLayout(null);
-		quadro.setBounds(90,90,800,600);
+			
+				
+ // Torna os botões transparentes
+		        
+		        btnContinuar.setOpaque(false);
+		        btnContinuar.setContentAreaFilled(false);
+		        btnContinuar.setBorderPainted(false);
+
+		        btnVoltar.setOpaque(false);
+		        btnVoltar.setContentAreaFilled(false);
+		        btnVoltar.setBorderPainted(false);
+		        
+		        rbtFeminino.setOpaque(false);
+		        rbtFeminino.setContentAreaFilled(false);
+		        rbtFeminino.setBorderPainted(false);
+
+		        rbtMasculino.setOpaque(false);
+		        rbtMasculino.setContentAreaFilled(false);
+		        rbtMasculino.setBorderPainted(false);
+				
+		
 		lblDados.setBounds(310,50,250,40);
 		lblNome.setBounds(150,200,110,20);
 		lblSexo.setBounds(150,230,110,20);
 		lblDataNasc.setBounds(150,260,190,20);
-		tfNome.setBounds(400,200,140,30);
-		rbtMasculino.setBounds(400,230,110,20);
-		rbtFeminino.setBounds(510,230,110,20);
-		tfDataNasc.setBounds(400,260,110,30);
-		btnContinuar.setBounds(220,350,140,30);
-		btnVoltar.setBounds(450, 350, 140, 30);
+		tfNome.setBounds(540,298,140,30);
+		rbtMasculino.setBounds(526,400,17,17);
+		rbtFeminino.setBounds(692,400,17,17);
+		tfDataNasc.setBounds(540,488,110,30);
+		btnContinuar.setBounds(510,555,168,50);
+		btnVoltar.setBounds(682, 555, 168, 50);
+		
+		//Posicionando
+		/*tfNome.setBackground(Color.BLACK);
+		rbtMasculino.setBackground(Color.BLACK);
+		rbtFeminino.setBackground(Color.BLACK);
+		tfDataNasc.setBackground(Color.BLACK);
+		btnContinuar.setBackground(Color.BLACK);
+		btnVoltar.setBackground(Color.BLACK);*/
 		
 		escolha.add(rbtMasculino);
 		escolha.add(rbtFeminino);
-		quadro.add(lblDados);
-		quadro.add(lblNome);
-		quadro.add(lblSexo);
-		quadro.add(lblDataNasc);
-		quadro.add(tfNome);
-		quadro.add(btnContinuar);
-		quadro.add(rbtMasculino);
-		quadro.add(rbtFeminino);
-		quadro.add(tfDataNasc);
-		quadro.add(btnContinuar);
-		quadro.add(btnVoltar);
-		add(quadro);
+		pnTela.add(mockupLabel);
+		pnTela.add(lblDados);
+		pnTela.add(lblNome);
+		pnTela.add(lblSexo);
+		pnTela.add(lblDataNasc);
+		pnTela.add(tfNome);
+		pnTela.add(btnContinuar);
+		pnTela.add(rbtMasculino);
+		pnTela.add(rbtFeminino);
+		pnTela.add(tfDataNasc);
+		pnTela.add(btnContinuar);
+		pnTela.add(btnVoltar);
+		add(pnTela);
 		definirEventos();
-		
+		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na imagem
 				
 	}
 	private void definirEventos() {
+		rbtMasculino.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				rbtMasculino.setOpaque(true);
+				rbtMasculino.setBackground(Color.WHITE);
+			}
+		});
+		
+		rbtFeminino.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				rbtFeminino.setOpaque(true);
+				rbtFeminino.setBackground(Color.WHITE);
+			}
+		});
+		
 		btnContinuar.addActionListener(new ActionListener() {
 			
 			@Override

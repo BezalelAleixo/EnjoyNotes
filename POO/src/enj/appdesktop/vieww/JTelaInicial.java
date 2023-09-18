@@ -1,5 +1,6 @@
 package enj.appdesktop.vieww;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
@@ -10,7 +11,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
+import java.lang.String;
 /**
  * @author AleixoUNI
  * @see Classe para Tela inicial
@@ -20,6 +23,7 @@ public class JTelaInicial extends JFrame{
 	 * @see Tela Inicial
 	 */
 	private Container quadro;
+	private JPanel pnTela;
 	private JLabel lblTitulo;
 	private JButton btnCadastrar, btnEntrar;
 	private JLabel image;
@@ -29,17 +33,19 @@ public class JTelaInicial extends JFrame{
 	public JTelaInicial() {
 		setTitle("EnjoyNotes");
 		quadro = getContentPane();
-		setLayout(null);
-		setSize(1000,800);
+		setLayout(new BorderLayout());
 		
-		quadro.setBackground(Color.PINK);
-
+		pnTela = new JPanel();
+		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
+        pnTela.setBackground(Color.WHITE);
+        
+        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\TelaInicial.png");
+        JLabel mockupLabel = new JLabel(mockupImage);
+        mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
+		
 		lblTitulo = new JLabel("ENJOYNOTES");
 		btnCadastrar = new JButton("Cadastre-se");
 		btnEntrar = new JButton("Entrar");
-		imagem = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\logo.png");
-		image = new JLabel(imagem);
-		
 		
 		//Fontes
 		fonte1 = new Font("Arial", Font.BOLD,50);
@@ -54,16 +60,28 @@ public class JTelaInicial extends JFrame{
 		//
 		
 		lblTitulo.setBounds(330,100,500,100);
-		btnCadastrar.setBounds(200, 500, 150, 35);
-		btnEntrar.setBounds(600,500,150,35);
-		image.setBounds(350,200,257,244);
+		btnCadastrar.setBounds(543, 493, 200, 80);
+		btnEntrar.setBounds(543,377,200,80);
+		//btnCadastrar.setBackground(Color.BLACK);
+		//btnEntrar.setBackground(Color.BLACK);
 		
-		add(lblTitulo);
-		add(btnCadastrar);
-		add(btnEntrar);
-		add(image);
+		// Torna os botões transparentes
+        btnEntrar.setOpaque(false);
+        btnEntrar.setContentAreaFilled(false);
+        btnEntrar.setBorderPainted(false);
+
+        btnCadastrar.setOpaque(false);
+        btnCadastrar.setContentAreaFilled(false);
+        btnCadastrar.setBorderPainted(false);
+        
+        pnTela.add(mockupLabel); // Adiciona a imagem como plano de fundo
+		pnTela.add(btnEntrar);
+		pnTela.add(btnCadastrar);
+
+		
+		add(pnTela);
 		definirEventos();
-		
+		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na imagem
 	}
 
 	private void definirEventos() {	
@@ -92,10 +110,7 @@ public class JTelaInicial extends JFrame{
 		//frame.setExtendedState(MAXIMIZED_BOTH);
 	}
 	public static void main(String[] args) {
-		JTelaInicial frame = new JTelaInicial();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(frame);
-		frame.setVisible(true);
+		JTelaInicial.abreInicial();
 	}
 	
 

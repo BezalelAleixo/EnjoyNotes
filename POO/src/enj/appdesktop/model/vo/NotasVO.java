@@ -29,9 +29,15 @@ public class NotasVO {
 	public String getTitulo() {
         return titulo;
     }
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
     public String getContent() {
         return conteudo;
+    }
+    public void setContent(String conteudo) {
+    	this.conteudo = conteudo;
     }
 
     @Override

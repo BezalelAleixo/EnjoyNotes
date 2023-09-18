@@ -1,11 +1,13 @@
 package enj.appdesktop.vieww;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -31,15 +33,21 @@ public class JTelaCadastro2 extends JFrame{
 	private JButton btnConcluir;
 	private JButton btnVoltar, btnVoltarInicio;
 	private JCheckBox cksenha;
-	private JTelaCadastro fonte;
 	Font fonte1, fonte2, fonte3;
 	
 	public JTelaCadastro2() {
 		setTitle("Cadastro");
 		quadro = getContentPane();
-		setLayout(null);
-		setBounds(0,0,1000,800);
-        quadro.setBackground(Color.PINK);
+		setLayout(new BorderLayout());
+		
+		pnTela = new JPanel();
+		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
+        pnTela.setBackground(Color.WHITE);
+        
+        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\cadastro2.jpeg");
+        JLabel mockupLabel = new JLabel(mockupImage);
+        mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
+
 
 		
 		lblDados = new JLabel("Dados da Conta");
@@ -54,7 +62,6 @@ public class JTelaCadastro2 extends JFrame{
 		cksenha = new JCheckBox("Mostrar Senha");
 		cksenha.setBackground(Color.WHITE);
 		btnConcluir = new JButton("Concluir");
-		pnTela = new JPanel();
 		btnVoltar = new JButton("Cancelar");
 		btnVoltarInicio = new JButton("Voltar ao inicio");
 		
@@ -77,21 +84,46 @@ public class JTelaCadastro2 extends JFrame{
 		btnVoltarInicio.setFont(fonte2);
 		btnConcluir.setFont(fonte2);
 		
-		pnTela.setLayout(null);
-		pnTela.setBackground(Color.WHITE);
-		pnTela.setBounds(90,90,800,600);
+		// Torna os botões transparentes
+		
+		btnConcluir.setOpaque(false);
+        btnConcluir.setContentAreaFilled(false);
+        btnConcluir.setBorderPainted(false);
+
+        btnVoltar.setOpaque(false);
+        btnVoltar.setContentAreaFilled(false);
+        btnVoltar.setBorderPainted(false);
+		
+		 btnVoltarInicio.setOpaque(false);
+	     btnVoltarInicio.setContentAreaFilled(false);
+	     btnVoltarInicio.setBorderPainted(false);
+	        
+	     cksenha.setOpaque(false);
+	     cksenha.setContentAreaFilled(false);
+	     cksenha.setBorderPainted(false);
+		
+	
+		
 		lblDados.setBounds(310,50,250,40);
 		lblNome.setBounds(150,200,190,20);
 		lblSenha.setBounds(150,230,190,20);
 		lblConfSenha.setBounds(150,260,190,20);
-		tfNome.setBounds(400,200,140,30);
-		pfSenha.setBounds(400,230,140,30);
-		pfConfSenha.setBounds(400,260,140,30);
-		btnConcluir.setBounds(220,360,120,30);
-		btnVoltar.setBounds(450,360, 120, 30);
+		tfNome.setBounds(540,298,140,30);
+		pfSenha.setBounds(540,410,140,30);
+		pfConfSenha.setBounds(540,514,140,30);
+		btnConcluir.setBounds(512,568,168,50);
+		btnVoltar.setBounds(686,568, 168, 50);
 		btnVoltarInicio.setBounds(400, 540,190,30);
 		cksenha.setBounds(150, 300,140,20);
 		
+		//Posicionando
+				/*tfNome.setBackground(Color.BLACK);
+				pfSenha.setBackground(Color.BLACK);
+				pfConfSenha.setBackground(Color.BLACK);
+				btnConcluir.setBackground(Color.BLACK);
+				btnVoltar.setBackground(Color.BLACK);*/
+		
+		pnTela.add(mockupLabel);
 		pnTela.add(lblDados);
 		pnTela.add(lblNome);
 		pnTela.add(lblSenha);
@@ -105,6 +137,8 @@ public class JTelaCadastro2 extends JFrame{
 		pnTela.add(cksenha);
 		add(pnTela);
 		definirEventos();
+		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na imagem
+		
 	}
 	private void definirEventos() {
 		btnConcluir.addActionListener(new ActionListener() {

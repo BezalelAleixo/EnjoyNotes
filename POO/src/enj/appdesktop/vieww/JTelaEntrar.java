@@ -1,11 +1,13 @@
 package enj.appdesktop.vieww;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -35,12 +37,18 @@ public class JTelaEntrar extends JFrame{
 	public JTelaEntrar() {
 		setTitle("EnjoyNotes - Login");
 		contentpane = getContentPane();
-		setLayout(null);
-		setBounds(0,0,1000,800);
-        contentpane.setBackground(Color.PINK);
+		setLayout(new BorderLayout()); 
 
 		
 		pnTela = new JPanel();
+		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
+        pnTela.setBackground(Color.WHITE);
+		
+      //aqui ele puxa a imagem tela.png que ta no pacote
+        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\login.png");
+        JLabel mockupLabel = new JLabel(mockupImage);
+        mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
+        
 		lblEntre = new JLabel("Entre na sua Conta");
 		lblUsuario = new JLabel("Usuário:");
 		lblSenha = new JLabel("Senha:");
@@ -59,28 +67,39 @@ public class JTelaEntrar extends JFrame{
 				
 				//Adicionando as fontes aos componentes
 				
-				lblEntre.setFont(fonte1);
-				lblUsuario.setFont(fonte3);
-				lblSenha.setFont(fonte3);
+				//lblEntre.setFont(fonte1);
+				//lblUsuario.setFont(fonte3);
+				//lblSenha.setFont(fonte3);
 				pfSenha.setFont(fonte3);
 				tfUsuario.setFont(fonte3);
-				btnEntrar.setFont(fonte2);
-				btnVoltar.setFont(fonte2);
+				//btnEntrar.setFont(fonte2);
+				//btnVoltar.setFont(fonte2);
 				
 				
 		
-		pnTela.setLayout(null);
-		pnTela.setBounds(90,90,800,600);
-		pnTela.setBackground(Color.WHITE);
-		lblEntre.setBounds(290,50,300,30);
-		lblUsuario.setBounds(150,200,120,20);
-		lblSenha.setBounds(150,230,190,20);
-		tfUsuario.setBounds(400,200,140,30);
-		pfSenha.setBounds(400,230,140,30);
-		btnEntrar.setBounds(220,310,150,30);
-		btnVoltar.setBounds(480, 310, 150, 30);
-		ckMostrar.setBounds(150,260,150,20);
 		
+		
+		
+				lblEntre.setBounds(350, 50, 150, 20);
+		        lblUsuario.setBounds(250, 200, 110, 20);
+		        lblSenha.setBounds(150, 230, 110, 20);
+		        tfUsuario.setBounds(550, 300, 240, 20);
+		        pfSenha.setBounds(550, 400, 240, 20);
+		        btnEntrar.setBounds(610, 479, 130, 30);
+		        btnVoltar.setBounds(610, 550, 120, 30);
+		        ckMostrar.setBounds(550,430,150,20);
+		        
+		     // Torna os botões transparentes
+		        
+		        btnEntrar.setOpaque(false);
+		        btnEntrar.setContentAreaFilled(false);
+		        btnEntrar.setBorderPainted(false);
+
+		        btnVoltar.setOpaque(false);
+		        btnVoltar.setContentAreaFilled(false);
+		        btnVoltar.setBorderPainted(false);
+		
+		pnTela.add(mockupLabel); // Adiciona a imagem como plano de fundo
 		pnTela.add(lblEntre);
 		pnTela.add(lblUsuario);
 		pnTela.add(lblSenha);
@@ -90,13 +109,17 @@ public class JTelaEntrar extends JFrame{
 		pnTela.add(btnVoltar);
 		pnTela.add(ckMostrar);
 		add(pnTela);
+		
 		definirEventos();
+		
+		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na imagem
+		
 }
 	private void definirEventos() {
 		btnVoltar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	JOptionPane.showMessageDialog( null, "Voltando à tela anterior");
-		        dispose(); // Fecha a janela atual (tela de login)
+		    	setVisible(false); // Fecha a janela atual (tela de login)
 		        JTelaInicial.abreInicial();
 		    }
 		});
@@ -111,6 +134,7 @@ public class JTelaEntrar extends JFrame{
 				}else{
 					JOptionPane.showMessageDialog(null, "Usuário ou Senha incorreta!");
 				};
+				int numero = 1;
 				
 			}
 		});
@@ -128,10 +152,12 @@ public class JTelaEntrar extends JFrame{
 		});
 	}
 	public static void abre() {
-		JTelaEntrar frame = new JTelaEntrar();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(frame);
-		frame.setVisible(true);
+		JTelaEntrar f = new JTelaEntrar();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setLocationRelativeTo(f);   
+        f.setVisible(true);
+		 
+		
 	}
 	public static void abreMenu() {
 		JTelaMenu menu = new JTelaMenu();
