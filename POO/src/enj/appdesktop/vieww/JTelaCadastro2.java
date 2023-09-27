@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -86,6 +87,18 @@ public class JTelaCadastro2 extends JFrame{
 		
 		// Torna os botões transparentes
 		
+		tfNome.setOpaque(false);
+        tfNome.setBorder(BorderFactory.createEmptyBorder()); 
+        tfNome.setForeground(Color.BLACK);
+        
+        pfSenha.setOpaque(false);
+        pfSenha.setBorder(BorderFactory.createEmptyBorder()); 
+        pfSenha.setForeground(Color.BLACK);
+        
+        pfConfSenha.setOpaque(false);
+        pfConfSenha.setBorder(BorderFactory.createEmptyBorder()); 
+        pfConfSenha.setForeground(Color.BLACK);
+		
 		btnConcluir.setOpaque(false);
         btnConcluir.setContentAreaFilled(false);
         btnConcluir.setBorderPainted(false);
@@ -123,14 +136,15 @@ public class JTelaCadastro2 extends JFrame{
 				btnConcluir.setBackground(Color.BLACK);
 				btnVoltar.setBackground(Color.BLACK);*/
 		
+		
+		pnTela.add(tfNome);
+		pnTela.add(pfSenha);
+		pnTela.add(pfConfSenha);
 		pnTela.add(mockupLabel);
 		pnTela.add(lblDados);
 		pnTela.add(lblNome);
 		pnTela.add(lblSenha);
 		pnTela.add(lblConfSenha);
-		pnTela.add(tfNome);
-		pnTela.add(pfSenha);
-		pnTela.add(pfConfSenha);
 		pnTela.add(btnConcluir);
 		pnTela.add(btnVoltar);
 		pnTela.add(btnVoltarInicio);
@@ -163,13 +177,17 @@ public class JTelaCadastro2 extends JFrame{
 				usuario.setNome(JTelaCadastro.getNome());
 				usuario.setSexo(JTelaCadastro.getSexo());
 				usuario.setDatanasc(JTelaCadastro.getNasc());//2006/07/28
-				usuario.setNomeUsuario(nomeUsuario);
-				usuario.setSenha(senha);
+				
+				CadastroVO conta = new CadastroVO();
+				conta.setNomeUsuario(nomeUsuario);
+				conta.setSenha(senha);
 			
 				if(pfConfSenha.getText().length() == pfSenha.getText().length()) {
 					JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso");
 					ConexaoDAOCadastro dadosusuario = new ConexaoDAOCadastro();
 					dadosusuario.ConexaoDAOCadastro(usuario);
+					
+					dadosusuario.ConexaoDAOCadastro2(conta);
 				}else {
 					JOptionPane.showMessageDialog(null, "Verifique a senha!");
 				}

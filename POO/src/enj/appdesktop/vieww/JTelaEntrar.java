@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -91,6 +92,14 @@ public class JTelaEntrar extends JFrame{
 		        
 		     // Torna os botões transparentes
 		        
+		        tfUsuario.setOpaque(false);
+		        tfUsuario.setBorder(BorderFactory.createEmptyBorder()); 
+		        tfUsuario.setForeground(Color.BLACK);
+		        
+		        pfSenha.setOpaque(false);
+		        pfSenha.setBorder(BorderFactory.createEmptyBorder()); 
+		        pfSenha.setForeground(Color.BLACK);
+		        
 		        btnEntrar.setOpaque(false);
 		        btnEntrar.setContentAreaFilled(false);
 		        btnEntrar.setBorderPainted(false);
@@ -99,16 +108,18 @@ public class JTelaEntrar extends JFrame{
 		        btnVoltar.setContentAreaFilled(false);
 		        btnVoltar.setBorderPainted(false);
 		
-		pnTela.add(mockupLabel); // Adiciona a imagem como plano de fundo
-		pnTela.add(lblEntre);
-		pnTela.add(lblUsuario);
-		pnTela.add(lblSenha);
-		pnTela.add(tfUsuario);
-		pnTela.add(pfSenha);
-		pnTela.add(btnEntrar);
-		pnTela.add(btnVoltar);
-		pnTela.add(ckMostrar);
-		add(pnTela);
+		
+		        pnTela.add(tfUsuario);
+				pnTela.add(pfSenha);        
+				pnTela.add(mockupLabel); // Adiciona a imagem como plano de fundo
+				pnTela.add(lblEntre);
+				pnTela.add(lblUsuario);
+				pnTela.add(lblSenha);
+		
+				pnTela.add(btnEntrar);
+				pnTela.add(btnVoltar);
+				pnTela.add(ckMostrar);
+				add(pnTela);
 		
 		definirEventos();
 		

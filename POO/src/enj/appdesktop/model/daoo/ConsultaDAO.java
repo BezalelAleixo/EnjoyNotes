@@ -14,7 +14,7 @@ public class ConsultaDAO {
 	Connection conexao = new ConexaoDAO().conexaoBD();
 	PreparedStatement PSTM = null;
 	ResultSet RS = null;
-	String select = "SELECT * FROM NOTA WHERE TITULO LIKE ?";
+	String select = "SELECT * FROM NOTA WHERE titulo LIKE ?";
 	
 	
 	try {
@@ -24,15 +24,15 @@ public class ConsultaDAO {
 		
 		while (RS.next()) {
 			dado = new NotasVO();
-			String titulo1 = RS.getString("TITULO");	
-			String nota = RS.getString("CONTEUDO");
+			String titulo1 = RS.getString("titulo");	
+			String nota = RS.getString("conteudo");
 			dado.setTitulo(titulo1);
 			dado.setContent(nota);	
 			//System.out.println(titulo1+"\n"+nota);
 		}
 	}catch (SQLException e) {
 		System.out.println("FALHA"+e);
-	}
+ 	}
 
 		
 	}
@@ -53,7 +53,7 @@ public class ConsultaDAO {
 	Connection conexao = new ConexaoDAO().conexaoBD();
 	PreparedStatement PSTM = null;
 	ResultSet RS = null;
-	String select = "SELECT * FROM LISTA WHERE TITULO LIKE ?";
+	String select = "SELECT * FROM LISTA WHERE titulo_list LIKE ?";
 	
 	
 	try {
@@ -63,8 +63,8 @@ public class ConsultaDAO {
 		
 		while (RS.next()) {
 			doc = new ListaVO();
-			String titulo1 = RS.getString("TITULO");
-			String itens = RS.getString("LISTA_ENUMERADA");
+			String titulo1 = RS.getString("titulo_list");
+			String itens = RS.getString("ordem_list");
 			doc.setTitulo(titulo1);
 			doc.setItens(itens);			
 		}

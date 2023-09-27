@@ -6,8 +6,11 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -85,9 +88,18 @@ public class JTelaCadastro extends JFrame{
 				rbtMasculino.setFont(fonte3);
 				tfDataNasc.setFont(fonte3);
 				
+				
 			
 				
  // Torna os botões transparentes
+		        
+				tfNome.setOpaque(false);
+		        tfNome.setBorder(BorderFactory.createEmptyBorder()); 
+		        tfNome.setForeground(Color.BLACK);
+				
+		        tfDataNasc.setOpaque(false);
+		        tfDataNasc.setBorder(BorderFactory.createEmptyBorder()); 
+		        tfDataNasc.setForeground(Color.BLACK);
 		        
 		        btnContinuar.setOpaque(false);
 		        btnContinuar.setContentAreaFilled(false);
@@ -127,16 +139,19 @@ public class JTelaCadastro extends JFrame{
 		
 		escolha.add(rbtMasculino);
 		escolha.add(rbtFeminino);
+		pnTela.add(tfNome);
+		pnTela.add(tfDataNasc);
 		pnTela.add(mockupLabel);
+	
 		pnTela.add(lblDados);
 		pnTela.add(lblNome);
 		pnTela.add(lblSexo);
 		pnTela.add(lblDataNasc);
-		pnTela.add(tfNome);
+		
 		pnTela.add(btnContinuar);
 		pnTela.add(rbtMasculino);
 		pnTela.add(rbtFeminino);
-		pnTela.add(tfDataNasc);
+		
 		pnTela.add(btnContinuar);
 		pnTela.add(btnVoltar);
 		add(pnTela);

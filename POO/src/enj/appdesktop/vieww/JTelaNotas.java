@@ -1,6 +1,7 @@
 package enj.appdesktop.vieww;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class JTelaNotas extends JFrame {
     private JButton deletar;
     private JButton Salvar;
     private JButton Voltar;
+    Font fonte;
     int id=0;
     
     public JTelaNotas() {
@@ -41,12 +43,16 @@ public class JTelaNotas extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel inputPanel = new JPanel(new BorderLayout());
+        
+        fonte = new Font("Verdana", Font.PLAIN, 17);
 
         tituloCamp = new JTextField();
+        tituloCamp.setFont(fonte);
         tituloCamp.setBorder(BorderFactory.createTitledBorder("Título"));
         inputPanel.add(tituloCamp, BorderLayout.NORTH);
         
         caixaTexto = new JTextArea();
+        caixaTexto.setFont(fonte);
         JScrollPane sp = new JScrollPane(caixaTexto);
         inputPanel.add(sp, BorderLayout.CENTER);
 

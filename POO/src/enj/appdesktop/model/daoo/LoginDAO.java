@@ -23,7 +23,7 @@ public class LoginDAO {
 		Connection conexao = new ConexaoDAO().conexaoBD();
 		PreparedStatement PSTM = null;
 		ResultSet RS = null;
-		String select = "SELECT * FROM USUARIO WHERE NOMEUSUARIO = ? AND SENHA = ?";
+		String select = "SELECT * FROM CONTA WHERE NOMEUSUARIO = ? AND SENHA = ?";
 		boolean check = false;
 		
 		try {

@@ -14,7 +14,7 @@ public class SalvarNotaDAO {
 		PreparedStatement PSTM;
 		
 		public void SalvarNotaDAO(NotasVO notas) {
-			String comandoSQL = "INSERT INTO NOTA (TITULO, CONTEUDO) VALUES (?,?)";
+			String comandoSQL = "INSERT INTO NOTA (titulo, conteudo, data_criac) VALUES (?,?, now())";
 			conexao = new ConexaoDAO().conexaoBD();
 			try {
 				PSTM = conexao.prepareStatement(comandoSQL);

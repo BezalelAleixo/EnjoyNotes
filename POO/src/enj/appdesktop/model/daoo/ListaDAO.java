@@ -17,7 +17,7 @@ public class ListaDAO {
 	PreparedStatement PSTM;
 	
 	public void SalvarListaDAO(ListaVO listas) {
-		String salvarListaDAO = "INSERT INTO LISTA (TITULO, LISTA_ENUMERADA) VALUES (?,?)";
+		String salvarListaDAO = "INSERT INTO LISTA (titulo_list, ordem_list, data_criac) VALUES (?,?,now())";
 		conexao = new ConexaoDAO().conexaoBD();
 		try {
 			PSTM = conexao.prepareStatement(salvarListaDAO);
@@ -30,7 +30,7 @@ public class ListaDAO {
 		}
 	}
 	public void AtualizarListaDAO(ListaVO listas) {
-		String comandoSQL = "UPDATE LISTA SET TITULO = ?, LISTA_ENUMERADA = ? WHERE id = ?";
+		String comandoSQL = "UPDATE LISTA SET titulo_list = ?, ordem_list = ? WHERE id = ?";
 		conexao = new ConexaoDAO().conexaoBD();
 		try {
 			PSTM = conexao.prepareStatement(comandoSQL);

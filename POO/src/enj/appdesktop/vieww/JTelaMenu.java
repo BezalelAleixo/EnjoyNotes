@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -46,7 +47,7 @@ public class JTelaMenu extends JFrame {
         mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 		
 
-		Font customFont = new Font("Arial", Font.BOLD | Font.BOLD, 15);
+		Font customFont = new Font("Arial", Font.BOLD | Font.BOLD, 17);
 		
 		lblTitulo = new JLabel("Bem vindo, escolha o que fazer:");
 		lblTitulo.setFont(customFont);
@@ -88,6 +89,10 @@ public class JTelaMenu extends JFrame {
 		
 
 		// Torna os botões transparentes
+		txtPesquisa.setOpaque(false);
+        txtPesquisa.setBorder(BorderFactory.createEmptyBorder()); 
+        txtPesquisa.setForeground(Color.BLACK);
+		
         btnCriarLista.setOpaque(false);
         btnCriarLista.setContentAreaFilled(false);
         btnCriarLista.setBorderPainted(false);
@@ -155,14 +160,14 @@ public class JTelaMenu extends JFrame {
 		                    // Realiza a pesquisa nas notas
 		                    pesquisador.pesquisarNotasPorNome(); 
 		                        // Exiba ou faça algo com a nota encontrada
-		                        JOptionPane.showMessageDialog(null, "Nota encontrada: " + pesquisador.resultadoNT1());
+		                        JOptionPane.showMessageDialog(null, "Nota encontrada: \n" + pesquisador.resultadoNT1()+"\n"+pesquisador.resultadoNT2());
 		                    
 	                	} else if(!termoDePesquisa.isEmpty() && pesquisador.verificarPesquisaLIS()) {
 							//Pesquisar pesquisador = new Pesquisar(termoDePesquisa);
 	                    // Realiza a pesquisa nas listas
 	                        pesquisador.pesquisarListasPorNome();
 	                        // Exiba ou faça algo com a lista encontrada
-	                        JOptionPane.showMessageDialog(null, "Lista encontrada: " + pesquisador.resultadoLT1());
+	                        JOptionPane.showMessageDialog(null, "Lista encontrada: \n" + pesquisador.resultadoLT1()+"\n"+pesquisador.resultadoLT2());
 						}
 	                 else {
 	                    JOptionPane.showMessageDialog(null, "Digite um termo de pesquisa válido.");
@@ -170,11 +175,12 @@ public class JTelaMenu extends JFrame {
 				}	
 	        });
 		 
+		pnTela.add(txtPesquisa);
 		pnTela.add(mockupLabel);
 		pnTela.add(lblTitulo);
 		pnTela.add(btnCriarLista);
 		pnTela.add(btnCriarNota);
-		pnTela.add(txtPesquisa);
+		
 		pnTela.add(btnPesquisar);
 		pnTela.add(btnSair);
 		pnTela.add(btnIcone);

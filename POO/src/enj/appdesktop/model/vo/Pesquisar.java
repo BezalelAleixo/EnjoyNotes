@@ -66,7 +66,7 @@ public class Pesquisar {
 		Connection conexao = new ConexaoDAO().conexaoBD();
 		PreparedStatement PSTM = null;
 		ResultSet RS = null;
-		String select = "SELECT * FROM NOTA WHERE TITULO LIKE ?";
+		String select = "SELECT * FROM NOTA WHERE titulo LIKE ?";
 		boolean check = false;
 		
 		try {
@@ -86,7 +86,7 @@ public class Pesquisar {
 		Connection conexao = new ConexaoDAO().conexaoBD();
 		PreparedStatement PSTM = null;
 		ResultSet RS = null;
-		String select = "SELECT * FROM LISTA WHERE TITULO LIKE ?";
+		String select = "SELECT * FROM LISTA WHERE titulo_list LIKE ?";
 		boolean check = false;
 		
 		try {

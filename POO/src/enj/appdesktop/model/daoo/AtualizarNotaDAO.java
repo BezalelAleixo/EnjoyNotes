@@ -18,7 +18,7 @@ public class AtualizarNotaDAO {
 	//ResultSet RS = null;
 	
 	public void AtualizarNotaDAO(NotasVO notas) {
-		String comandoSQL = "UPDATE NOTA SET TITULO = ?, CONTEUDO = ? WHERE id = ?";
+		String comandoSQL = "UPDATE NOTA SET titulo = ?, conteudo = ? WHERE id = ?";
 		conexao = new ConexaoDAO().conexaoBD();
 		try {
 			PSTM = conexao.prepareStatement(comandoSQL);
