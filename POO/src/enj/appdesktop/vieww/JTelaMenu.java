@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -16,7 +18,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import enj.appdesktop.model.daoo.ConsultaDAO;
 import enj.appdesktop.model.vo.ListaVO;
@@ -31,6 +36,9 @@ public class JTelaMenu extends JFrame {
 	private JTextField txtPesquisa;
     private JButton btnPesquisar;
     private JButton btnIcone;
+    ScrollPane barrarolagem;
+	JTable tabela;
+	
     
 
 	public JTelaMenu() {
@@ -40,7 +48,7 @@ public class JTelaMenu extends JFrame {
 		
 		pnTela = new JPanel();
 		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
-        pnTela.setBackground(Color.WHITE);
+        //pnTela.setBackground(Color.WHITE);
         
         ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\Menu.png");
         JLabel mockupLabel = new JLabel(mockupImage);
@@ -53,9 +61,22 @@ public class JTelaMenu extends JFrame {
 		lblTitulo.setFont(customFont);
 		
 
+		
 		txtPesquisa = new JTextField();
         txtPesquisa.setFont(customFont);
         txtPesquisa.setBounds(595, 527, 150, 30);
+        
+        tabela = new JTable();
+        barrarolagem = new ScrollPane();
+		panel = new JPanel();
+		panel.setLayout(new GridLayout(1,1));
+		panel.setBounds(460,580,280,100);
+		panel.setBackground(Color.WHITE);
+		
+		barrarolagem.add(tabela); 
+		panel.add(barrarolagem);
+		pnTela.add(panel);
+
         
         btnPesquisar = new JButton("Pesquisar");
         btnPesquisar.setFont(customFont);
@@ -160,27 +181,113 @@ public class JTelaMenu extends JFrame {
 		                    // Realiza a pesquisa nas notas
 		                    pesquisador.pesquisarNotasPorNome(); 
 		                        // Exiba ou faça algo com a nota encontrada
-		                        JOptionPane.showMessageDialog(null, "Nota encontrada: \n" + pesquisador.resultadoNT1()+"\n"+pesquisador.resultadoNT2());
+		                        JOptionPane.showMessageDialog(null, "Nota encontrada: \n" + pesquisador.resultadoNT1());
 		                    
 	                	} else if(!termoDePesquisa.isEmpty() && pesquisador.verificarPesquisaLIS()) {
 							//Pesquisar pesquisador = new Pesquisar(termoDePesquisa);
 	                    // Realiza a pesquisa nas listas
 	                        pesquisador.pesquisarListasPorNome();
 	                        // Exiba ou faça algo com a lista encontrada
-	                        JOptionPane.showMessageDialog(null, "Lista encontrada: \n" + pesquisador.resultadoLT1()+"\n"+pesquisador.resultadoLT2());
+	                        JOptionPane.showMessageDialog(null, "Lista encontrada: \n" + pesquisador.resultadoLT1());
 						}
 	                 else {
 	                    JOptionPane.showMessageDialog(null, "Digite um termo de pesquisa válido.");
 	                }
 				}	
 	        });
-		 
+		txtPesquisa.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				Pesquisar pesquisador = new Pesquisar(txtPesquisa.getText());
+	               // ConsultaDAO amor = new ConsultaDAO();
+	                // Verifica se o termo de pesquisa não está vazio
+	                if (!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisa()) {
+	                    
+	                //	if(amor.verificarPesquisa(termoDePesquisa)) {
+
+		                    // Realiza a pesquisa nas notas
+		                    pesquisador.pesquisarNotasPorNome(); 
+		                        // Exiba ou faça algo com a nota encontrada
+		                    
+		                		
+		                    
+	                	} else if(!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisaLIS()) {
+							//Pesquisar pesquisador = new Pesquisar(termoDePesquisa);
+	                    // Realiza a pesquisa nas listas
+	                        pesquisador.pesquisarListasPorNome();
+	                        // Exiba ou faça algo com a lista encontrada
+	                        JOptionPane.showMessageDialog(null, "Lista encontrada: \n" + pesquisador.resultadoLT1());
+						}
+				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				Pesquisar pesquisador = new Pesquisar(txtPesquisa.getText());
+	               // ConsultaDAO amor = new ConsultaDAO();
+	                // Verifica se o termo de pesquisa não está vazio
+	                if (!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisa()) {
+	                    
+	                //	if(amor.verificarPesquisa(termoDePesquisa)) {
+
+		                    // Realiza a pesquisa nas notas
+		                    pesquisador.pesquisarNotasPorNome(); 
+		                        // Exiba ou faça algo com a nota encontrada
+		                    String [][] over = {{pesquisador.resultadoNT1()}};
+			                   
+	                        tabela = new JTable(over.length,1);
+	                		barrarolagem.add(tabela); 
+	                		panel.add(barrarolagem);
+	                		pnTela.add(panel);
+	                		pnTela.add(mockupLabel);
+	                		pnTela.add(lblTitulo);
+	                		pnTela.add(btnCriarLista);
+	                		pnTela.add(btnCriarNota);
+	                		pnTela.add(btnPesquisar);
+	                		pnTela.add(btnSair);
+	                		pnTela.add(btnIcone);
+		                    
+	                	} else if(!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisaLIS()) {
+							//Pesquisar pesquisador = new Pesquisar(termoDePesquisa);
+	                    // Realiza a pesquisa nas listas
+	                        pesquisador.pesquisarListasPorNome();
+	                        // Exiba ou faça algo com a lista encontrada
+	                        JOptionPane.showMessageDialog(null, "Lista encontrada: \n" + pesquisador.resultadoLT1());
+						}
+				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				Pesquisar pesquisador = new Pesquisar(txtPesquisa.getText());
+	               // ConsultaDAO amor = new ConsultaDAO();
+	                // Verifica se o termo de pesquisa não está vazio
+	                if (!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisa()) {
+	                    
+	                //	if(amor.verificarPesquisa(termoDePesquisa)) {
+
+		                    // Realiza a pesquisa nas notas
+		                    pesquisador.pesquisarNotasPorNome(); 
+		                        // Exiba ou faça algo com a nota encontrada
+		                        JOptionPane.showMessageDialog(null, "Nota encontrada: \n" + pesquisador.resultadoNT1()+"\n"+pesquisador.resultadoNT2());
+		                    
+	                	} else if(!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisaLIS()) {
+							//Pesquisar pesquisador = new Pesquisar(termoDePesquisa);
+	                    // Realiza a pesquisa nas listas
+	                        pesquisador.pesquisarListasPorNome();
+	                        // Exiba ou faça algo com a lista encontrada
+	                        JOptionPane.showMessageDialog(null, "Lista encontrada: \n" + pesquisador.resultadoLT1()+"\n"+pesquisador.resultadoLT2());
+						}
+				
+			}
+		});
+		
 		pnTela.add(txtPesquisa);
 		pnTela.add(mockupLabel);
 		pnTela.add(lblTitulo);
 		pnTela.add(btnCriarLista);
 		pnTela.add(btnCriarNota);
-		
 		pnTela.add(btnPesquisar);
 		pnTela.add(btnSair);
 		pnTela.add(btnIcone);
@@ -221,10 +328,10 @@ public static void abreTelaUsuario() {
     		frame.setVisible(true);
 }
 
-/*public static void main(String[] args) {
+public static void main(String[] args) {
 	JTelaMenu frame = new JTelaMenu();
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setLocationRelativeTo(null);
 	frame.setVisible(true);
-}*/
+}
 }

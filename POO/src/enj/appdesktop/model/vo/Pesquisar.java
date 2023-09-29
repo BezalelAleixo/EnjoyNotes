@@ -13,7 +13,8 @@ import enj.appdesktop.vieww.JTelaListas;
 
 public class Pesquisar {
 	private String letra;
-    NotasVO assunto = new NotasVO();
+   
+	NotasVO assunto = new NotasVO();
     ListaVO contemais = new ListaVO();
     public Pesquisar(String letra) {
         this.letra = letra;
