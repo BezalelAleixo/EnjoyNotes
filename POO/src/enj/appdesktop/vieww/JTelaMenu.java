@@ -39,6 +39,7 @@ public class JTelaMenu extends JFrame {
 	private static JTextField txtPesquisa;
     private JButton btnPesquisar;
     private JButton btnIcone;
+    private JButton btnAgenda;
     private DefaultTableModel model;
     private JTable tabela;
     private JPanel panel;
@@ -61,6 +62,7 @@ public class JTelaMenu extends JFrame {
 		
 
 		Font customFont = new Font("Arial", Font.BOLD | Font.BOLD, 17);
+		Font customFont2 = new Font("Arial", Font.BOLD | Font.BOLD, 22);
 		
 		lblTitulo = new JLabel("Bem vindo, escolha o que fazer:");
 		lblTitulo.setFont(customFont);
@@ -96,17 +98,23 @@ public class JTelaMenu extends JFrame {
 		btnCriarLista = new JButton("Criar Lista");
 		btnCriarNota = new JButton("Criar Notas");
 		btnSair = new JButton("Sair");
+		btnAgenda = new JButton("Agenda");
 		lblTitulo.setBounds(300, 30, 250, 50);
+		
+		btnAgenda.setFont(customFont2);
 		
 		btnCriarLista.setBounds(50, 490, 65, 65);
 		btnCriarNota.setBounds(50, 300, 65, 65);
 		btnSair.setBounds(1290, 30, 55,45);
 		btnIcone.setBounds(1267, 130, 63,63);
+		btnAgenda.setBounds(600,130, 120,63);
 		
 	/*	btnCriarLista.setBackground(Color.BLACK);
 		btnCriarNota.setBackground(Color.BLACK);
 		btnSair.setBackground(Color.BLACK);
 		btnIcone.setBackground(Color.BLACK);*/
+		
+		btnAgenda.setForeground(Color.BLACK);
 		
 
 		// Torna os botões transparentes
@@ -134,7 +142,13 @@ public class JTelaMenu extends JFrame {
         btnSair.setContentAreaFilled(false);
         btnSair.setBorderPainted(false);
         
+        btnCriarLista.setOpaque(false);
+        btnCriarLista.setContentAreaFilled(false);
+        btnCriarLista.setBorderPainted(false);
 		
+        btnAgenda.setOpaque(false);
+        btnAgenda.setContentAreaFilled(false);
+        btnAgenda.setBorderPainted(false);
 		
 		
 
@@ -195,6 +209,15 @@ public class JTelaMenu extends JFrame {
 	                }
 				}	
 	        });
+		 
+		 btnAgenda.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AgendaApp.abrirAgenda();
+				
+			}
+		});
 		/*txtPesquisa.getDocument().addDocumentListener(new DocumentListener() {
 			
 			@Override
@@ -240,6 +263,7 @@ public class JTelaMenu extends JFrame {
 		});*/
 	
 		pnTela.add(txtPesquisa);
+		pnTela.add(btnAgenda);
 		pnTela.add(mockupLabel);
 		pnTela.add(lblTitulo);
 		pnTela.add(btnCriarLista);

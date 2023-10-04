@@ -120,11 +120,13 @@ public class JTelaUsuario extends JFrame {
         pnTela.add(btnSair);
         
         btnVoltar = new JButton("Voltar");
-        btnVoltar.setFont(customFont);
-        btnVoltar.setBounds(995, 25, 120, 45);
+        btnVoltar.setForeground(Color.WHITE);
+        btnVoltar.setFont(customFont2);
+        btnVoltar.setBounds(1030, 25, 120, 45);
       //  btnVoltar.setBackground(Color.BLACK);
-        pnTela.add(mockupLabel);
         pnTela.add(btnVoltar);
+        pnTela.add(mockupLabel);
+        
        
         // Torna os botões transparentes
 		

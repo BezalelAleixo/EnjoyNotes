@@ -50,7 +50,7 @@ public class AgendaApp extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Voltando à tela anterior");
 				setVisible(false); // Fecha a janela atual (tela de login)
-				AgendaApp.abreMenu();
+				
 			}
 		});
 
@@ -117,6 +117,7 @@ public class AgendaApp extends JFrame {
 		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na
 																			// imagem
 		setContentPane(panel);
+		setLocationRelativeTo(getContentPane());
 	}
 
 	private Date getDateFromCalendar(JCalendar calendar) {
@@ -142,6 +143,17 @@ public class AgendaApp extends JFrame {
 		menu.setLocationRelativeTo(menu);
 		menu.setVisible(true);
 	}
+	public static void abrirAgenda() {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				AgendaApp agendaApp = new AgendaApp();
+				agendaApp.setVisible(true);
+			}
+		});
+	}
+
+	
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
