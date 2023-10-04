@@ -7,23 +7,28 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import enj.appdesktop.model.daoo.ConsultaDAO;
+import enj.appdesktop.model.daoo.Sessao;
 
 public class JTelaUsuario extends JFrame {
     private Container contentPane;
     private JPanel quadro, pnTela;
-    private JLabel lblDados, lblNome, lblSexo, lblDataNasc;
-    private JLabel lblDadosConta, lblNomeConta, lblID;
+    private JTextField lblNome, lblSexo, lblDataNasc;
+    private JTextField lblNomeConta, lblSenha;
     private JButton btnSair, btnVoltar;
    
-
+   
     public JTelaUsuario() {
-
+    	
         setTitle("Dados do Usuário");
         contentPane = getContentPane();
         setLayout(new BorderLayout());
@@ -32,77 +37,99 @@ public class JTelaUsuario extends JFrame {
 		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
         pnTela.setBackground(Color.WHITE);
         
-        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\conta.jpeg");
+        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\menu\\convert-dpi.com\\6300.jpg");
         JLabel mockupLabel = new JLabel(mockupImage);
         mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 
         
 
         Font customFont = new Font("Arial", Font.BOLD | Font.BOLD, 15);
+        Font customFont2 = new Font("Arial", Font.BOLD | Font.BOLD, 20);
 
         quadro = new JPanel();
-        lblDados = new JLabel("Dados Pessoais");
-        lblDados.setFont(customFont);
-        lblNome = new JLabel("Nome: ");
+        
+        
+       
+        lblNome = new JTextField(ConsultaDAO.getNome());
         lblNome.setFont(customFont);
-        lblSexo = new JLabel("Sexo: ");
+        lblSexo = new JTextField(ConsultaDAO.getSexo());
         lblSexo.setFont(customFont);
-        lblDataNasc = new JLabel("Data de Nascimento: ");
+        lblDataNasc = new JTextField(ConsultaDAO.getData());
         lblDataNasc.setFont(customFont);
 
-        lblDadosConta = new JLabel("Dados da Conta");
-        lblDadosConta.setFont(customFont);
+      
 
-        lblNomeConta = new JLabel("Nome da Conta");
+        lblNomeConta = new JTextField(ConsultaDAO.getUsuario());
         lblNomeConta.setFont(customFont);
-        lblID = new JLabel("Senha:");
-        lblID.setFont(customFont);
-        
+        lblSenha = new JTextField(ConsultaDAO.getSenha());
+        lblSenha.setFont(customFont);
+       
+        lblNome.setOpaque(false);
+		lblNome.setBorder(BorderFactory.createEmptyBorder());
+		lblNome.setForeground(Color.BLACK);
+		
+		lblSexo.setOpaque(false);
+		lblSexo.setBorder(BorderFactory.createEmptyBorder());
+		lblSexo.setForeground(Color.BLACK);
+		
+		lblDataNasc.setOpaque(false);
+		lblDataNasc.setBorder(BorderFactory.createEmptyBorder());
+		lblDataNasc.setForeground(Color.BLACK);
+		
+		lblNomeConta.setOpaque(false);
+		lblNomeConta.setBorder(BorderFactory.createEmptyBorder());
+		lblNomeConta.setForeground(Color.BLACK);
+		
+		lblSenha.setOpaque(false);
+		lblSenha.setBorder(BorderFactory.createEmptyBorder());
+		lblSenha.setForeground(Color.BLACK);
     
 
         
-        lblDados.setBounds(350, 50, 140, 20);
-        lblNome.setBounds(150, 150, 250, 20);
-        lblSexo.setBounds(150, 180, 250, 20);
-        lblDataNasc.setBounds(150, 210, 250, 20);
-
-        lblDadosConta.setBounds(350, 300, 140, 20);
-        lblNomeConta.setBounds(150, 400, 250, 20);
-        lblID.setBounds(150, 430, 360, 20);
+       
+        lblNome.setBounds(290, 270, 250, 50);
+        lblSexo.setBounds(290, 410, 250, 50);
+        lblDataNasc.setBounds(290, 550, 250, 50);
+        lblNomeConta.setBounds(750, 270, 250, 50);
+        lblSenha.setBounds(750, 410, 250, 50);
         
         //Posicionando
-        lblID.setForeground(Color.PINK);
-        lblNome.setBackground(Color.pink);
+        
+        /*lblNome.setBackground(Color.BLACK);
 		lblDataNasc.setBackground(Color.BLACK);
 		lblSexo.setBackground(Color.BLACK);
 		lblNomeConta.setBackground(Color.BLACK);
+		lblSenha.setBackground(Color.BLACK);*/
 		
 		
-        pnTela.add(mockupLabel);
-        pnTela.add(lblDados);
-        pnTela.add(lblNome);
+		pnTela.add(lblNome);
         pnTela.add(lblSexo);
         pnTela.add(lblDataNasc);
-        pnTela.add(lblDadosConta);
+        pnTela.add(lblSenha);
         pnTela.add(lblNomeConta);
-        pnTela.add(lblID);
+       
+        
+        
+      
 
         btnSair = new JButton("Sair");
-        btnSair.setFont(customFont);
+        btnSair.setForeground(Color.WHITE);
+        btnSair.setFont(customFont2);
         btnSair.setBounds(1130, 25, 120, 45);
-        //btnSair.setBackground(Color.BLACK);
+        //btnSair.setBackground(Color.BLUE);
         pnTela.add(btnSair);
         
         btnVoltar = new JButton("Voltar");
         btnVoltar.setFont(customFont);
         btnVoltar.setBounds(995, 25, 120, 45);
       //  btnVoltar.setBackground(Color.BLACK);
+        pnTela.add(mockupLabel);
         pnTela.add(btnVoltar);
-        
+       
         // Torna os botões transparentes
 		
 		 
-		 btnSair.setOpaque(false);
+		btnSair.setOpaque(false);
         btnSair.setContentAreaFilled(false);
         btnSair.setBorderPainted(false);
 
@@ -113,6 +140,9 @@ public class JTelaUsuario extends JFrame {
         btnSair.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	int number = 1;
+            	Sessao pp = new Sessao();
+            	pp.manterSessao(number);
                 JOptionPane.showMessageDialog(null, "Você saiu da conta.");
                 dispose();
                 JTelaUsuario.abreInicial();
@@ -133,7 +163,7 @@ public class JTelaUsuario extends JFrame {
         setResizable(false);
         setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na imagem
 
-    }
+    };
     
     public static void abreInicial() {
 		JTelaInicial frame = new JTelaInicial();
@@ -160,8 +190,8 @@ public class JTelaUsuario extends JFrame {
         frame.setVisible(true);
     }
 
- /*   public static void main(String[] args) {
+   public static void main(String[] args) {
 
         JTelaUsuario.abrir();
-    }*/
+    }
 }

@@ -45,26 +45,26 @@ public class JTelaCadastro2 extends JFrame{
 		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
         pnTela.setBackground(Color.WHITE);
         
-        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\cadastro2.jpeg");
+        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\menu\\convert-dpi.com\\4300.jpg");
         JLabel mockupLabel = new JLabel(mockupImage);
         mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 
 
 		
-		lblDados = new JLabel("Dados da Conta");
-		lblNome = new JLabel("Nome do Usuário:");
-		lblSenha = new JLabel("Digite sua senha:");
-		lblConfSenha = new JLabel("Confirmar senha:");
+		lblDados = new JLabel("");
+		lblNome = new JLabel("");
+		lblSenha = new JLabel("");
+		lblConfSenha = new JLabel("");
 		tfNome = new JTextField();
 		pfSenha = new JPasswordField();
 		pfSenha.setEchoChar('*');;
 		pfConfSenha = new JPasswordField();
 		pfConfSenha.setEchoChar('*');
-		cksenha = new JCheckBox("Mostrar Senha");
-		cksenha.setBackground(Color.WHITE);
-		btnConcluir = new JButton("Concluir");
-		btnVoltar = new JButton("Cancelar");
-		btnVoltarInicio = new JButton("Voltar ao inicio");
+		cksenha = new JCheckBox("");
+	    cksenha.setBorder(BorderFactory.createEmptyBorder()); 
+		btnConcluir = new JButton("");
+		btnVoltar = new JButton("");
+		btnVoltarInicio = new JButton("");
 		
 		//Fontes
 		fonte1 = new Font("Arial", Font.BOLD,30);
@@ -107,28 +107,27 @@ public class JTelaCadastro2 extends JFrame{
         btnVoltar.setContentAreaFilled(false);
         btnVoltar.setBorderPainted(false);
 		
-		 btnVoltarInicio.setOpaque(false);
-	     btnVoltarInicio.setContentAreaFilled(false);
-	     btnVoltarInicio.setBorderPainted(false);
+		btnVoltarInicio.setOpaque(false);
+	    btnVoltarInicio.setContentAreaFilled(false);
+	    btnVoltarInicio.setBorderPainted(false);
 	        
-	     cksenha.setOpaque(false);
-	     cksenha.setContentAreaFilled(false);
-	     cksenha.setBorderPainted(false);
-		
+	    cksenha.setOpaque(false);
+	    cksenha.setContentAreaFilled(false);
+	    cksenha.setBorderPainted(false); 
 	
-		
+
 		lblDados.setBounds(310,50,250,40);
 		lblNome.setBounds(150,200,190,20);
 		lblSenha.setBounds(150,230,190,20);
 		lblConfSenha.setBounds(150,260,190,20);
-		tfNome.setBounds(540,298,140,30);
-		pfSenha.setBounds(540,410,140,30);
-		pfConfSenha.setBounds(540,514,140,30);
-		btnConcluir.setBounds(512,568,168,50);
-		btnVoltar.setBounds(686,568, 168, 50);
-		btnVoltarInicio.setBounds(400, 540,190,30);
-		cksenha.setBounds(150, 300,140,20);
-		
+		tfNome.setBounds(535,285,300,30);
+		pfSenha.setBounds(535,375,300,30);
+		pfConfSenha.setBounds(535,465,300,30);
+		cksenha.setBounds(534,504,300,30);
+		btnConcluir.setBounds(519,550,149,50);
+		btnVoltar.setBounds(686,550, 149, 50);	
+		btnVoltarInicio.setBounds(615,628,140,50);
+
 		//Posicionando
 				/*tfNome.setBackground(Color.BLACK);
 				pfSenha.setBackground(Color.BLACK);
@@ -151,8 +150,9 @@ public class JTelaCadastro2 extends JFrame{
 		pnTela.add(cksenha);
 		add(pnTela);
 		definirEventos();
-		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na imagem
-		
+		pnTela.add(mockupLabel);
+        setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na imagem
+        setContentPane(pnTela);		
 	}
 	private void definirEventos() {
 		btnConcluir.addActionListener(new ActionListener() {
@@ -234,15 +234,15 @@ public class JTelaCadastro2 extends JFrame{
 	public static void abreInicio() {
 		JTelaInicial inicio = new JTelaInicial();
 		inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		inicio.setLocationRelativeTo(inicio);
 		inicio.setVisible(true);
 	}
 	
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		JTelaCadastro2 frame = new JTelaCadastro2();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(frame);
 		frame.setVisible(true);
-	}*/
-
+	}
 }
