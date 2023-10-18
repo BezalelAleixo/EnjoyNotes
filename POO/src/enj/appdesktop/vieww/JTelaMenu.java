@@ -183,31 +183,10 @@ public class JTelaMenu extends JFrame {
 		 
 		 btnPesquisar.addActionListener(new ActionListener() {
 				@Override
-	            public void actionPerformed(ActionEvent e) {
-	                String termoDePesquisa = txtPesquisa.getText();
-	                Pesquisar pesquisador = new Pesquisar(termoDePesquisa);
-	               // ConsultaDAO amor = new ConsultaDAO();
-	                // Verifica se o termo de pesquisa não está vazio
-	                if (!termoDePesquisa.isEmpty() && pesquisador.verificarPesquisa()) {
-	                    
-	                //	if(amor.verificarPesquisa(termoDePesquisa)) {
-
-		                    // Realiza a pesquisa nas notas
-		                   pesquisador.pesquisarNotasPorNomes(); 
-		                        // Exiba ou faça algo com a nota encontrada
-		                        JOptionPane.showMessageDialog(null, "Nota encontrada: \n" + pesquisador.resultadoNT1());
-		                    
-	                	} else if(!termoDePesquisa.isEmpty() && pesquisador.verificarPesquisaLIS()) {
-							//Pesquisar pesquisador = new Pesquisar(termoDePesquisa);
-	                    // Realiza a pesquisa nas listas
-	                        pesquisador.pesquisarListasPorNome();
-	                        // Exiba ou faça algo com a lista encontrada
-	                        JOptionPane.showMessageDialog(null, "Lista encontrada: \n" + pesquisador.resultadoLT1());
-						}
-	                 else {
-	                    JOptionPane.showMessageDialog(null, "Digite um termo de pesquisa válido.");
-	                }
-				}	
+	            public void actionPerformed(ActionEvent e) {	
+				FiltroPesquisa.abrir();
+				dispose();
+				}
 	        });
 		 
 		 btnAgenda.addActionListener(new ActionListener() {
@@ -218,49 +197,7 @@ public class JTelaMenu extends JFrame {
 				
 			}
 		});
-		/*txtPesquisa.getDocument().addDocumentListener(new DocumentListener() {
-			
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				Pesquisar pesquisador = new Pesquisar(txtPesquisa.getText());
-	                if (!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisa()) {
-	           
-		                    
-		                		
-		                    
-	                	} else if(!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisaLIS()) {
-							
-						}
-				
-			}
-			
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				Pesquisar pesquisador = new Pesquisar(txtPesquisa.getText());
-	                if (!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisa()) {
-		                  
-	                        
-		                    
-	                	} else if(!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisaLIS()) {
-
-					}
-			}	
-			
-		
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				Pesquisar pesquisador = new Pesquisar(txtPesquisa.getText());
-	               
-	                if (!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisa()) {
-	                    
-	                	
-		                    
-	                	} else if(!txtPesquisa.getText().isEmpty() && pesquisador.verificarPesquisaLIS()) {
-						
-						}
-				
-			}
-		});*/
+	
 	
 		pnTela.add(txtPesquisa);
 		pnTela.add(btnAgenda);
@@ -274,6 +211,11 @@ public class JTelaMenu extends JFrame {
 		add(pnTela);
 		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na imagem
 		  }
+	
+	public static String getPesquisa() {
+		String n = txtPesquisa.getText();
+		return n;
+	}
 
 public static void abreTelaListas() {
 		JTelaListas frame = new JTelaListas();
@@ -300,7 +242,13 @@ public static void abreTelaUsuario() {
     		frame.setLocationRelativeTo(frame);
     		frame.setVisible(true);
 }
-
+public static void abreMenuPrincipal() {
+    // Você precisará fornecer os detalhes do usuário a partir do seu aplicativo, como nome, sexo e data de nascimento.
+    JTelaMenu frame = new JTelaMenu();
+    		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    		frame.setLocationRelativeTo(frame);
+    		frame.setVisible(true);
+}
 public static void main(String[] args) {
 	JTelaMenu frame = new JTelaMenu();
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
