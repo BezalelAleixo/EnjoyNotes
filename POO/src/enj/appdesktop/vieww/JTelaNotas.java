@@ -20,9 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import enj.appdesktop.model.daoo.AtualizarNotaDAO;
-import enj.appdesktop.model.daoo.DeletarNotaDAO;
-import enj.appdesktop.model.daoo.SalvarNotaDAO;
+import enj.appdesktop.controller.NotaController;
+import enj.appdesktop.model.daoo.NotaIdDAO;
 import enj.appdesktop.model.vo.NotasVO;
 
 public class JTelaNotas extends JFrame {
@@ -54,7 +53,7 @@ public class JTelaNotas extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\menu\\convert-dpi.com\\7300.jpg");
+        ImageIcon mockupImage = new ImageIcon("D:\\AleixoUNI\\BEZALEL\\convert-dpi.com\\7300.jpg");
         JLabel mockupLabel = new JLabel(mockupImage);
         mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 
@@ -155,16 +154,10 @@ public class JTelaNotas extends JFrame {
         salvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String titulo = tituloCamp.getText();
-                String conteudo = caixaTexto.getText();
-                id = id + 1;
-                NotasVO note = new NotasVO(id, titulo, conteudo);
-                nota.add(note);
-                tituloCamp.setText("");
-                caixaTexto.setText("");
-                JOptionPane.showMessageDialog(JTelaNotas.this, "Nota Salva!");
-                SalvarNotaDAO salvarnota = new SalvarNotaDAO();
-                salvarnota.SalvarNotaDAO(note);
+            	String titulo = tituloCamp.getText();
+            	String conteudo = caixaTexto.getText();
+                NotaController notacontroller = new NotaController();
+                notacontroller.salvarNota(titulo, conteudo);
             }
         });
 
@@ -198,9 +191,10 @@ public class JTelaNotas extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 salvar.setEnabled(true);
                 deletar.setEnabled(true);
-                NotasVO notas = new NotasVO(id, tituloCamp.getText(), caixaTexto.getText());
-                AtualizarNotaDAO atualizar = new AtualizarNotaDAO();
-                atualizar.AtualizarNotaDAO(notas);
+                String titulo = tituloCamp.getText();
+            	String conteudo = caixaTexto.getText();
+                NotaController notacontroller = new NotaController();
+                notacontroller.atualizarNota(new NotaIdDAO().buscarIdPorTitulo(titulo), titulo, conteudo);
                 tituloCamp.setText("");
                 caixaTexto.setText("");
             }
@@ -229,9 +223,7 @@ public class JTelaNotas extends JFrame {
                     nota.remove(selectedNote);
                     JOptionPane.showMessageDialog(JTelaNotas.this, "Nota Deletada!");
                 }
-                NotasVO cod = new NotasVO(selectedIndex + 1);
-                DeletarNotaDAO delete = new DeletarNotaDAO();
-                delete.DeletarNotaDAO(cod);
+             
             }
         });
 

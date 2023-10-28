@@ -19,7 +19,7 @@ import javax.swing.JRootPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import enj.appdesktop.model.daoo.DeletarNotaDAO;
+
 import enj.appdesktop.model.daoo.ListaDAO;
 import enj.appdesktop.model.vo.ListaVO;
 import enj.appdesktop.model.vo.NotasVO;

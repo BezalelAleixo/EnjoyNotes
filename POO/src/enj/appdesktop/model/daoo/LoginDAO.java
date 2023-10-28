@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-import enj.appdesktop.model.vo.CadastroVO;
-
 /**
  * @author prfel
  * @see Classe para banco de dados da entidade Usuario

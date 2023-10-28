@@ -3,17 +3,18 @@ package enj.appdesktop.model.daoo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import enj.appdesktop.model.vo.CadastroVO;
+
+import enj.appdesktop.model.vo.UsuarioVO;
 
 /**
  * @author AleixoUNI
  * @see Classe para conectar a tela de cadastro ao banco de dados
  */
-public class ConexaoDAOCadastro {
+public class UsuarioDAO {
 	 Connection conexao = null;
 	 PreparedStatement PSTM;
 	
-	public void ConexaoDAOCadastro(CadastroVO user) {
+	public void cadastrar(UsuarioVO user){
 		String SQL = "INSERT INTO USUARIO (nome_pessoal, sexo, data_nasc) VALUES (?,?,?);";
 		conexao = new ConexaoDAO().conexaoBD();
 		try {
@@ -27,18 +28,6 @@ public class ConexaoDAOCadastro {
 			System.out.println(e);
 		}
 	}
-	public void ConexaoDAOCadastro2(CadastroVO user) {
-		String SQL = "INSERT INTO CONTA (nome_perfil, senha) VALUES (?,?);";
-		conexao = new ConexaoDAO().conexaoBD();
-		try {
-			PSTM = conexao.prepareStatement(SQL);
-			PSTM.setString(1, user.getNomeUsuario());
-			PSTM.setString(2, user.getSenha());
-			PSTM.execute();
-			PSTM.close();
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-	}
+	
 	
 }

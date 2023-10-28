@@ -29,7 +29,6 @@ import javax.swing.table.DefaultTableModel;
 import enj.appdesktop.model.daoo.ConsultaDAO;
 import enj.appdesktop.model.vo.ListaVO;
 import enj.appdesktop.model.vo.NotasVO;
-import enj.appdesktop.model.vo.Pesquisar;
 
 public class JTelaMenu extends JFrame {
 	private Container contentPane;

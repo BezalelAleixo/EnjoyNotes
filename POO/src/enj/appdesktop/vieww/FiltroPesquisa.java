@@ -51,13 +51,13 @@ public class FiltroPesquisa extends JFrame{
 
         pnBarraPes = new JPanel();
         pnBarraPes.setLayout(null);
-        pnBarraPes.setBackground(Color.GRAY);
+        pnBarraPes.setBackground(new Color(0x2a4674));
 
         // Defina o tamanho preferido do pnBarraPes
         pnBarraPes.setPreferredSize(new Dimension(1366, 150));
 
         pnResultados = new JPanel();
-        pnResultados.setBackground(Color.WHITE);
+        pnResultados.setBackground(new Color(0x84CAED));
 
         // Adicione pnBarraPes ao topo e pnResultados abaixo
         cnTela.add(pnBarraPes, BorderLayout.NORTH);
@@ -66,14 +66,14 @@ public class FiltroPesquisa extends JFrame{
 	private void posicionandoComponentes() {
 		Font fonte = new Font("Verdana", Font.PLAIN, 16);
 				
-		tfpesquisa = new JTextField(JTelaMenu.getPesquisa());
+		tfpesquisa = new JTextField(/*JTelaMenu.getPesquisa()*/);
 		tfpesquisa.setBounds(200, 50, 500, 40);
 		tfpesquisa.setFont(fonte);
 		
-		btnPesquisa = new JButton(new ImageIcon("C:\\Users\\prfel\\Pictures\\ppes.png"));
+		btnPesquisa = new JButton(/*new ImageIcon("C:\\Users\\prfel\\Pictures\\ppes.png")*/);
 		btnPesquisa.setBounds(700, 50, 46, 44);
 		
-		btnVoltar = new JButton(new ImageIcon("C:\\Users\\prfel\\Pictures\\voltin.png"));
+		btnVoltar = new JButton(/*new ImageIcon("C:\\Users\\prfel\\Pictures\\voltin.png")*/);
 		btnVoltar.setBounds(30, 50, 46, 44);
 		
 		String []tipos = {"      A a Z", "      Z a A", "Data de Criação"};

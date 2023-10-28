@@ -7,16 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import enj.appdesktop.model.vo.CadastroVO;
+
+import enj.appdesktop.model.vo.ContaVO;
 import enj.appdesktop.model.vo.ListaVO;
 import enj.appdesktop.model.vo.NotasVO;
-import enj.appdesktop.model.vo.Pesquisar;
+
+import enj.appdesktop.model.vo.UsuarioVO;
 import enj.appdesktop.vieww.JTelaMenu;
 
 public class ConsultaDAO {
 	
-	static CadastroVO dd;
-	static CadastroVO pp;
+	static ContaVO dd;
+	static UsuarioVO pp;
 	
 	NotasVO dado;
 	ListaVO doc;
@@ -131,26 +133,20 @@ public class ConsultaDAO {
 				String usuario = RS.getString("nome_perfil");	
 				String senha = RS.getString("senha");
 				int id = RS.getInt("id_conta");
-				dd = new CadastroVO();
-				dd.setId(id);
-				dd.setNomeUsuario(usuario);
+				dd = new ContaVO();
+
+				dd.setNome_perfil(usuario);
 				dd.setSenha(senha);
-				dd.setNome("bezalel");
-				dd.setSexo("masculino");
-				dd.setDatanasc("2006/07/28");
+				
 			
 			}
 		}catch (SQLException e) {
 			System.out.println("FALHA"+e);
 	 	}
 		}
-	public static int getID() {
-		int notin = dd.getId();
-		return notin;
 
-	}
 	public static String getUsuario() {
-		String notinho = dd.getNomeUsuario();
+		String notinho = dd.getNome_perfil();
 		return notinho;
 
 	}
@@ -177,10 +173,8 @@ public class ConsultaDAO {
 				String sexo = RS.getString("sexo");
 				String data_nasc = RS.getString("data_nasc");
 				int id = 1;
-				pp = new CadastroVO();
+				pp = new UsuarioVO();
 				pp.setId(id);
-				pp.setNomeUsuario("comoé");
-				pp.setSenha("aiai");
 				pp.setNome(nome);
 				pp.setSexo(sexo);
 				pp.setDatanasc(data_nasc);
@@ -195,17 +189,17 @@ public class ConsultaDAO {
 	 	}
 		}
 	public static String getNome() {
-		String notin = dd.getNome();
+		String notin = pp.getNome();
 		return notin;
 
 	}
 	public static String getSexo() {
-		String notinho = dd.getSexo();
+		String notinho = pp.getSexo();
 		return notinho;
 
 	}
 	public static String getData() {
-		String notin = dd.getDatanasc();
+		String notin = pp.getDatanasc();
 		return notin;
 
 	}

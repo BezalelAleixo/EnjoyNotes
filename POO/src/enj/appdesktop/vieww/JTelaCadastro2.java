@@ -18,8 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import enj.appdesktop.model.daoo.ConexaoDAOCadastro;
-import enj.appdesktop.model.vo.CadastroVO;
+
+import enj.appdesktop.model.vo.ContaVO;
+import enj.appdesktop.model.vo.UsuarioVO;
 
 /**
  * @author AleixoUNI
@@ -171,23 +172,20 @@ public class JTelaCadastro2 extends JFrame{
 				nome = dados.getNome();
 				sexo = dados.getSexo();
 				datanasc = dados.getDatanasc();*/
-				CadastroVO usuario = new CadastroVO();
+				UsuarioVO usuario = new UsuarioVO();
 				
 				
 				usuario.setNome(JTelaCadastro.getNome());
 				usuario.setSexo(JTelaCadastro.getSexo());
 				usuario.setDatanasc(JTelaCadastro.getNasc());//2006/07/28
 				
-				CadastroVO conta = new CadastroVO();
-				conta.setNomeUsuario(nomeUsuario);
+				ContaVO conta = new ContaVO();
+				conta.setNome_perfil(nomeUsuario);
 				conta.setSenha(senha);
 			
 				if(pfConfSenha.getText().length() == pfSenha.getText().length()) {
 					JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso");
-					ConexaoDAOCadastro dadosusuario = new ConexaoDAOCadastro();
-					dadosusuario.ConexaoDAOCadastro(usuario);
 					
-					dadosusuario.ConexaoDAOCadastro2(conta);
 				}else {
 					JOptionPane.showMessageDialog(null, "Verifique a senha!");
 				}

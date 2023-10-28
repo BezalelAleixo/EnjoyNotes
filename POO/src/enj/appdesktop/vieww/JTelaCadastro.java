@@ -21,8 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import enj.appdesktop.model.daoo.ConexaoDAOCadastro;
-import enj.appdesktop.model.vo.CadastroVO;
+
 
 /**
  * @author AleixoUNI
