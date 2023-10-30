@@ -6,12 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/AleixoUNI/BEZALEL/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0.jar">
+	<classpathentry kind="lib" path="C:/Users/Aland/OneDrive/Documentos/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0/mysql-connector-j-8.1.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/jcalendar-1.4/lib/jcalendar-1.4.jar">
+	<classpathentry kind="lib" path="C:/Users/Aland/eclipse-workspace/POO/lib/JCalendar.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
