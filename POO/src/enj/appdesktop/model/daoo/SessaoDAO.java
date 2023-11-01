@@ -89,7 +89,7 @@ public class SessaoDAO {
 			PSTM.setString(1, sessoes);
 			RS = PSTM.executeQuery();
 			
-			if (RS.next()) {
+			while (RS.next()) {
 				check = true;
 				contaslogadas = new SessaoVO();
 				int id = RS.getInt("S.id");
@@ -119,5 +119,13 @@ public class SessaoDAO {
 		}
 	public List<ContaVO> PreparadContas(){
 		return contasPreparadas;
+	}
+	public static void main(String[] args) {
+		SessaoDAO dao = new SessaoDAO();
+		dao.Logadas();
+		for (ContaVO contas : dao.PreparadContas()) {
+			System.out.println(contas.getNome_perfil());
+			System.out.println(contas.getFoto());
+		}
 	}
 }

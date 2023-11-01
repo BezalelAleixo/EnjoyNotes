@@ -46,6 +46,7 @@ public class JTelaSessoesContas extends JPanel{
 		btnMockup = new JButton(new ImageIcon(conta.getFoto()));
 		btnMockup.setPreferredSize(new Dimension(193,193));
 		btnMockup.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnMockup.setBackground(new Color(0x2a4674));
 		
 		Font fonte = new Font("Garet", Font.PLAIN, 24);
 		lblNomeConta = new JLabel(conta.getNome_perfil());

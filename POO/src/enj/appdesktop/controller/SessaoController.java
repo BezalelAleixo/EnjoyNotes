@@ -41,5 +41,6 @@ public class SessaoController {
 			System.out.println("foto: "+ contas.getFoto());
 			System.out.println("nome de perfil: "+ contas.getNome_perfil());
 		}
+		System.out.println(controller.ListaContasFeitas());
 	}
 }

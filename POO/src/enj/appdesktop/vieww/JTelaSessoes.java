@@ -7,13 +7,18 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import enj.appdesktop.controller.SessaoController;
 import enj.appdesktop.model.vo.ContaVO;
@@ -23,6 +28,7 @@ public class JTelaSessoes extends JFrame{
 	private Container contentpane;
 	private JPanel pnPrincipal, pnBarra, pnBlocosContas;
 	private JLabel lblPergunta, lblMockupLogo;
+	private JButton btnIncio, btnEntrar, btnCadastre;
 	
 	public JTelaSessoes () {
 		inicializarComponentes();
@@ -62,12 +68,38 @@ public class JTelaSessoes extends JFrame{
 		lblPergunta.setBounds(383, 50, 600, 100);
 		
 		pnBlocosContas = new JPanel();
-		pnBlocosContas.setLayout(new FlowLayout());
-		pnBlocosContas.setBounds(0,200, 1366,440);
+		FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 30, 0); // 20 pixels de espaçamento horizontal
+		pnBlocosContas.setLayout(flowLayout);
+		pnBlocosContas.setBounds(0, 200, 1366, 440);
 		pnBlocosContas.setBackground(new Color(0x84CAED));
 		
+		Font fonte2 = new Font("Bernoru", Font.BOLD, 24);
+		
+		btnEntrar = new JButton("Entrar");
+		btnEntrar.setFont(fonte2);
+		btnEntrar.setBounds(1200, 42, 120, 42);
+		btnEntrar.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnEntrar.setBackground(new Color(0x2a4674));
+		btnEntrar.setForeground(Color.WHITE);
+		
+		btnCadastre = new JButton("Cadastre-se");
+		btnCadastre.setFont(fonte2);
+		btnCadastre.setBounds(1000, 42, 160, 42);
+		btnCadastre.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnCadastre.setBackground(new Color(0x2a4674));
+		btnCadastre.setForeground(Color.WHITE);
+		
+		btnIncio = new JButton("Início");
+		btnIncio.setFont(fonte2);
+		btnIncio.setBounds(860, 42, 100, 42);
+		btnIncio.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnIncio.setBackground(new Color(0x2a4674));
+		btnIncio.setForeground(Color.WHITE);
 		
 		pnBarra.add(lblMockupLogo);
+		pnBarra.add(btnEntrar);
+		pnBarra.add(btnCadastre);
+		pnBarra.add(btnIncio);
 		pnPrincipal.add(lblPergunta);
 		pnPrincipal.add(pnBlocosContas);
 	}
@@ -85,9 +117,109 @@ public class JTelaSessoes extends JFrame{
 		}
 		for(JTelaSessoesContas blocosProntos : contasPreparadas) {
 			blocosProntos.setPreferredSize(new Dimension(193,263));
-			pnBlocosContas.add(blocosProntos, FlowLayout.LEFT);
+			pnBlocosContas.add(blocosProntos);
 		}
+		
+		btnEntrar.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnEntrar.setForeground(Color.WHITE);
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+				btnEntrar.setForeground(new Color(0x2b2760));
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			JTelaEntrar.abre();
+				
+			}
+		});
+			btnCadastre.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnCadastre.setForeground(Color.WHITE);
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+				btnCadastre.setForeground(new Color(0x2b2760));
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JTelaCadastro.abrir();
+				
+			}
+		});
+			btnIncio.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					btnIncio.setForeground(Color.WHITE);
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					
+					btnIncio.setForeground(new Color(0x2b2760));
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					JTelaInicial.abreInicial();
+					
+				}
+			});
+				
 	}
+	
+		
 
 	public static void abrir(){
 		JTelaSessoes frame = new JTelaSessoes();
