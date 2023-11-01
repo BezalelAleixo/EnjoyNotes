@@ -6,8 +6,8 @@ import enj.appdesktop.model.vo.ContaVO;
 public class ContaBO {
     private ContaDAO contaDAO = new ContaDAO();
 
-    public void cadastrarConta(String nome_perfil, String senha) {
-        ContaVO conta = new ContaVO(nome_perfil, senha);
+    public void cadastrarConta(String nome_perfil, String senha, String foto) {
+        ContaVO conta = new ContaVO(nome_perfil, senha, foto);
 
         try {
             contaDAO.cadastrar(conta);

@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import enj.appdesktop.model.daoo.ConsultaDAO;
-import enj.appdesktop.model.daoo.Sessao;
+
 
 public class JTelaUsuario extends JFrame {
     private Container contentPane;
@@ -143,8 +143,7 @@ public class JTelaUsuario extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	int number = 1;
-            	Sessao pp = new Sessao();
-            	pp.manterSessao(number);
+            
                 JOptionPane.showMessageDialog(null, "Você saiu da conta.");
                 dispose();
                 JTelaUsuario.abreInicial();

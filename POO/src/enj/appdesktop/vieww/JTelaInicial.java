@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import enj.appdesktop.model.daoo.ConsultaDAO;
-import enj.appdesktop.model.daoo.Sessao;
+
 
 import java.lang.String;
 /**
@@ -113,17 +113,7 @@ public class JTelaInicial extends JFrame{
 		//frame.setExtendedState(MAXIMIZED_BOTH);
 	}
 	public static void main(String[] args) {
-		Sessao oi = new Sessao();
-		if(oi.verificarSessao(1)) {
-		JTelaInicial.abreInicial();
-		}else if (oi.verificarSessao(0)){
-			ConsultaDAO pp = new ConsultaDAO();
-			pp.mandar("@beza");
-			ConsultaDAO bb = new ConsultaDAO();
-			bb.mandarUser("bezalel");
-			
-			JTelaEntrar.abreMenu();
-		}
+		
 	}
 	
 

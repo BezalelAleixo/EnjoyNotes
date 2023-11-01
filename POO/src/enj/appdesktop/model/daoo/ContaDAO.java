@@ -15,12 +15,13 @@ public class ContaDAO {
 	 PreparedStatement PSTM;
 	
 	 public void cadastrar(ContaVO user) {
-			String SQL = "INSERT INTO CONTA (nome_perfil, senha) VALUES (?,?);";
+			String SQL = "INSERT INTO CONTA (nome_perfil, senha, foto) VALUES (?,?,?);";
 			conexao = new ConexaoDAO().conexaoBD();
 			try {
 				PSTM = conexao.prepareStatement(SQL);
 				PSTM.setString(1, user.getNome_perfil());
 				PSTM.setString(2, user.getSenha());
+				PSTM.setString(3, user.getFoto());
 				PSTM.execute();
 				PSTM.close();
 			}catch(Exception e) {

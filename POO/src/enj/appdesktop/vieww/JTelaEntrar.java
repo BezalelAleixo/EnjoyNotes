@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 
 import enj.appdesktop.model.daoo.ConsultaDAO;
 import enj.appdesktop.model.daoo.LoginDAO;
-import enj.appdesktop.model.daoo.Sessao;
+
 
 /**
  * @author AleixoUNI
@@ -138,8 +138,7 @@ public class JTelaEntrar extends JFrame {
 				pp.mandarUser("bezalel");
 			
 				int number = 0;
-				Sessao bb = new Sessao();
-				bb.manterSessao(number);
+				
 			}
 		});
 		ckMostrar.addActionListener(new ActionListener() {
