@@ -42,7 +42,7 @@ public class JTelaInicial extends JFrame{
 		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
         pnTela.setBackground(Color.WHITE);
         
-        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\menu\\convert-dpi.com\\1300.jpg");
+        ImageIcon mockupImage = new ImageIcon("D:\\AleixoUNI\\BEZALEL\\convert-dpi.com\\1300.jpg");
         JLabel mockupLabel = new JLabel(mockupImage);
         mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 		
@@ -113,7 +113,7 @@ public class JTelaInicial extends JFrame{
 		//frame.setExtendedState(MAXIMIZED_BOTH);
 	}
 	public static void main(String[] args) {
-		
+		JTelaInicial.abreInicial();
 	}
 	
 

@@ -39,7 +39,7 @@ public class JTelaListas extends JFrame {
 		contentPane = getContentPane();
 		setLayout(null);
 		setBounds(0, 0, 1000, 800);
-		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\menu\\convert-dpi.com\\8300.jpg");
+		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\convert-dpi.com\\8300.jpg");
 		JLabel mockupLabel = new JLabel(mockupImage);
 		mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 		

@@ -48,7 +48,7 @@ public class JTelaCadastro extends JFrame {
 		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
 		pnTela.setBackground(Color.WHITE);
 
-		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\menu\\convert-dpi.com\\3300.jpg");
+		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\convert-dpi.com\\3300.jpg");
 		JLabel mockupLabel = new JLabel(mockupImage);
 		mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 

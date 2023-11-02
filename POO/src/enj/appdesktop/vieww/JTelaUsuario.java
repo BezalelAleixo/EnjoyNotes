@@ -37,7 +37,7 @@ public class JTelaUsuario extends JFrame {
 		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
         pnTela.setBackground(Color.WHITE);
         
-        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\menu\\convert-dpi.com\\6300.jpg");
+        ImageIcon mockupImage = new ImageIcon("D:\\AleixoUNI\\BEZALEL\\convert-dpi.com\\6300.jpg");
         JLabel mockupLabel = new JLabel(mockupImage);
         mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 
@@ -50,18 +50,18 @@ public class JTelaUsuario extends JFrame {
         
         
        
-        lblNome = new JTextField(ConsultaDAO.getNome());
+        lblNome = new JTextField(/*ConsultaDAO.getNome()*/);
         lblNome.setFont(customFont);
-        lblSexo = new JTextField(ConsultaDAO.getSexo());
+        lblSexo = new JTextField(/*ConsultaDAO.getSexo()*/);
         lblSexo.setFont(customFont);
-        lblDataNasc = new JTextField(ConsultaDAO.getData());
+        lblDataNasc = new JTextField(/*ConsultaDAO.getData()*/);
         lblDataNasc.setFont(customFont);
 
       
 
-        lblNomeConta = new JTextField(ConsultaDAO.getUsuario());
+        lblNomeConta = new JTextField(/*ConsultaDAO.getUsuario()*/);
         lblNomeConta.setFont(customFont);
-        lblSenha = new JTextField(ConsultaDAO.getSenha());
+        lblSenha = new JTextField(/*ConsultaDAO.getSenha()*/);
         lblSenha.setFont(customFont);
        
         lblNome.setOpaque(false);

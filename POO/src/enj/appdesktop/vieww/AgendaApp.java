@@ -24,7 +24,7 @@ public class AgendaApp extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 
-		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\menu\\convert-dpi.com\\10.jpg");
+		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\convert-dpi.com\\10.jpg");
 		JLabel mockupLabel = new JLabel(mockupImage);
 		mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 

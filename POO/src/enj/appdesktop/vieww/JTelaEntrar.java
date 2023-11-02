@@ -46,7 +46,7 @@ public class JTelaEntrar extends JFrame {
 		pnTela.setBackground(Color.WHITE);
 
 		// aqui ele puxa a imagem tela.png que ta no pacote
-		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\menu\\convert-dpi.com\\2300.jpg");
+		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\convert-dpi.com\\2300.jpg");
 		JLabel mockupLabel = new JLabel(mockupImage);
 		mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 
