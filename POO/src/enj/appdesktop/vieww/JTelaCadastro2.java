@@ -58,7 +58,7 @@ public class JTelaCadastro2 extends JFrame{
 		lblConfSenha = new JLabel("");
 		tfNome = new JTextField();
 		pfSenha = new JPasswordField();
-		pfSenha.setEchoChar('*');;
+		pfSenha.setEchoChar('*');
 		pfConfSenha = new JPasswordField();
 		pfConfSenha.setEchoChar('*');
 		cksenha = new JCheckBox("");

@@ -22,7 +22,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 public class JTelaNotificacoes extends JPanel{
-	private JPanel pn3Opcoes;
     private JPanel nomeNotificacoesPanel;
     private JLabel lblLembretes;
     private JLabel lblNotificacoes;

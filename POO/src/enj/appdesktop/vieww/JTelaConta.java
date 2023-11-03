@@ -113,9 +113,6 @@ public class JTelaConta extends JPanel {
 		MatteBorder redBottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.WHITE);
 	    Border compoundBorder = BorderFactory.createCompoundBorder(emptyBorder, redBottomBorder);
 	    btnPersonalize.setBorder(compoundBorder);
-	    
-        
-        
         btnPersonalize.setAlignmentX(JComponent.LEFT_ALIGNMENT);
 		
 		pn3Opcoes.add(Box.createRigidArea(new Dimension(0, 0))); // Espaço rígido de 10 pixels

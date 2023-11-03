@@ -46,7 +46,7 @@ public class JTelaTema extends JPanel{
         Font fonte2 = new Font("Garet", Font.PLAIN, 18);
         Font fonte3 = new Font("Garet", Font.PLAIN, 12);
         
-        lblTema = new JLabel("Notificações");
+        lblTema = new JLabel("Aparência e Tema");
         lblTema.setFont(fonte);
         lblTema.setBackground(new Color(0x345389));
         lblTema.setForeground(Color.WHITE);
