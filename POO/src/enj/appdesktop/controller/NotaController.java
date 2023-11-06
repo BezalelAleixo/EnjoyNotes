@@ -1,6 +1,9 @@
 package enj.appdesktop.controller;
 
+import java.util.List;
+
 import enj.appdesktop.model.bo.NotaBO;
+import enj.appdesktop.model.vo.ContaVO;
 import enj.appdesktop.model.vo.NotasVO;
 
 public class NotaController {
@@ -25,6 +28,15 @@ public class NotaController {
 
         notaBO.deletarNota(nota);
     }
-
-    // Outros métodos do controller relacionados a notas podem ser adicionados aqui.
+    
+    public List<NotasVO> listarNotas(String nome_perfil) {
+        // Chame o método correspondente na classe BO para listar as notas
+        return notaBO.listarNotas(nome_perfil);
+    }
+    public List<NotasVO> NotasPreparadasdaCOnta() {
+        return notaBO.NotasProntas();
+    }
+    public boolean verificarSeTemNotas(String nome_perfil) {
+        return notaBO.verificarSeTemNota(nome_perfil);
+    }
 }

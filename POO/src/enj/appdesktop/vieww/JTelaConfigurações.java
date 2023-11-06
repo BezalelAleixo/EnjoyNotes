@@ -331,7 +331,7 @@ public class JTelaConfigurações extends JFrame{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JTelaMenu.abreMenuPrincipal();
+		
 				
 			}
 		});

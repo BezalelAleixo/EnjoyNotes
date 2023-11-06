@@ -78,7 +78,7 @@ public class JTelaListas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Voltando à tela anterior");
 				setVisible(false); // Fecha a janela atual (tela de login)
-				AgendaApp.abreMenu();
+		
 			}
 		});
 
@@ -244,7 +244,7 @@ public class JTelaListas extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				JTelaListas.AbreMenu();
+			
 
 			}
 		});
@@ -264,12 +264,7 @@ public class JTelaListas extends JFrame {
 		setContentPane(panel);
 	}
 
-	public static void AbreMenu() {
-		JTelaMenu menu = new JTelaMenu();
-		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menu.setLocationRelativeTo(menu);
-		menu.setVisible(true);
-	}
+	
 
 	public static void main(String[] args) {
 		JTelaListas frame = new JTelaListas();

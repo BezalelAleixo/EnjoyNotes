@@ -15,9 +15,11 @@ public class JTelaCronometro extends JFrame {
 
     public JTelaCronometro() {
         setTitle("Cronômetro");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+       // setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setSize(1366,768);
         setUndecorated(telaCheia);  // Remove as bordas da janela em tela cheia
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(getContentPane());
 
         // Usar um JLayeredPane para posicionar os elementos em cima da imagem
         JLayeredPane layeredPane = new JLayeredPane();
@@ -48,7 +50,7 @@ public class JTelaCronometro extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Voltando à tela anterior");
                 setVisible(false);
-                abreMenu();
+               
             }
         });
 
@@ -65,7 +67,7 @@ public class JTelaCronometro extends JFrame {
         });
 
 
-        ImageIcon mockupImage = new ImageIcon("C:\\Users\\\\Aland\\OneDrive\\Documentos\\LUAN\\1000.png");
+        ImageIcon mockupImage = new ImageIcon("C:\\Users\\AleixoUNI\\git\\EnjoyNotes\\1000.png");
         JLabel mockupLabel = new JLabel(mockupImage);
         mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
         layeredPane.add(mockupLabel, JLayeredPane.DEFAULT_LAYER);
@@ -152,13 +154,7 @@ public class JTelaCronometro extends JFrame {
 
     }
     
-    public static void abreMenu() {
-        JTelaMenu menu = new JTelaMenu();
-        menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menu.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        menu.setLocationRelativeTo(menu);
-        menu.setVisible(true);
-    }
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

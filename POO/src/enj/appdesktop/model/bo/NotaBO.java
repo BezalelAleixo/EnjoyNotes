@@ -1,6 +1,9 @@
 package enj.appdesktop.model.bo;
 
+import java.util.List;
+
 import enj.appdesktop.model.daoo.NotaDAO;
+import enj.appdesktop.model.vo.ContaVO;
 import enj.appdesktop.model.vo.NotasVO;
 
 public class NotaBO {
@@ -32,6 +35,18 @@ public class NotaBO {
             // Trate o erro de acordo com as necessidades do aplicativo.
         }
     }
-
+    
+    public List<NotasVO> listarNotas(String nome_perfil) {
+        // Adicione a lógica para listar todas as notas associadas a uma conta específica
+        List<NotasVO> notas = notaDAO.todasNotas(nome_perfil);
+        return notas;
+    }
+    public List<NotasVO> NotasProntas() {
+        // Adicione a lógica para listar todas as notas associadas a uma conta específica
+        return notaDAO.PreparadNotas();
+    }
+    public boolean verificarSeTemNota(String nome_perfil) {
+        return notaDAO.verificarseTemNota(nome_perfil);
+    }
     // Outras regras de negócios relacionadas a notas podem ser adicionadas aqui.
 }

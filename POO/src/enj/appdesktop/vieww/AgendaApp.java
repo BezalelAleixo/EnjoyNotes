@@ -136,13 +136,7 @@ public class AgendaApp extends JFrame {
 		}
 	}
 
-	public static void abreMenu() {
-		JTelaMenu menu = new JTelaMenu();
-		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menu.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		menu.setLocationRelativeTo(menu);
-		menu.setVisible(true);
-	}
+
 	public static void abrirAgenda() {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override

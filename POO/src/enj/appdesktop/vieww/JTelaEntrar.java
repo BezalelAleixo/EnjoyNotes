@@ -128,7 +128,7 @@ public class JTelaEntrar extends JFrame {
 				LoginDAO dao = new LoginDAO();
 				if (dao.VerificarLogin(tfUsuario.getText(), pfSenha.getText())) {
 					dispose();
-					JTelaEntrar.abreMenu();
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Usuário ou Senha incorreta!");
 				}
@@ -168,12 +168,7 @@ public class JTelaEntrar extends JFrame {
 
 	}
 
-	public static void abreMenu() {
-		JTelaMenu menu = new JTelaMenu();
-		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menu.setLocationRelativeTo(menu);
-		menu.setVisible(true);
-	}
+	
 
 	public static void main(String[] args) {
 		JTelaEntrar frame = new JTelaEntrar();

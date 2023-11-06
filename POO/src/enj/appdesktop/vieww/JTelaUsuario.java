@@ -159,7 +159,7 @@ public class JTelaUsuario extends JFrame{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JTelaMenu.abreMenuPrincipal();
+	
 				
 			}
 		});

@@ -77,7 +77,7 @@ public class JTelaNotas extends JFrame {
 		    public void actionPerformed(ActionEvent e) {
 		    	JOptionPane.showMessageDialog( null, "Voltando à tela anterior");
 		    	setVisible(false); // Fecha a janela atual (tela de login)
-		        AgendaApp.abreMenu();
+		        
 		    }
 		});
 
@@ -231,17 +231,12 @@ public class JTelaNotas extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                JTelaNotas.VoltarMenu();
+               
             }
         });
     }
 
-    public static void VoltarMenu() {
-        JTelaMenu menu = new JTelaMenu();
-        menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menu.setLocationRelativeTo(menu);
-        menu.setVisible(true);
-    }
+   
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

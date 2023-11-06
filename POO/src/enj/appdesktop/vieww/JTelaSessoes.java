@@ -30,7 +30,9 @@ public class JTelaSessoes extends JFrame{
 	private JLabel lblPergunta, lblMockupLogo;
 	private JButton btnIncio, btnEntrar, btnCadastre;
 	
+	
 	public JTelaSessoes () {
+	    
 		inicializarComponentes();
 		posicionandoComponentes();
 		definirEventos();
@@ -112,7 +114,7 @@ public class JTelaSessoes extends JFrame{
 		List<ContaVO> contaLogadas = controller.ListaContasFeitas();
 		
 		for(ContaVO contas : contaLogadas) {
-			JTelaSessoesContas blocos = new JTelaSessoesContas(contas);
+			JTelaSessoesContas blocos = new JTelaSessoesContas(contas, JTelaSessoes.this);
 			contasPreparadas.add(blocos);
 		}
 		for(JTelaSessoesContas blocosProntos : contasPreparadas) {
@@ -219,7 +221,9 @@ public class JTelaSessoes extends JFrame{
 				
 	}
 	
-		
+	public Container getContentpane() {
+	    return contentpane;
+	}	
 
 	public static void abrir(){
 		JTelaSessoes frame = new JTelaSessoes();

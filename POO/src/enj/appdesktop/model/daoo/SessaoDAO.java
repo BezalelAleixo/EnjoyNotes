@@ -80,9 +80,8 @@ public class SessaoDAO {
 		Connection conexao = new ConexaoDAO().conexaoBD();
 		PreparedStatement PSTM = null;
 		ResultSet RS = null;
-		String select = "SELECT S.id, S.acesso, S.id_conta_acesso, C.nome_perfil, C.foto FROM SESSAO as S INNER JOIN CONTA as C ON S.id_conta_acesso = C.id_conta WHERE acesso = ?";
+		String select = "SELECT S.id, S.acesso, S.id_conta_acesso, C.id_conta ,C.nome_perfil, C.foto FROM SESSAO as S INNER JOIN CONTA as C ON S.id_conta_acesso = C.id_conta WHERE acesso = ?";
 		String sessoes = "L"; 
-		boolean check = false;
 		
 		try {
 			PSTM = conexao.prepareStatement(select);
@@ -90,7 +89,6 @@ public class SessaoDAO {
 			RS = PSTM.executeQuery();
 			
 			while (RS.next()) {
-				check = true;
 				contaslogadas = new SessaoVO();
 				int id = RS.getInt("S.id");
 				String acesso = RS.getString("S.acesso");
@@ -103,6 +101,8 @@ public class SessaoDAO {
 				contas = new ContaVO();
 				String nomeConta = RS.getString("C.nome_perfil");
 				String foto = RS.getString("C.foto");
+				int id_conta = RS.getInt("C.id_conta");
+				contas.setId_conta(id_conta);
 				contas.setNome_perfil(nomeConta);
 				contas.setFoto(foto);
 				contasPreparadas.add(contas);

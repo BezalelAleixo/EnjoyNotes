@@ -104,7 +104,7 @@ public class FiltroPesquisa extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			JTelaMenu.abreMenuPrincipal();
+
 			dispose();
 			}
 		});
