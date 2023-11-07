@@ -24,7 +24,7 @@ import enj.appdesktop.controller.NotaController;
 import enj.appdesktop.model.daoo.NotaIdDAO;
 import enj.appdesktop.model.vo.NotasVO;
 
-public class JTelaNotas extends JFrame {
+public class JTelaNotas extends JPanel {
 
     private List<NotasVO> nota;
     private JTextArea caixaTexto;
@@ -40,12 +40,9 @@ public class JTelaNotas extends JFrame {
     public JTelaNotas() {
         nota = new ArrayList<>();
 
-        setTitle("Enjoy Notes - Nova Nota");
         setSize(1000, 750);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);  // Usando null layout
         
-        setUndecorated(true);  // Remover a barra de título padrão
         getRootPane().setWindowDecorationStyle(JRootPane.NONE);  // Remover a decoração padrão do sistema
 
         fonte = new Font("Verdana", Font.PLAIN, 17);
@@ -88,7 +85,7 @@ public class JTelaNotas extends JFrame {
         minimizeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setExtendedState(JFrame.ICONIFIED);
+              
             }
         });
         
@@ -148,7 +145,7 @@ public class JTelaNotas extends JFrame {
         
         panel.add(mockupLabel);
         setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight());
-        setContentPane(panel);
+        add(panel);
 
         // Adicionando ação para os botões
         salvar.addActionListener(new ActionListener() {
@@ -167,22 +164,7 @@ public class JTelaNotas extends JFrame {
                 salvar.setEnabled(false);
                 deletar.setEnabled(false);
                 SalvarNota.setEnabled(true);
-                int selectedIndex = JOptionPane.showOptionDialog(
-                        JTelaNotas.this,
-                        "Selecione a nota que deseja editar: ",
-                        "Editar Nota",
-                        JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        nota.toArray(),
-                        null
-                );
-                if (selectedIndex >= 0) {
-                    NotasVO selectedNote = nota.get(selectedIndex);
-                    tituloCamp.setText(selectedNote.getTitulo());
-                    caixaTexto.setText(selectedNote.getContent());
-                    nota.remove(selectedNote);
-                }
+              
             }
         });
 
@@ -203,26 +185,7 @@ public class JTelaNotas extends JFrame {
         deletar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] notas = new String[nota.size()];
-                for (int i = 0; i < nota.size(); i++) {
-                    notas[i] = nota.get(i).getTitulo();
-                }
-                int selectedIndex = JOptionPane.showOptionDialog(
-                        JTelaNotas.this,
-                        "Selecione a nota que deseja excluir: ",
-                        "Excluir Nota",
-                        JOptionPane.DEFAULT_OPTION,
-                        JOptionPane.PLAIN_MESSAGE,
-                        null,
-                        notas,
-                        null
-                );
-
-                if (selectedIndex >= 0) {
-                    NotasVO selectedNote = nota.get(selectedIndex);
-                    nota.remove(selectedNote);
-                    JOptionPane.showMessageDialog(JTelaNotas.this, "Nota Deletada!");
-                }
+               
              
             }
         });
@@ -230,20 +193,7 @@ public class JTelaNotas extends JFrame {
         Voltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
                
-            }
-        });
-    }
-
-   
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JTelaNotas app = new JTelaNotas();
-                app.setVisible(true);
             }
         });
     }

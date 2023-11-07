@@ -7,6 +7,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -19,6 +20,11 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import enj.appdesktop.controller.SessaoController;
+import enj.appdesktop.controller.UsuarioController;
+import enj.appdesktop.model.vo.ContaVO;
+import enj.appdesktop.model.vo.UsuarioVO;
+
 
 public class JTelaConta extends JPanel {
     private JPanel pn3Opcoes;
@@ -26,8 +32,16 @@ public class JTelaConta extends JPanel {
     private JLabel lblNome, lblNomeConta;
     private JLabel lblMockupConta, lblVoce;
     private JButton btnOpcional, btnUsarOutraConta, btnSairConta, btnPersonalize;
-
-    public JTelaConta() {
+    private ContaVO conta;
+    private JTelaSessoes telaSessoes;
+    private UsuarioVO usuario;
+    public JTelaConta(ContaVO conta, JTelaSessoes telaSessoes) {
+    	int id_conta_CE = conta.getId_conta();
+    	UsuarioController user = new UsuarioController();
+    	user.BuscarDadosUSER(id_conta_CE);
+    	usuario = user.MyUser();
+    	this.conta = conta;
+        this.telaSessoes = telaSessoes;
         inicializarComponentes();
         posicionandoComponentes();
         definirEventos();
@@ -60,20 +74,20 @@ public class JTelaConta extends JPanel {
 	    lblVoce.setBorder(compoundBorder1); // Adiciona espaço de 40 pixels ao redor
         lblVoce.setAlignmentX(JComponent.LEFT_ALIGNMENT);
         
-        lblMockupConta = new JLabel(new ImageIcon("D:\\projetoENjoyNotes\\teste2.png"));
+        lblMockupConta = new JLabel(new ImageIcon(conta.getFoto()));
         lblMockupConta.setPreferredSize(new Dimension(193, 193));
         lblMockupConta.setBackground(new Color(0x2a4674));
         lblMockupConta.setBorder(new EmptyBorder(0, 40, 0, 0));
         lblMockupConta.setAlignmentX(JComponent.LEFT_ALIGNMENT);
 
-        lblNomeConta = new JLabel("@beza");
+        lblNomeConta = new JLabel(conta.getNome_perfil());
         lblNomeConta.setFont(fonte);
         lblNomeConta.setBackground(new Color(0x345389));
         lblNomeConta.setForeground(Color.WHITE);
         lblNomeConta.setBorder(new EmptyBorder(0, 0, 0, 50)); // Adiciona espaço de 40 pixels ao redor
         lblNomeConta.setAlignmentX(JComponent.LEFT_ALIGNMENT);
         
-        lblNome = new JLabel("Bezalel Aleixo");
+        lblNome = new JLabel(usuario.getNome());
         lblNome.setFont(fonte2);
         lblNome.setBackground(new Color(0x345389));
         lblNome.setForeground(Color.WHITE);
@@ -236,7 +250,11 @@ public class JTelaConta extends JPanel {
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			JTelaUsuario.abrir();
+			telaSessoes.getContentpane().removeAll();
+            JTelaUsuario usuario = new JTelaUsuario(conta, telaSessoes);
+            telaSessoes.getContentpane().add(usuario, BorderLayout.CENTER);
+            telaSessoes.revalidate();
+            telaSessoes.repaint();
 		}
 	});
        btnUsarOutraConta.addMouseListener(new MouseListener() {
@@ -267,10 +285,45 @@ public class JTelaConta extends JPanel {
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			JTelaConfigurações.fechar();
+			telaSessoes.dispose();
+			JTelaSessoes.abrir();
+            
+		}
+	});
+       btnSairConta.addMouseListener(new MouseListener() {
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnSairConta.setForeground(Color.WHITE);
+			
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnSairConta.setForeground(new Color(0x84CAED));
+			
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			int id_conta = conta.getId_conta();
+			SessaoController sessao = new SessaoController();
+			sessao.atualizarSessao("NL", id_conta);
+			telaSessoes.dispose();
 			JTelaSessoes.abrir();
 		}
 	});
-    
     }
 }

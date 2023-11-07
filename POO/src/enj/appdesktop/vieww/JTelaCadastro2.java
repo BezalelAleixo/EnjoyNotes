@@ -26,7 +26,7 @@ import enj.appdesktop.model.vo.UsuarioVO;
  * @author AleixoUNI
  * @see Classe para mostrar continuação da tela de cadastro
  */
-public class JTelaCadastro2 extends JFrame{
+public class JTelaCadastro2 extends JPanel{
 	private Container quadro;
 	private JPanel pnTela;
 	private JLabel lblDados, lblNome, lblSenha, lblConfSenha;
@@ -36,17 +36,25 @@ public class JTelaCadastro2 extends JFrame{
 	private JButton btnVoltar, btnVoltarInicio;
 	private JCheckBox cksenha;
 	Font fonte1, fonte2, fonte3;
+	private JTelaSessoes telaSessoes;
+	private String nome;
+	private String sexo;
+	private String dataNasc;
 	
-	public JTelaCadastro2() {
-		setTitle("Cadastro");
-		quadro = getContentPane();
-		setLayout(new BorderLayout());
+	
+	public JTelaCadastro2(JTelaSessoes telaSessoes, String nome, String sexo, String dataNasc) {
+		this.telaSessoes = telaSessoes;
+		this.nome = nome;
+		this.sexo = sexo;
+		this.dataNasc = dataNasc;
+
+	
 		
-		pnTela = new JPanel();
-		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
-        pnTela.setBackground(Color.WHITE);
+	
+		setLayout(null); // Layout nulo para posicionar elementos manualmente
+		setSize(1366,768);
         
-        ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\convert-dpi.com\\4300.jpg");
+        ImageIcon mockupImage = new ImageIcon("D:\\AleixoUNI\\BEZALEL\\convert-dpi.com\\4300.jpg");
         JLabel mockupLabel = new JLabel(mockupImage);
         mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 
@@ -137,23 +145,21 @@ public class JTelaCadastro2 extends JFrame{
 				btnVoltar.setBackground(Color.BLACK);*/
 		
 		
-		pnTela.add(tfNome);
-		pnTela.add(pfSenha);
-		pnTela.add(pfConfSenha);
-		pnTela.add(mockupLabel);
-		pnTela.add(lblDados);
-		pnTela.add(lblNome);
-		pnTela.add(lblSenha);
-		pnTela.add(lblConfSenha);
-		pnTela.add(btnConcluir);
-		pnTela.add(btnVoltar);
-		pnTela.add(btnVoltarInicio);
-		pnTela.add(cksenha);
-		add(pnTela);
+		add(tfNome);
+		add(pfSenha);
+		add(pfConfSenha);
+		add(mockupLabel);
+		add(lblDados);
+		add(lblNome);
+		add(lblSenha);
+		add(lblConfSenha);
+		add(btnConcluir);
+		add(btnVoltar);
+		add(btnVoltarInicio);
+		add(cksenha);
+		
 		definirEventos();
-		pnTela.add(mockupLabel);
-        setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na imagem
-        setContentPane(pnTela);		
+		
 	}
 	private void definirEventos() {
 		btnConcluir.addActionListener(new ActionListener() {
@@ -167,29 +173,20 @@ public class JTelaCadastro2 extends JFrame{
 				if(nomeUsuario.isEmpty() || senha.isEmpty() || consenha.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
 				}else {
-				//String nome, sexo, datanasc;
-				/*CadastroVO dados = new CadastroVO();
-				nome = dados.getNome();
-				sexo = dados.getSexo();
-				datanasc = dados.getDatanasc();*/
-				UsuarioVO usuario = new UsuarioVO();
 				
-				
-				usuario.setNome(JTelaCadastro.getNome());
-				usuario.setSexo(JTelaCadastro.getSexo());
-				usuario.setDatanasc(JTelaCadastro.getNasc());//2006/07/28
-				
-				ContaVO conta = new ContaVO();
-				conta.setNome_perfil(nomeUsuario);
-				conta.setSenha(senha);
-			
+				}
 				if(pfConfSenha.getText().length() == pfSenha.getText().length()) {
-					JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso");
+					UsuarioVO usuario = new UsuarioVO(nome, sexo, dataNasc);
+					telaSessoes.getContentpane().removeAll();
+		            JTelaSelecionarFoto foto = new JTelaSelecionarFoto(telaSessoes, usuario, nomeUsuario, senha);
+		            telaSessoes.getContentpane().add(foto, BorderLayout.CENTER);
+		            telaSessoes.revalidate();
+		            telaSessoes.repaint();
 					
 				}else {
 					JOptionPane.showMessageDialog(null, "Verifique a senha!");
 				}
-				}
+				
 			}
 		});
 		cksenha.addActionListener(new ActionListener() {
@@ -208,7 +205,12 @@ public class JTelaCadastro2 extends JFrame{
 		btnVoltar.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	setVisible(false);
-		    	JTelaCadastro.abrir();
+		    	
+				telaSessoes.getContentpane().removeAll();
+	            JTelaCadastro cadastro = new JTelaCadastro(telaSessoes);
+	            telaSessoes.getContentpane().add(cadastro, BorderLayout.CENTER);
+	            telaSessoes.revalidate();
+	            telaSessoes.repaint();
 		       
 		    }
 		});
@@ -216,31 +218,15 @@ public class JTelaCadastro2 extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				JTelaCadastro2.abreInicio();
 				
+				telaSessoes.getContentpane().removeAll();
+	            JTelaInicial inicio = new JTelaInicial(telaSessoes);
+	            telaSessoes.getContentpane().add(inicio, BorderLayout.CENTER);
+	            telaSessoes.revalidate();
+	            telaSessoes.repaint();
 				
 			}
 		});
 	}
-	public static void abre() {
-		JTelaCadastro2 frame = new JTelaCadastro2();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(frame);
-		frame.setVisible(true);
-	}
-	public static void abreInicio() {
-		JTelaInicial inicio = new JTelaInicial();
-		inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		inicio.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		inicio.setLocationRelativeTo(inicio);
-		inicio.setVisible(true);
-	}
 	
-	public static void main(String[] args) {
-		JTelaCadastro2 frame = new JTelaCadastro2();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(frame);
-		frame.setVisible(true);
-	}
 }

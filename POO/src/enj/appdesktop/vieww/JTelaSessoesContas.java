@@ -83,7 +83,7 @@ public class JTelaSessoesContas extends JPanel {
             public void mouseClicked(MouseEvent e) {
             	String nome_perfil = conta.getNome_perfil();
                 telaSessoes.getContentpane().removeAll();
-                JTelaMenu telaMenu = new JTelaMenu(nome_perfil, telaSessoes);
+                JTelaMenu telaMenu = new JTelaMenu(conta, nome_perfil, telaSessoes);
                 telaSessoes.getContentpane().add(telaMenu, BorderLayout.CENTER);
                 telaSessoes.revalidate();
                 telaSessoes.repaint();

@@ -15,6 +15,16 @@ public class ContaBO {
             // Trate o erro de acordo com as necessidades do aplicativo.
         }
     }
-
+    public void BuscarConta(int id) {
+        try {
+            contaDAO.BuscarContaPeloID(id);
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar conta: " + e.getMessage());
+            // Trate o erro de acordo com as necessidades do aplicativo.
+        }
+    }
+    public ContaVO ContaMinha() {
+    	return contaDAO.MinhaConta();
+    }
     // Outros métodos de lógica de negócios relacionados a contas podem ser adicionados aqui.
 }

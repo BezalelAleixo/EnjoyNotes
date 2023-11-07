@@ -15,8 +15,7 @@ import enj.appdesktop.model.vo.SessaoVO;
 
 public class NotaDAO {
 	
-	private NotasVO notas;
-	List<NotasVO> notasPreparadas = new ArrayList<>();
+	
 	public void SalvarNotaDAO(NotasVO notas) {
 		Connection conexao = null;
 		PreparedStatement PSTM;
@@ -70,6 +69,8 @@ public class NotaDAO {
 			System.out.println(e);
 		}
 	}
+	private NotasVO notas;
+	List<NotasVO> notasPreparadas = new ArrayList<>();
 	public List<NotasVO> todasNotas(String nome_perfil) {
 		Connection conexao = new ConexaoDAO().conexaoBD();
 		PreparedStatement PSTM = null;

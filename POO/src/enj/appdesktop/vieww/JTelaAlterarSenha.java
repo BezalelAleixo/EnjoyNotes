@@ -26,6 +26,8 @@ import javax.swing.border.MatteBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import enj.appdesktop.model.vo.ContaVO;
+
 public class JTelaAlterarSenha extends JPanel{
     private JPanel nomeNomeContaPanel,nomeSenhaContaPanel, nomeSenhaConfirmarNomeContaPanel,nomeNovaSenhaContaPanel,nomeNovaSenhaConfirmarNomeContaPanel, nomeBtnSalvarPanel;
     private JLabel lblSeuNomeConta, lblSenhaConta, lblSenhaConfirmarConta,lblNovaSenhaConta,lblNovaSenhaConfirmarConta, lblbtnSalvar;
@@ -33,9 +35,11 @@ public class JTelaAlterarSenha extends JPanel{
     private JLabel lblNomeConta;
     private JPasswordField pfSenha, pfConfirmarSenha,pfNovaSenha,pfNovaConfirmarSenha;
     private JButton btnSalvar;
+    private ContaVO conta;
 
 
-    public JTelaAlterarSenha() {
+    public JTelaAlterarSenha(ContaVO conta) {
+    	this.conta = conta;
         inicializarComponentes();
         posicionandoComponentes();
         definirEventos();
@@ -75,7 +79,7 @@ public class JTelaAlterarSenha extends JPanel{
         lblSeuNomeConta.setBorder(new EmptyBorder(0, 0, 0, 50)); // Adiciona espaço de 40 pixels ao redor
         lblSeuNomeConta.setAlignmentX(JComponent.LEFT_ALIGNMENT);
         
-        lblNomeConta = new JLabel("@beza"); // 100 is the initial width
+        lblNomeConta = new JLabel(conta.getNome_perfil()); // 100 is the initial width
         lblNomeConta.setFont(fonte);
         lblNomeConta.setMaximumSize(new Dimension(400, 28)); // Set the maximum size
         lblNomeConta.setPreferredSize(new Dimension(400, 28)); // Set the preferred size

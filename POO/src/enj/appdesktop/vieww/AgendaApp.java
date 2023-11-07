@@ -2,6 +2,8 @@ package enj.appdesktop.vieww;
 
 import com.toedter.calendar.JCalendar;
 
+import enj.appdesktop.model.vo.ContaVO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,27 +13,29 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AgendaApp extends JFrame {
+public class AgendaApp extends JPanel {
 
 	private Map<Date, String> events;
-
-	public AgendaApp() {
+	private ContaVO conta;
+    private JTelaSessoes telaSessoes;
+    
+	public AgendaApp(ContaVO conta, JTelaSessoes telaSessoes) {
+		this.conta = conta;
+        this.telaSessoes = telaSessoes;
 		events = new HashMap<>();
 
-		setUndecorated(true); // Remover a barra de título padrão
-		getRootPane().setWindowDecorationStyle(JRootPane.NONE); // Remover a decoração padrão do sistema
 
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
+		setLayout(null);
+		setSize(1366,768);
 
-		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\convert-dpi.com\\10.jpg");
+		ImageIcon mockupImage = new ImageIcon("D:\\AleixoUNI\\BEZALEL\\convert-dpi.com\\10.jpg");
 		JLabel mockupLabel = new JLabel(mockupImage);
-		mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
+		mockupLabel.setBounds(0, 0, 1366, 768);
 
 		// Adicionar botão de fechar
 		JButton closeButton = new JButton();
 		closeButton.setBounds(1300, 10, 50, 50);
-		panel.add(closeButton);
+		add(closeButton);
 		closeButton.setContentAreaFilled(false);
 		closeButton.setBorderPainted(false);
 		closeButton.addActionListener(new ActionListener() {
@@ -43,13 +47,17 @@ public class AgendaApp extends JFrame {
 
 		JButton voltarButton = new JButton();
 		voltarButton.setBounds(1160, 10, 50, 50);
-		panel.add(voltarButton);
+		add(voltarButton);
 		voltarButton.setContentAreaFilled(false);
 		voltarButton.setBorderPainted(false);
 		voltarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Voltando à tela anterior");
-				setVisible(false); // Fecha a janela atual (tela de login)
+				String nome_perfil = conta.getNome_perfil();
+				telaSessoes.getContentpane().removeAll();
+                JTelaMenu telaMenu = new JTelaMenu(conta, nome_perfil, telaSessoes);
+                telaSessoes.getContentpane().add(telaMenu, BorderLayout.CENTER);
+                telaSessoes.revalidate();
+                telaSessoes.repaint();
 				
 			}
 		});
@@ -57,13 +65,13 @@ public class AgendaApp extends JFrame {
 		// Adicionar botão de minimizar
 		JButton minimizeButton = new JButton();
 		minimizeButton.setBounds(1235, 10, 50, 50);
-		panel.add(minimizeButton);
+		add(minimizeButton);
 		minimizeButton.setContentAreaFilled(false);
 		minimizeButton.setBorderPainted(false);
 		minimizeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setExtendedState(JFrame.ICONIFIED);
+				
 			}
 		});
 
@@ -72,7 +80,7 @@ public class AgendaApp extends JFrame {
 		Dimension calendarDimension = new Dimension(682, 647);
 		calendar.setPreferredSize(calendarDimension);
 		calendar.setBounds(1, 65, calendarDimension.width, calendarDimension.height);
-		panel.add(calendar);
+		add(calendar);
 
 		Font fonte = new Font("Verdana", Font.PLAIN, 12);
 
@@ -84,7 +92,7 @@ public class AgendaApp extends JFrame {
 		// Adicionando a JTextArea em um JScrollPane
 		JScrollPane scrollPane = new JScrollPane(eventList);
 		scrollPane.setBounds(710, 80, 640, 620); // Ajuste o tamanho conforme necessário
-		panel.add(scrollPane);
+		add(scrollPane);
 
 		calendar.setOpaque(false);
 		calendar.setBorder(BorderFactory.createEmptyBorder());
@@ -97,7 +105,7 @@ public class AgendaApp extends JFrame {
 		// Botão para adicionar evento
 		JButton addButton = new JButton("Adicionar Evento");
 		addButton.setBounds(1, 713, 1364, 400);
-		panel.add(addButton);
+		add(addButton);
 		addButton.setContentAreaFilled(false); // Tornar a área do botão transparente
 		addButton.setBorderPainted(false); // Remover a borda do botão
 
@@ -113,11 +121,11 @@ public class AgendaApp extends JFrame {
 			}
 		});
 
-		panel.add(mockupLabel);
-		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na
-																			// imagem
-		setContentPane(panel);
-		setLocationRelativeTo(getContentPane());
+		add(mockupLabel);
+		
+		// Ajusta o tamanho da janela com base na
+																// imagem
+		
 	}
 
 	private Date getDateFromCalendar(JCalendar calendar) {
@@ -136,26 +144,4 @@ public class AgendaApp extends JFrame {
 		}
 	}
 
-
-	public static void abrirAgenda() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				AgendaApp agendaApp = new AgendaApp();
-				agendaApp.setVisible(true);
-			}
-		});
-	}
-
-	
-
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				AgendaApp agendaApp = new AgendaApp();
-				agendaApp.setVisible(true);
-			}
-		});
-	}
 }

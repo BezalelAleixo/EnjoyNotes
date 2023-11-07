@@ -18,15 +18,19 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import enj.appdesktop.controller.ContaController;
+import enj.appdesktop.controller.SessaoController;
+import enj.appdesktop.controller.UsuarioController;
 import enj.appdesktop.model.daoo.ConsultaDAO;
 import enj.appdesktop.model.daoo.LoginDAO;
+import enj.appdesktop.model.vo.ContaVO;
 
 
 /**
  * @author AleixoUNI
  * @see Classe para tela de Entrar no Menu Principal
  */
-public class JTelaEntrar extends JFrame {
+public class JTelaEntrar extends JPanel {
 	private Container contentpane;
 	private JPanel pnTela;
 	private static JTextField tfUsuario;
@@ -35,18 +39,17 @@ public class JTelaEntrar extends JFrame {
 	private JButton btnVoltar;
 	private JCheckBox ckMostrar;
 	Font fonte1, fonte2, fonte3;
+	private JTelaSessoes telaSessoes;
+	
+	public JTelaEntrar(JTelaSessoes telaSessoes) {
+		this.telaSessoes = telaSessoes;
+		
 
-	public JTelaEntrar() {
-		setTitle("EnjoyNotes - Login");
-		contentpane = getContentPane();
-		setLayout(new BorderLayout());
-
-		pnTela = new JPanel();
-		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
-		pnTela.setBackground(Color.WHITE);
+		setLayout(null); // Layout nulo para posicionar elementos manualmente
+	
 
 		// aqui ele puxa a imagem tela.png que ta no pacote
-		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\convert-dpi.com\\2300.jpg");
+		ImageIcon mockupImage = new ImageIcon("D:\\AleixoUNI\\BEZALEL\\convert-dpi.com\\2300.jpg");
 		JLabel mockupLabel = new JLabel(mockupImage);
 		mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 
@@ -98,27 +101,27 @@ public class JTelaEntrar extends JFrame {
 		btnVoltar.setContentAreaFilled(false);
 		btnVoltar.setBorderPainted(false);
 
-		pnTela.add(tfUsuario);
-		pnTela.add(pfSenha);
-		pnTela.add(mockupLabel); // Adiciona a imagem como plano de fundo
-		pnTela.add(btnEntrar);
-		pnTela.add(btnVoltar);
-		pnTela.add(ckMostrar);
-		add(pnTela);
+		add(tfUsuario);
+		add(pfSenha);
+		add(mockupLabel); 
+		add(btnEntrar);
+		add(btnVoltar);
+		add(ckMostrar);
+		
 
 		definirEventos();
-		pnTela.add(mockupLabel);
-		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na
-																			// imagem
-		setContentPane(pnTela);
+		add(mockupLabel);
+		
 	}
 
 	private void definirEventos() {
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Voltando à tela anterior");
-				setVisible(false); // Fecha a janela atual (tela de login)
-				JTelaInicial.abreInicial();
+				telaSessoes.getContentpane().removeAll();
+	            JTelaInicial inicio = new JTelaInicial(telaSessoes);
+	            telaSessoes.getContentpane().add(inicio, BorderLayout.CENTER);
+	            telaSessoes.revalidate();
+	            telaSessoes.repaint();
 			}
 		});
 		btnEntrar.addActionListener(new ActionListener() {
@@ -127,17 +130,26 @@ public class JTelaEntrar extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				LoginDAO dao = new LoginDAO();
 				if (dao.VerificarLogin(tfUsuario.getText(), pfSenha.getText())) {
-					dispose();
+					String nome_perfil = tfUsuario.getText();
+					UsuarioController usuario = new UsuarioController();
+					usuario.BuscarID_conta(nome_perfil);
+					int id_conta = usuario.getID_CONTA();
+					SessaoController sessao = new SessaoController();
+					sessao.atualizarSessao("L", id_conta);
+					
+					ContaController conta = new ContaController();
+					conta.ContaBuscada(id_conta);
+					ContaVO minhaConta = conta.ContaMMinha();
+					
+					telaSessoes.getContentpane().removeAll();
+		            JTelaMenu menu = new JTelaMenu(minhaConta, nome_perfil, telaSessoes);
+		            telaSessoes.getContentpane().add(menu, BorderLayout.CENTER);
+		            telaSessoes.revalidate();
+		            telaSessoes.repaint();
 					
 				} else {
 					JOptionPane.showMessageDialog(null, "Usuário ou Senha incorreta!");
-				}
-				ConsultaDAO dd =  new ConsultaDAO();
-				dd.mandar(tfUsuario.getText());
-				ConsultaDAO pp = new ConsultaDAO();
-				pp.mandarUser("bezalel");
-			
-				int number = 0;
+				}	
 				
 			}
 		});
@@ -160,20 +172,4 @@ public class JTelaEntrar extends JFrame {
 		return n;
 	}
 
-	public static void abre() {
-		JTelaEntrar f = new JTelaEntrar();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setLocationRelativeTo(f);
-		f.setVisible(true);
-
-	}
-
-	
-
-	public static void main(String[] args) {
-		JTelaEntrar frame = new JTelaEntrar();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setVisible(true);
-	}
 }

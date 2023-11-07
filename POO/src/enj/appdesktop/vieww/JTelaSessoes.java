@@ -32,7 +32,6 @@ public class JTelaSessoes extends JFrame{
 	
 	
 	public JTelaSessoes () {
-	    
 		inicializarComponentes();
 		posicionandoComponentes();
 		definirEventos();
@@ -150,7 +149,11 @@ public class JTelaSessoes extends JFrame{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			JTelaEntrar.abre();
+				getContentpane().removeAll();
+	            JTelaEntrar entrar = new JTelaEntrar(JTelaSessoes.this);
+	            getContentpane().add(entrar, BorderLayout.CENTER);
+	            revalidate();
+	            repaint();
 				
 			}
 		});
@@ -182,7 +185,11 @@ public class JTelaSessoes extends JFrame{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JTelaCadastro.abrir();
+				getContentpane().removeAll();
+	            JTelaCadastro cadastre = new JTelaCadastro(JTelaSessoes.this);
+	            getContentpane().add(cadastre, BorderLayout.CENTER);
+	            revalidate();
+	            repaint();
 				
 			}
 		});
@@ -214,7 +221,11 @@ public class JTelaSessoes extends JFrame{
 				
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					JTelaInicial.abreInicial();
+					getContentpane().removeAll();
+		            JTelaInicial inicio = new JTelaInicial(JTelaSessoes.this);
+		            getContentpane().add(inicio, BorderLayout.CENTER);
+		            revalidate();
+		            repaint();
 					
 				}
 			});

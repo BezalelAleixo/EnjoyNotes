@@ -26,12 +26,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+import enj.appdesktop.controller.ListaController;
 import enj.appdesktop.controller.NotaController;
 import enj.appdesktop.controller.SessaoController;
 import enj.appdesktop.model.vo.ContaVO;
+import enj.appdesktop.model.vo.ListaVO;
 import enj.appdesktop.model.vo.NotasVO;
-	
-	
 	
 	public class JTelaMenu extends JPanel{
 	
@@ -41,14 +41,18 @@ import enj.appdesktop.model.vo.NotasVO;
 		private JPanel pnLBLNotas, pnListaNotas;
 		private JLabel lblNotas;
 		private JPanel pnLBLListas, pnListaListas;
+		private JLabel lblListas;
 		private JPanel pnLBLQuadros, pnListaQuadros;
 		private JLabel lblPergunta, lblMockupLogo;
 		private String nome_perfil;
 		private JTelaSessoes sessoes;
+		private ContaVO conta;
 		
-		public JTelaMenu (String nome_perfil, JTelaSessoes sessoes) {
+		public JTelaMenu (ContaVO conta, String nome_perfil, JTelaSessoes sessoes) {
+			this.conta = conta;
 			this.nome_perfil = nome_perfil;
 			this.sessoes = sessoes;
+			
 			inicializarComponentes();
 			posicionandoComponentes();
 			definirEventos();
@@ -148,13 +152,42 @@ import enj.appdesktop.model.vo.NotasVO;
 			lblNotas.setBorder(compoundBorder7);
 	       
 			pnListaNotas = new JPanel();
-			FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, 30, 0); // 20 pixels de espaçamento horizontal
+			FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, 20, 0); // 20 pixels de espaçamento horizontal
 			pnListaNotas.setLayout(flowLayout);
 			pnListaNotas.setPreferredSize(new Dimension(1366, 160));
 			pnListaNotas.setMaximumSize(new Dimension(1366,160));
 			pnListaNotas.setBackground(Color.WHITE);
 			
+			pnListas = new JPanel();
+			pnListas.setLayout(new BoxLayout(pnListas, BoxLayout.Y_AXIS)); // Usando BoxLayout com orientação vertical
+	        pnListas.setPreferredSize(new Dimension(1366, 200));
+			pnListas.setBackground(Color.WHITE);
+			
+			pnLBLListas = new JPanel();
+			pnLBLListas.setLayout(new FlowLayout(FlowLayout.LEFT));
+			pnLBLListas.setPreferredSize(new Dimension(1366, 40));
+			pnLBLListas.setMaximumSize(new Dimension(1366,40));
+			pnLBLListas.setBackground(Color.WHITE);
+			
+			lblListas = new JLabel("LISTAS");
+	        lblListas.setFont(fonte);
+	        lblListas.setBackground(Color.WHITE);
+	        lblListas.setForeground(Color.BLACK);
+	        MatteBorder emptyBorder8 = BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(0x2a4674));
+			MatteBorder redBottomBorder8 = BorderFactory.createMatteBorder(0, 40, 0, 0, Color.WHITE);
+		    Border compoundBorder8 = BorderFactory.createCompoundBorder(emptyBorder8, redBottomBorder8);
+			lblListas.setBorder(compoundBorder8);
+	       
+			pnListaListas = new JPanel();
+			FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT, 20, 0); // 20 pixels de espaçamento horizontal
+			pnListaListas.setLayout(flowLayout2);
+			pnListaListas.setPreferredSize(new Dimension(1600, 160));
+			pnListaListas.setMaximumSize(new Dimension(1366,160));
+			pnListaListas.setBackground(Color.WHITE);
+	
+			
 			pnBarra.add(lblMockupLogo);
+			pnPrincipal.add(pnListas, FlowLayout.LEFT);
 			pnPrincipal.add(pnNotas, FlowLayout.LEFT);
 			pnPrincipal.add(pnOpcoes, FlowLayout.LEFT);
 			pnOpcoes.add(btn3linhas); 
@@ -166,11 +199,14 @@ import enj.appdesktop.model.vo.NotasVO;
 			pnLBLNotas.add(lblNotas);
 			pnNotas.add(pnLBLNotas);
 			pnNotas.add(pnListaNotas);
+			pnLBLListas.add(lblListas);
+			pnListas.add(pnLBLListas);
+			pnListas.add(pnListaListas);
 		}
 	
 		private void definirEventos() {
 			NotaController notacontroller = new NotaController();
-			if(!notacontroller.verificarSeTemNotas(nome_perfil)) {
+			if(notacontroller.verificarSeTemNotas(nome_perfil)) {
 			notacontroller.listarNotas(nome_perfil);
 			List<JTelaListaNotas> notasPreparadas;
 			notasPreparadas = new ArrayList<>();
@@ -180,13 +216,178 @@ import enj.appdesktop.model.vo.NotasVO;
 				JTelaListaNotas blocos = new JTelaListaNotas(notas, sessoes);
 				notasPreparadas.add(blocos);
 			}
-			for(JTelaListaNotas blocosProntos : notasPreparadas) {
-				blocosProntos.setPreferredSize(new Dimension(150, 150));
-				blocosProntos.setBorder(new LineBorder(Color.BLACK));
-				pnListaNotas.add(blocosProntos);
+
+			for (JTelaListaNotas blocosProntos : notasPreparadas) {
+			    blocosProntos.setPreferredSize(new Dimension(150, 150));
+			    blocosProntos.setMaximumSize(new Dimension(150,150));
+			    pnListaNotas.add(blocosProntos);
+			}
+			
+			}
+			ListaController listacontroller = new ListaController();
+			if(listacontroller.verificarSeTemLista(nome_perfil)) {
+			listacontroller.listarListas(nome_perfil);
+			List<JTelaListaDeListas> ListasPreparadas;
+			ListasPreparadas = new ArrayList<>();
+			List<ListaVO> ListasProntas = listacontroller.ListasPreparadasdaCOnta();
+			
+			for(ListaVO listas : ListasProntas) {
+				JTelaListaDeListas blocos = new JTelaListaDeListas(listas, sessoes);
+				ListasPreparadas.add(blocos);
+			}
+
+			for (JTelaListaDeListas blocosProntos : ListasPreparadas) {
+			    blocosProntos.setPreferredSize(new Dimension(150, 150));
+			    blocosProntos.setMaximumSize(new Dimension(150,150));
+			    pnListaListas.add(blocosProntos);
 			}
 			
 		} else {
-			pnListaNotas.add(new JLabel("Adicione"));
+			pnListaListas.add(new JLabel("Adicione"));
 		}
-	}}
+			btnConfiguracoes.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sessoes.getContentpane().removeAll();
+	                JTelaConfigurações configuracoes = new JTelaConfigurações(conta, sessoes);
+	                sessoes.getContentpane().add(configuracoes, BorderLayout.CENTER);
+	                sessoes.revalidate();
+	                sessoes.repaint();
+					
+				}
+			});
+			btnConta.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sessoes.getContentpane().removeAll();
+		            JTelaUsuario usuario = new JTelaUsuario(conta, sessoes);
+		            sessoes.getContentpane().add(usuario, BorderLayout.CENTER);
+		            sessoes.revalidate();
+		            sessoes.repaint();
+					
+				}
+			});
+			btnAgenda.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sessoes.getContentpane().removeAll();
+		            AgendaApp agenda = new AgendaApp(conta, sessoes);
+		            sessoes.getContentpane().add(agenda, BorderLayout.CENTER);
+		            sessoes.revalidate();
+		            sessoes.repaint();
+					
+				}
+			});
+			btnCronometro.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sessoes.getContentpane().removeAll();
+		            JTelaCronometro cronometro = new JTelaCronometro(conta, sessoes);
+		            sessoes.getContentpane().add(cronometro, BorderLayout.CENTER);
+		            sessoes.revalidate();
+		            sessoes.repaint();
+					
+				}
+			});
+		}
+		}

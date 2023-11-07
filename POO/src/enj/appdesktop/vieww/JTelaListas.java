@@ -24,7 +24,7 @@ import enj.appdesktop.model.daoo.ListaDAO;
 import enj.appdesktop.model.vo.ListaVO;
 import enj.appdesktop.model.vo.NotasVO;
 
-public class JTelaListas extends JFrame {
+public class JTelaListas extends JPanel {
 	private Container contentPane;
 	private JPanel panel;
 	private JTextField tfTitulo;
@@ -35,8 +35,6 @@ public class JTelaListas extends JFrame {
 	private int i;
 
 	public JTelaListas() {
-		setTitle("Lista Enumerada");
-		contentPane = getContentPane();
 		setLayout(null);
 		setBounds(0, 0, 1000, 800);
 		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\convert-dpi.com\\8300.jpg");
@@ -54,7 +52,7 @@ public class JTelaListas extends JFrame {
 		btnEditar = new JButton("");
 		btnVoltarMenu = new JButton("");
 
-		setUndecorated(true); // Remover a barra de título padrão
+	
 		getRootPane().setWindowDecorationStyle(JRootPane.NONE); // Remover a decoração padrão do sistema
 
 		JButton closeButton = new JButton();
@@ -76,8 +74,7 @@ public class JTelaListas extends JFrame {
 		voltarButton.setBorderPainted(false);
 		voltarButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Voltando à tela anterior");
-				setVisible(false); // Fecha a janela atual (tela de login)
+				
 		
 			}
 		});
@@ -91,7 +88,7 @@ public class JTelaListas extends JFrame {
 		minimizeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setExtendedState(JFrame.ICONIFIED);
+				
 			}
 		});
 
@@ -152,8 +149,7 @@ public class JTelaListas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String titulo = tfTitulo.getText();
 				String conteudo = taItens.getText().concat("\n");
-				id = id + 1;
-				ListaVO lista = new ListaVO(titulo, conteudo, id);
+				ListaVO lista = new ListaVO(titulo, conteudo);
 				listas.add(lista);
 				tfTitulo.setText("");
 				taItens.setText("");
@@ -178,7 +174,7 @@ public class JTelaListas extends JFrame {
 				btnSalvar.setEnabled(true);
 				String[] titulos = new String[listas.size()];
 				for (int i = 0; i < listas.size(); i++) {
-					titulos[i] = listas.get(i).getTitulo();
+					titulos[i] = listas.get(i).getTitulo_list();
 				}
 
 				int selectedIndex = JOptionPane.showOptionDialog(JTelaListas.this,
@@ -187,7 +183,7 @@ public class JTelaListas extends JFrame {
 
 				if (selectedIndex >= 0) {
 					ListaVO listaSelecionada = listas.get(selectedIndex);
-					tfTitulo.setText(listaSelecionada.getTitulo());
+					tfTitulo.setText(listaSelecionada.getTitulo_list());
 					taItens.setText(String.join("\n", listaSelecionada.getItens()));
 				}
 			}
@@ -207,7 +203,7 @@ public class JTelaListas extends JFrame {
 				String titulo = tfTitulo.getText();
 				String conteudo = taItens.getText();
 
-				ListaVO listas = new ListaVO(titulo, conteudo, id);
+				ListaVO listas = new ListaVO(titulo, conteudo);
 				ListaDAO atualizar = new ListaDAO();
 				atualizar.AtualizarListaDAO(listas);
 				tfTitulo.setText("");
@@ -220,7 +216,7 @@ public class JTelaListas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String[] titulos = new String[listas.size()];
 				for (int i = 0; i < listas.size(); i++) {
-					titulos[i] = listas.get(i).getTitulo();
+					titulos[i] = listas.get(i).getTitulo_list();
 				}
 
 				int selectedIndex = JOptionPane.showOptionDialog(JTelaListas.this,
@@ -243,7 +239,7 @@ public class JTelaListas extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				
 			
 
 			}
@@ -257,21 +253,9 @@ public class JTelaListas extends JFrame {
 		panel.add(btnEditar);
 		panel.add(btnSalvar);
 		panel.add(btnVoltarMenu);
-		contentPane.add(panel);
 		panel.add(mockupLabel);
 		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na
 																			// imagem
-		setContentPane(panel);
-	}
-
-	
-
-	public static void main(String[] args) {
-		JTelaListas frame = new JTelaListas();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+		add(panel);
 	}
 }

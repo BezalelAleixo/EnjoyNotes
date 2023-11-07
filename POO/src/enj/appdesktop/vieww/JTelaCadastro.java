@@ -27,7 +27,7 @@ import javax.swing.JTextField;
  * @author AleixoUNI
  * @see Classe para tela de Cadastro
  */
-public class JTelaCadastro extends JFrame {
+public class JTelaCadastro extends JPanel {
 	private Container contentpane;
 	private JPanel pnTela;
 	private ButtonGroup escolha;
@@ -36,27 +36,23 @@ public class JTelaCadastro extends JFrame {
 	private JButton btnContinuar;
 	private JButton btnVoltar;
 	Font fonte1, fonte2, fonte3;
-	private String nome, sexo, dataN;
-	private String n, s, dn;
+	private String n2;
+	private JTelaSessoes telaSessoes;
+	public JTelaCadastro(JTelaSessoes telaSessoes) {
+		this.telaSessoes = telaSessoes;
+		
 
-	public JTelaCadastro() {
-		setTitle("Cadastro");
-		contentpane = getContentPane();
-		setLayout(new BorderLayout());
+		
+		setLayout(null); // Layout nulo para posicionar elementos manualmente
+		
 
-		pnTela = new JPanel();
-		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
-		pnTela.setBackground(Color.WHITE);
-
-		ImageIcon mockupImage = new ImageIcon("C:\\Users\\prfel\\Documents\\Bezalel\\convert-dpi.com\\3300.jpg");
+		ImageIcon mockupImage = new ImageIcon("D:\\AleixoUNI\\BEZALEL\\convert-dpi.com\\3300.jpg");
 		JLabel mockupLabel = new JLabel(mockupImage);
 		mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
 
 		tfNome = new JTextField();
 		rbtMasculino = new JRadioButton();
-		/* rbtMasculino.setBackground(Color.WHITE); */
 		rbtFeminino = new JRadioButton();
-		/* rbtFeminino.setBackground(Color.WHITE); */
 		escolha = new ButtonGroup();
 		tfDataNasc = new JTextField();
 		btnContinuar = new JButton("          ");
@@ -109,33 +105,23 @@ public class JTelaCadastro extends JFrame {
 		btnContinuar.setBounds(510, 555, 168, 50);
 		btnVoltar.setBounds(682, 555, 168, 50);
 
-		// Posicionando
-		/*
-		 * tfNome.setBackground(Color.BLACK); rbtMasculino.setBackground(Color.BLACK);
-		 * rbtFeminino.setBackground(Color.BLACK);
-		 * tfDataNasc.setBackground(Color.BLACK);
-		 * btnContinuar.setBackground(Color.BLACK);
-		 * btnVoltar.setBackground(Color.BLACK);
-		 */
-
 		escolha.add(rbtMasculino);
 		escolha.add(rbtFeminino);
-		pnTela.add(tfNome);
-		pnTela.add(tfDataNasc);
-		pnTela.add(mockupLabel);
-		pnTela.add(btnContinuar);
-		pnTela.add(rbtMasculino);
-		pnTela.add(rbtFeminino);
+		add(tfNome);
+		add(tfDataNasc);
+		add(mockupLabel);
+		add(btnContinuar);
+		add(rbtMasculino);
+		add(rbtFeminino);
 
-		pnTela.add(btnContinuar);
-		pnTela.add(btnVoltar);
-		add(pnTela);
+		add(btnContinuar);
+		add(btnVoltar);
+		
 		definirEventos();
 
-		pnTela.add(mockupLabel);
-		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na
-																			// imagem
-		setContentPane(pnTela);
+		
+	
+															// imagem
 	}
 
 	private void definirEventos() {
@@ -158,88 +144,41 @@ public class JTelaCadastro extends JFrame {
 				rbtFeminino.setBackground(Color.WHITE);
 			}
 		});
-
+		
 		btnContinuar.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				if(rbtMasculino.isSelected()) {
+					 n2 = "masculino";
+				}else {
+					 n2 = "feminino";
+				}
 				String n1 = tfNome.getText();
-				String n2 = tfDataNasc.getText();
-				if (n1.isEmpty() || n2.isEmpty()) {
+				String n3 = tfDataNasc.getText();
+				if (n1.isEmpty() || n3.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
 				} else {
-					setVisible(false);
-					JTelaCadastro2.abre();
+					telaSessoes.getContentpane().removeAll();
+		            JTelaCadastro2 cadastra2 = new JTelaCadastro2(telaSessoes, n1,n2,n3);
+		            telaSessoes.getContentpane().add(cadastra2, BorderLayout.CENTER);
+		            telaSessoes.revalidate();
+		            telaSessoes.repaint();
 				}
 
 			}
 		});
-		/*
-		 * btnContinuar.addActionListener(new ActionListener() {
-		 * 
-		 * @Override public void actionPerformed(ActionEvent e) { n= tfNome.getText();
-		 * if(rbtFeminino.isSelected()) { s = "feminino"; }else { s = "masculino"; } dn
-		 * = tfDataNasc.getText();
-		 * 
-		 * 
-		 * 
-		 * } });
-		 */
-
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Voltando à tela anterior");
-				dispose(); // Fecha a janela atual (tela de login)
-				JTelaInicial.abreInicial();
+				telaSessoes.getContentpane().removeAll();
+	            JTelaInicial inicio = new JTelaInicial(telaSessoes);
+	            telaSessoes.getContentpane().add(inicio, BorderLayout.CENTER);
+	            telaSessoes.revalidate();
+	            telaSessoes.repaint();
+			
 			}
 		});
 	}
 
-	public static String getNome() {
-		String n = tfNome.getText();
-		return n;
-	}
-
-	// public void setSexo(String sexo) {
-	// this.sexo = sexo;
-	// }
-	public static String getSexo() {
-		String s;
-		if (rbtFeminino.isSelected()) {
-			s = "feminino";
-		} else {
-			s = "masculino";
-		}
-		return s;
-	}
-
-	// public void setNasc(String Nasc) {
-	// this.dataN = Nasc;
-	// }
-	public static String getNasc() {
-		String dn = tfDataNasc.getText();
-		return dn;
-
-	}
-	// public void setNome(String nome) {
-	// this.nome = nome;
-	// }
-
-	public static void abrir() {
-		JTelaCadastro frame = new JTelaCadastro();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setLocationRelativeTo(frame);
-		frame.setVisible(true);
-
-	}
-
-	public static void main(String[] args) {
-		JTelaCadastro frame = new JTelaCadastro();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(frame);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setVisible(true);
-	}
 }

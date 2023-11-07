@@ -22,6 +22,11 @@ public class ContaVO {
 		this.senha = senha;
 		this.foto = foto;
 	}
+	
+	public ContaVO(int id_conta) {
+		super();
+		this.id_conta = id_conta;
+	}
 	public int getId_conta() {
 		return id_conta;
 	}

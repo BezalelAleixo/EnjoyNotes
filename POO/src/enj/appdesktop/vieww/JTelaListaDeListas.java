@@ -11,16 +11,17 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
+import enj.appdesktop.model.vo.ListaVO;
 import enj.appdesktop.model.vo.NotasVO;
 
-public class JTelaListaNotas extends JPanel {
+public class JTelaListaDeListas extends JPanel {
     private JTextField tfTitulo;
     private JTextArea taConteudo;
-    private NotasVO nota;
+    private ListaVO lista;
     private JTelaSessoes telaSessoes;
 
-    public JTelaListaNotas(NotasVO nota, JTelaSessoes telaSessoes) {
-        this.nota = nota;
+    public JTelaListaDeListas(ListaVO lista, JTelaSessoes telaSessoes) {
+        this.lista = lista;
         this.telaSessoes = telaSessoes;
         inicializarComponentes();
         posicionandoComponentes();
@@ -37,7 +38,7 @@ public class JTelaListaNotas extends JPanel {
 
     private void posicionandoComponentes() {
     	 Font fonte = new Font("Garet", Font.PLAIN, 20);
-         tfTitulo = new JTextField(nota.getTitulo());
+         tfTitulo = new JTextField(lista.getTitulo_list());
          tfTitulo.setFont(fonte);
          tfTitulo.setPreferredSize(new Dimension(150,20));
          tfTitulo.setBounds(5, 5, 140, 20);
@@ -46,7 +47,7 @@ public class JTelaListaNotas extends JPanel {
          tfTitulo.setBorder(new LineBorder(new Color(0x84CAED)));
          
          Font fonte2 = new Font("Garet", Font.PLAIN, 17);
-         taConteudo = new JTextArea(nota.getContent());
+         taConteudo = new JTextArea(lista.getItens());
          taConteudo.setFont(fonte2);
          taConteudo.setPreferredSize(new Dimension(150,130));
          taConteudo.setBounds(5, 25, 140, 120);
@@ -59,7 +60,7 @@ public class JTelaListaNotas extends JPanel {
     }
 
     private void definirEventos() {
-        tfTitulo.addMouseListener(new MouseListener() {
+tfTitulo.addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -147,11 +148,11 @@ public class JTelaListaNotas extends JPanel {
     	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	    frame.setPreferredSize(new Dimension(300, 300));
     	    
-    	    NotasVO nota = new NotasVO();
-    	    nota.setTitulo("Bezalel");
-    	    nota.setContent("One piece");
+    	    ListaVO lista = new ListaVO();
+    	    lista.setTitulo_list("Bezalel Aleixo");
+    	    lista.setItens("One piece");
     	    JTelaSessoes sessoes = new JTelaSessoes(); // Substitua isso pelo construtor correto da sua classe JTelaSessoes
-    	    JTelaListaNotas curvedListaNotas = new JTelaListaNotas(nota, sessoes);
+    	    JTelaListaDeListas curvedListaNotas = new JTelaListaDeListas(lista, sessoes);
     	    
     	    // Configura o layout do JFrame para FlowLayout
     	    frame.setLayout(new FlowLayout(FlowLayout.CENTER));

@@ -6,8 +6,26 @@ package enj.appdesktop.model.vo;
  */
 public class UsuarioVO {
 	private String nome, sexo, datanasc;
-	private int id;
+	private int id_usuario;
+	private int id_conta;
 
+	
+	public UsuarioVO(String nome, String sexo, String datanasc, int id_usuario, int id_conta) {
+		super();
+		this.nome = nome;
+		this.sexo = sexo;
+		this.datanasc = datanasc;
+		this.id_usuario = id_usuario;
+		this.id_conta = id_conta;
+	}
+
+	public UsuarioVO(String nome, String sexo, String datanasc, int id_conta) {
+		super();
+		this.nome = nome;
+		this.sexo = sexo;
+		this.datanasc = datanasc;
+		this.id_conta = id_conta;
+	}
 
 	public UsuarioVO(String nome, String sexo, String datanasc) {
 		super();
@@ -46,11 +64,19 @@ public class UsuarioVO {
 	}
 
 	public int getId() {
-		return id;
+		return id_conta;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.id_conta = id;
+	}
+
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 	
 }

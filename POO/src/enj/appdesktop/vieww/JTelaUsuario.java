@@ -23,17 +23,22 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
-public class JTelaUsuario extends JFrame{
+import enj.appdesktop.model.vo.ContaVO;
+
+public class JTelaUsuario extends JPanel{
 	private Container contentpane;
 	private JPanel pnBarra, pnPrincipal, pnColuna;
 	private JLabel lblMockupLogo;
 	private JButton btnDados, btnAlterarPerfil, btnAlterarSenha;
 	private JButton btnVoltarMenu;
-	
+	private ContaVO conta;
+    private JTelaSessoes telaSessoes;
 	public static JTelaUsuario frame;
 
 	
-	public JTelaUsuario() {
+	public JTelaUsuario(ContaVO conta, JTelaSessoes telaSessoes) {
+		this.conta = conta;
+        this.telaSessoes = telaSessoes;
 		inicializarComponentes();
 		posicionandoComponentes();
 		definirEventos();
@@ -42,8 +47,6 @@ public class JTelaUsuario extends JFrame{
 
 
 	private void inicializarComponentes() {
-		setTitle("Conta de Bezalel");
-		contentpane = getContentPane();
 		setSize(1366,768);
 		setLayout(new BorderLayout());
 		
@@ -74,9 +77,9 @@ public class JTelaUsuario extends JFrame{
         Border compoundBorder2 = BorderFactory.createCompoundBorder(emptyBorder2, redBottomBorder2);
         scrollPane.setBorder(compoundBorder2);
         
-        contentpane.add(pnBarra, BorderLayout.NORTH);
-        contentpane.add(pnPrincipal, BorderLayout.CENTER);
-        contentpane.add(scrollPane, BorderLayout.WEST);
+        add(pnBarra, BorderLayout.NORTH);
+        add(pnPrincipal, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.WEST);
 	}
 
 	private void posicionandoComponentes() {
@@ -118,13 +121,14 @@ public class JTelaUsuario extends JFrame{
 		btnVoltarMenu.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnVoltarMenu.setForeground(Color.WHITE);
 		
+		
 		pnBarra.add(lblMockupLogo);
 		pnBarra.add(btnVoltarMenu);
 		pnColuna.add(btnDados);
 		pnColuna.add(btnAlterarPerfil);
 		pnColuna.add(btnAlterarSenha);
 		
-		JTelaDadosGerais dados = new JTelaDadosGerais();
+		JTelaDadosGerais dados = new JTelaDadosGerais(conta , telaSessoes);
 		pnPrincipal.add(dados, BorderLayout.CENTER);
 		pnPrincipal.validate();
 		
@@ -159,7 +163,12 @@ public class JTelaUsuario extends JFrame{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-	
+				String nome_perfil = conta.getNome_perfil();
+				telaSessoes.getContentpane().removeAll();
+                JTelaMenu configuracoes = new JTelaMenu(conta, nome_perfil, telaSessoes);
+                telaSessoes.getContentpane().add(configuracoes, BorderLayout.CENTER);
+                telaSessoes.revalidate();
+                telaSessoes.repaint();
 				
 			}
 		});
@@ -200,7 +209,7 @@ public class JTelaUsuario extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				pnPrincipal.removeAll();
-				JTelaDadosGerais dados = new JTelaDadosGerais();
+				JTelaDadosGerais dados = new JTelaDadosGerais(conta, telaSessoes);
 				pnPrincipal.add(dados, BorderLayout.CENTER);
 				pnPrincipal.revalidate(); // Atualiza o layout para exibir a nova tela
 		        pnPrincipal.repaint();
@@ -288,31 +297,12 @@ public class JTelaUsuario extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				pnPrincipal.removeAll();
-				JTelaAlterarSenha senha = new JTelaAlterarSenha();
+				JTelaAlterarSenha senha = new JTelaAlterarSenha(conta);
 				pnPrincipal.add(senha, BorderLayout.CENTER);
 				pnPrincipal.revalidate(); // Atualiza o layout para exibir a nova tela
 		        pnPrincipal.repaint();
 				
 			}
 		});
-	}
-	
-	public static void abrir() {
-		frame = new JTelaUsuario();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(frame);
-		frame.setVisible(true);
-	}
-	
-
-
-	    public static void fechar() {
-	        if (frame != null) {
-	            frame.dispose(); 
-	        }
-	    }
-	
-	public static void main(String[] args) {
-		JTelaUsuario.abrir();
 	}
 }

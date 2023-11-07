@@ -92,7 +92,7 @@ public class ConsultaDAO {
 			doc = new ListaVO();
 			String titulo1 = RS.getString("titulo_list");
 			String itens = RS.getString("ordem_list");
-			doc.setTitulo(titulo1);
+			doc.setTitulo_list(titulo1);
 			doc.setItens(itens);			
 			listasList.add(doc);
 		}
@@ -106,7 +106,7 @@ public class ConsultaDAO {
 	}
 	
 	public String gettitulista() {
-		String notin = doc.getTitulo();
+		String notin = doc.getTitulo_list();
 		return notin;
 
 	}

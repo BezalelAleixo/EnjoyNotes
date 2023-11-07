@@ -1,13 +1,16 @@
 package enj.appdesktop.model.bo;
 
+import java.util.List;
+
 import enj.appdesktop.model.daoo.ListaDAO;
 import enj.appdesktop.model.vo.ListaVO;
+import enj.appdesktop.model.vo.NotasVO;
 
 public class ListaBO {
     private ListaDAO listaDAO = new ListaDAO();
 
     public void salvarLista(String titulo, String itens) {
-        ListaVO lista = new ListaVO(titulo, itens, 0); // O ID pode ser 0 porque será atribuído automaticamente no banco de dados.
+        ListaVO lista = new ListaVO(titulo, itens); // O ID pode ser 0 porque será atribuído automaticamente no banco de dados.
 
         try {
             listaDAO.SalvarListaDAO(lista);
@@ -38,6 +41,17 @@ public class ListaBO {
             // Trate o erro de acordo com as necessidades do aplicativo.
         }
     }
-
-    // Outros métodos de lógica de negócios relacionados a listas podem ser adicionados aqui.
+    public List<ListaVO> listarLISTAS(String nome_perfil) {
+        // Adicione a lógica para listar todas as notas associadas a uma conta específica
+        List<ListaVO> listas = listaDAO.todasListas(nome_perfil);
+        return listas;
+    }
+    public List<ListaVO> ListasProntas() {
+        // Adicione a lógica para listar todas as notas associadas a uma conta específica
+        return listaDAO.PreparadListas();
+    }
+    public boolean verificarSeTemListas(String nome_perfil) {
+        return listaDAO.verificarseTemNota(nome_perfil);
+    }
+  
 }

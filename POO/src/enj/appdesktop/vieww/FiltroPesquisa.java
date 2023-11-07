@@ -25,7 +25,7 @@ import enj.appdesktop.model.daoo.ConsultaDAO;
 import enj.appdesktop.model.vo.ListaVO;
 import enj.appdesktop.model.vo.NotasVO;
 
-public class FiltroPesquisa extends JFrame{
+public class FiltroPesquisa extends JPanel{
 	private Container cnTela;
 	private JPanel pnBarraPes, pnResultados;
 	private JTextField tfpesquisa;
@@ -43,25 +43,23 @@ public class FiltroPesquisa extends JFrame{
 	
 
 	private void inicializarComponentes() {
-		setTitle("Pesquise");
-		cnTela = getContentPane();
 		setSize(1366,768);
-		// Usando BorderLayout para posicionar pnBarraPes no topo
+		
         setLayout(new BorderLayout());
 
         pnBarraPes = new JPanel();
         pnBarraPes.setLayout(null);
         pnBarraPes.setBackground(new Color(0x2a4674));
 
-        // Defina o tamanho preferido do pnBarraPes
+        
         pnBarraPes.setPreferredSize(new Dimension(1366, 150));
 
         pnResultados = new JPanel();
         pnResultados.setBackground(new Color(0x84CAED));
 
-        // Adicione pnBarraPes ao topo e pnResultados abaixo
-        cnTela.add(pnBarraPes, BorderLayout.NORTH);
-        cnTela.add(pnResultados, BorderLayout.CENTER);
+       
+        add(pnBarraPes, BorderLayout.NORTH);
+        add(pnResultados, BorderLayout.CENTER);
 	}
 	private void posicionandoComponentes() {
 		Font fonte = new Font("Verdana", Font.PLAIN, 16);
@@ -105,7 +103,7 @@ public class FiltroPesquisa extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-			dispose();
+
 			}
 		});
 		
@@ -127,7 +125,7 @@ public class FiltroPesquisa extends JFrame{
 				buscar.consultarLIS(pesquisa);
 				modeloTabela.setRowCount(0); // Limpa a tabela
 	            for (ListaVO lista : buscar.getListResult()) {
-	                modeloTabela.addRow(new Object[]{lista.getTitulo(), lista.getItens()});
+	                modeloTabela.addRow(new Object[]{lista.getTitulo_list(), lista.getItens()});
 		}
 	            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
 			} else {
@@ -154,7 +152,7 @@ public class FiltroPesquisa extends JFrame{
 				buscar.consultarLIS(pesquisa);
 				modeloTabela.setRowCount(0); // Limpa a tabela
 	            for (ListaVO lista : buscar.getListResult()) {
-	                modeloTabela.addRow(new Object[]{lista.getTitulo(), lista.getItens()});
+	                modeloTabela.addRow(new Object[]{lista.getTitulo_list(), lista.getItens()});
 		}
 	            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
 			}
@@ -177,7 +175,7 @@ public class FiltroPesquisa extends JFrame{
 				buscar.consultarLIS(pesquisa);
 				modeloTabela.setRowCount(0); // Limpa a tabela
 	            for (ListaVO lista : buscar.getListResult()) {
-	                modeloTabela.addRow(new Object[]{lista.getTitulo(), lista.getItens()});
+	                modeloTabela.addRow(new Object[]{lista.getTitulo_list(), lista.getItens()});
 		}
 	            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
 			}
@@ -200,7 +198,7 @@ public class FiltroPesquisa extends JFrame{
 				buscar.consultarLIS(pesquisa);
 				modeloTabela.setRowCount(0); // Limpa a tabela
 	            for (ListaVO lista : buscar.getListResult()) {
-	                modeloTabela.addRow(new Object[]{lista.getTitulo(), lista.getItens()});
+	                modeloTabela.addRow(new Object[]{lista.getTitulo_list(), lista.getItens()});
 		}
 	            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
 			}
@@ -240,14 +238,6 @@ public class FiltroPesquisa extends JFrame{
 			}
 		});
 	}
-	public static void abrir(){
-		FiltroPesquisa frame = new FiltroPesquisa();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(frame);
-		frame.setVisible(true);
-	}
-	public static void main(String[] args) {
-		FiltroPesquisa.abrir();
-	}
+	
 }
 

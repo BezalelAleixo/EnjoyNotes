@@ -14,14 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import enj.appdesktop.model.daoo.ConsultaDAO;
-
+import enj.appdesktop.model.vo.ContaVO;
 
 import java.lang.String;
 /**
  * @author AleixoUNI
  * @see Classe para Tela inicial
  */
-public class JTelaInicial extends JFrame{
+public class JTelaInicial extends JPanel{
 	/**
 	 * @see Tela Inicial
 	 */
@@ -33,14 +33,14 @@ public class JTelaInicial extends JFrame{
 	private ImageIcon imagem;
 	Font fonte1, fonte2;
 	
-	public JTelaInicial() {
-		setTitle("EnjoyNotes");
-		quadro = getContentPane();
-		setLayout(new BorderLayout());
+    private JTelaSessoes telaSessoes;
+	
+	public JTelaInicial(JTelaSessoes telaSessoes) {
 		
-		pnTela = new JPanel();
-		pnTela.setLayout(null); // Layout nulo para posicionar elementos manualmente
-        pnTela.setBackground(Color.WHITE);
+        this.telaSessoes = telaSessoes;
+		
+		setLayout(null); // Layout nulo para posicionar elementos manualmente
+        setSize(1366,768);
         
         ImageIcon mockupImage = new ImageIcon("D:\\AleixoUNI\\BEZALEL\\convert-dpi.com\\1300.jpg");
         JLabel mockupLabel = new JLabel(mockupImage);
@@ -77,44 +77,36 @@ public class JTelaInicial extends JFrame{
         btnCadastrar.setContentAreaFilled(false);
         btnCadastrar.setBorderPainted(false);
         
-        pnTela.add(mockupLabel); // Adiciona a imagem como plano de fundo
-		pnTela.add(btnEntrar);
-		pnTela.add(btnCadastrar);
+        add(mockupLabel); // Adiciona a imagem como plano de fundo
+		add(btnEntrar);
+		add(btnCadastrar);
 
-		
-		add(pnTela);
 		definirEventos();
-		setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight()); // Ajusta o tamanho da janela com base na imagem
+		
 	}
 
 	private void definirEventos() {	
 		btnCadastrar.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-			    JTelaCadastro.abrir();
+				telaSessoes.getContentpane().removeAll();
+	            JTelaCadastro cadastra = new JTelaCadastro(telaSessoes);
+	            telaSessoes.getContentpane().add(cadastra, BorderLayout.CENTER);
+	            telaSessoes.revalidate();
+	            telaSessoes.repaint();
 			}
 		});
 		btnEntrar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				JTelaEntrar.abre();
+				telaSessoes.getContentpane().removeAll();
+	            JTelaEntrar entrar = new JTelaEntrar(telaSessoes);
+	            telaSessoes.getContentpane().add(entrar, BorderLayout.CENTER);
+	            telaSessoes.revalidate();
+	            telaSessoes.repaint();
 			}
 		});
-	}
-	public static void abreInicial() {
-		JTelaInicial frame = new JTelaInicial();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null); // cetraliza a tela
-		frame.setVisible(true);
-		frame.setResizable(false);// desativa botão maximizar e minimizar
-		//frame.setExtendedState(MAXIMIZED_BOTH);
-	}
-	public static void main(String[] args) {
-		JTelaInicial.abreInicial();
-	}
 	
-
+	}
 }
