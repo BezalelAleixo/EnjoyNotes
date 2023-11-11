@@ -197,7 +197,7 @@ public class JTelaAlterarSenha extends JPanel{
 		btnSalvar.setPreferredSize(new Dimension(120,45));
 		btnSalvar.setFont(fonte2);
         btnSalvar.setBackground(new Color(0x345389));
-        btnSalvar.setForeground(new Color(0x2a4674));
+        btnSalvar.setForeground(Color.WHITE);
         MatteBorder emptyBorder = BorderFactory.createMatteBorder(2, 2, 0, 0, new Color(0x2a4674));
 		MatteBorder redBottomBorder = BorderFactory.createMatteBorder(0, 0, 2, 2, new Color(0x2a4674));
 	    Border compoundBorder = BorderFactory.createCompoundBorder(emptyBorder, redBottomBorder);

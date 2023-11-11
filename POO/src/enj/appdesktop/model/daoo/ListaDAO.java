@@ -66,7 +66,7 @@ public class ListaDAO {
 		Connection conexao = new ConexaoDAO().conexaoBD();
 		PreparedStatement PSTM = null;
 		ResultSet RS = null;
-		String select = "SELECT L.id, L.titulo_list, L.ordem_list, L.data_criac FROM LISTA as L INNER JOIN CONTA as C WHERE C.nome_perfil = ?";
+		String select = "SELECT L.* FROM LISTA as L INNER JOIN CONTA as C ON L.id_conta = C.id_conta WHERE C.nome_perfil = ?";
 		
 		try {
 			PSTM = conexao.prepareStatement(select);

@@ -1,200 +1,362 @@
 package enj.appdesktop.vieww;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.RoundRectangle2D;
+import java.util.Arrays;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRootPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.*;
+import java.awt.event.*;
 
-import enj.appdesktop.controller.NotaController;
-import enj.appdesktop.model.daoo.NotaIdDAO;
-import enj.appdesktop.model.vo.NotasVO;
+
+import enj.appdesktop.model.vo.ContaVO;
+
 
 public class JTelaNotas extends JPanel {
+    private JTextField tfTitulo;
+    private JTextArea taConteudo;
+    private ContaVO conta;
+    private JTelaSessoes telaSessoes;
+    private JButton btnLembrar, btnCor, btnAddImagem, btnArquivar, btn3pontos, btnFechar, btnFixarNota;
+    int novaPosicao = 70;
 
-    private List<NotasVO> nota;
-    private JTextArea caixaTexto;
-    private JTextField tituloCamp;
-    private JButton salvar;
-    private JButton editar;
-    private JButton deletar;
-    private JButton SalvarNota;
-    private JButton Voltar;
-    Font fonte;
-    int id = 0;
-
-    public JTelaNotas() {
-        nota = new ArrayList<>();
-
-        setSize(1000, 750);
-        setLayout(null);  // Usando null layout
-        
-        getRootPane().setWindowDecorationStyle(JRootPane.NONE);  // Remover a decoração padrão do sistema
-
-        fonte = new Font("Verdana", Font.PLAIN, 17);
-        
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
-
-        ImageIcon mockupImage = new ImageIcon("D:\\AleixoUNI\\BEZALEL\\convert-dpi.com\\7300.jpg");
-        JLabel mockupLabel = new JLabel(mockupImage);
-        mockupLabel.setBounds(0, 0, mockupImage.getIconWidth(), mockupImage.getIconHeight());
-
-
-     // Adicionar botão de fechar
-        JButton closeButton = new JButton();
-        closeButton.setBounds(1300, 10, 50, 50);
-        panel.add(closeButton);
-
-        closeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-        
-        JButton voltarButton = new JButton();
-        voltarButton.setBounds(1160, 10, 50, 50);
-        panel.add(voltarButton);
-        voltarButton.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		    	JOptionPane.showMessageDialog( null, "Voltando à tela anterior");
-		    	setVisible(false); // Fecha a janela atual (tela de login)
-		        
-		    }
-		});
-
-        // Adicionar botão de minimizar
-        JButton minimizeButton = new JButton();
-        minimizeButton.setBounds(1235, 10, 50, 50);
-        panel.add(minimizeButton);
-        minimizeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-              
-            }
-        });
-        
-        // Título
-        tituloCamp = new JTextField();
-        tituloCamp.setFont(fonte);
-        tituloCamp.setBounds(100, 170, 1150, 50);
-        panel.add(tituloCamp);
-        tituloCamp.setOpaque(false);
-        tituloCamp.setBorder(BorderFactory.createEmptyBorder());
-        tituloCamp.setForeground(Color.BLACK);
-
-        // Caixa de texto
-        caixaTexto = new JTextArea();
-        caixaTexto.setFont(fonte);
-        JScrollPane sp = new JScrollPane(caixaTexto);
-        sp.setBounds(100, 250, 1150, 350);
-        panel.add(sp);
-        
-        sp.setOpaque(false);
-        sp.setBorder(BorderFactory.createEmptyBorder());
-        sp.setForeground(Color.BLACK);
-      
-
-        // Botões
-        salvar = new JButton("           ");
-        salvar.setBounds(235, 659, 150, 40);
-        salvar.setContentAreaFilled(false);  // Tornar a área do botão transparente
-        salvar.setBorderPainted(false);  // Remover a borda do botão
-        panel.add(salvar);
-
-        editar = new JButton("           ");
-        editar.setBounds(415, 659, 150, 40);
-        editar.setContentAreaFilled(false);  // Tornar a área do botão transparente
-        editar.setBorderPainted(false);  // Remover a borda do botão
-        panel.add(editar);
-
-        deletar = new JButton("          ");
-        deletar.setBounds(595, 659, 150, 40);
-        deletar.setContentAreaFilled(false);  // Tornar a área do botão transparente
-        deletar.setBorderPainted(false);  // Remover a borda do botão
-        panel.add(deletar);
-
-        SalvarNota = new JButton("          ");
-        SalvarNota.setBounds(965, 659, 150, 40);
-        panel.add(SalvarNota);
-        SalvarNota.setContentAreaFilled(false);  // Tornar a área do botão transparente
-        SalvarNota.setBorderPainted(false);  // Remover a borda do botão
-
-
-        Voltar = new JButton("           ");
-        Voltar.setBounds(785, 659, 150, 40);
-        Voltar.setContentAreaFilled(false);  // Tornar a área do botão transparente
-        Voltar.setBorderPainted(false);  // Remover a borda do botão
-
-        panel.add(Voltar);
-        
-        panel.add(mockupLabel);
-        setSize(mockupImage.getIconWidth(), mockupImage.getIconHeight());
-        add(panel);
-
-        // Adicionando ação para os botões
-        salvar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	String titulo = tituloCamp.getText();
-            	String conteudo = caixaTexto.getText();
-                NotaController notacontroller = new NotaController();
-                notacontroller.salvarNota(titulo, conteudo);
-            }
-        });
-
-        editar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                salvar.setEnabled(false);
-                deletar.setEnabled(false);
-                SalvarNota.setEnabled(true);
-              
-            }
-        });
-
-        SalvarNota.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                salvar.setEnabled(true);
-                deletar.setEnabled(true);
-                String titulo = tituloCamp.getText();
-            	String conteudo = caixaTexto.getText();
-                NotaController notacontroller = new NotaController();
-                notacontroller.atualizarNota(new NotaIdDAO().buscarIdPorTitulo(titulo), titulo, conteudo);
-                tituloCamp.setText("");
-                caixaTexto.setText("");
-            }
-        });
-
-        deletar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               
-             
-            }
-        });
-
-        Voltar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               
-            }
-        });
+    public JTelaNotas(ContaVO conta, JTelaSessoes telaSessoes) {
+        this.conta = conta;
+        this.telaSessoes = telaSessoes;
+        inicializarComponentes();
+        posicionandoComponentes();
+        definirEventos();
     }
+
+    private void inicializarComponentes() {
+        setLayout(null);
+        setOpaque(false); // Tornar o painel transparente
+        setPreferredSize(new Dimension(610, 100));
+        setMaximumSize(new Dimension(610,100));
+        setBackground(new Color(0x84CAED));
+    }
+
+    private void posicionandoComponentes() {
+    	 Font fonte = new Font("Garet", Font.PLAIN, 20);
+         tfTitulo = new JTextField("Título");
+         tfTitulo.setFont(fonte);
+         tfTitulo.setPreferredSize(new Dimension(515,20));
+         tfTitulo.setBounds(15, 10, 515, 20);
+         tfTitulo.setBackground(new Color(0x84CAED));
+         tfTitulo.setBorder(new LineBorder(Color.WHITE));
+         
+         Font fonte2 = new Font("Garet", Font.PLAIN, 17);
+         taConteudo = new JTextArea("radwimps");
+         taConteudo.setFont(fonte2);
+         taConteudo.setBounds(15, 45, 580, 20);
+         taConteudo.setBackground(new Color(0x84CAED));
+         taConteudo.setBorder(new LineBorder(Color.WHITE));
+         
+         btnFixarNota = new JButton("Fixar");
+         btnFixarNota.setFont(fonte2);
+         btnFixarNota.setPreferredSize(new Dimension(60, 17));
+         btnFixarNota.setBounds(535, 10, 60,17);
+         btnFixarNota.setBackground(new Color(0x84CAED));
+         btnFixarNota.setBorder(new LineBorder(Color.WHITE));
+         
+         btnLembrar = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\btnLembrar.png"));
+         btnLembrar.setPreferredSize(new Dimension(21, 28));
+         btnLembrar.setBounds(15, 70, 21, 28);
+         btnLembrar.setBackground(new Color(0x84CAED));
+         //btnLembrar.setBorder(new LineBorder(Color.WHITE));
+         
+         btnCor = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\btnLembrar.png"));
+         btnCor.setPreferredSize(new Dimension(21, 28));
+         btnCor.setBounds(46, 70, 21, 28);
+         btnCor.setBackground(new Color(0x84CAED));
+         //btnLembrar.setBorder(new LineBorder(Color.WHITE));
+
+         btnAddImagem = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\btnLembrar.png"));
+         btnAddImagem.setPreferredSize(new Dimension(21, 28));
+         btnAddImagem.setBounds(77, 70, 21, 28);
+         btnAddImagem.setBackground(new Color(0x84CAED));
+         //btnLembrar.setBorder(new LineBorder(Color.WHITE));
+         
+         btnArquivar = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\btnLembrar.png"));
+         btnArquivar.setPreferredSize(new Dimension(21, 28));
+         btnArquivar.setBounds(108, 70, 21, 28);
+         btnArquivar.setBackground(new Color(0x84CAED));
+         //btnLembrar.setBorder(new LineBorder(Color.WHITE));
+         
+         btn3pontos = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\btnLembrar.png"));
+         btn3pontos.setPreferredSize(new Dimension(21, 28));
+         btn3pontos.setBounds(139, 70, 21, 28);
+         btn3pontos.setBackground(new Color(0x84CAED));
+         //btnLembrar.setBorder(new LineBorder(Color.WHITE));
+         
+         btnFechar = new JButton("fechar");
+         btnFechar.setPreferredSize(new Dimension(60, 17));
+         btnFechar.setFont(fonte2);
+         btnFechar.setBounds(535, 70, 60, 17);
+         btnFechar.setBackground(new Color(0x84CAED));
+         btnFechar.setBorder(new LineBorder(Color.WHITE));
+         
+
+         
+         add(tfTitulo);
+         add(taConteudo);
+         add(btnFixarNota);
+         add(btnLembrar);
+         add(btnCor);
+         add(btnAddImagem);
+         add(btnArquivar);
+         add(btn3pontos);
+         add(btnFechar);
+    }
+
+    private void definirEventos() {
+        tfTitulo.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				tfTitulo.setForeground(Color.BLACK);
+				taConteudo.setForeground(Color.BLACK);
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				tfTitulo.setForeground(Color.WHITE);
+				taConteudo.setForeground(Color.WHITE);
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+        taConteudo.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				tfTitulo.setForeground(Color.BLACK);
+				taConteudo.setForeground(Color.BLACK);
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				tfTitulo.setForeground(Color.WHITE);
+				taConteudo.setForeground(Color.WHITE);
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+        
+        taConteudo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    aumentarAltura();
+                }
+           
+            }
+        private void aumentarAltura() {
+            int novaAltura = taConteudo.getPreferredSize().height;
+                // Ajusta a altura do JTextArea
+                novaAltura = novaAltura + 20;
+                taConteudo.setBounds(15, 45, 580, novaAltura);
+
+                // Ajusta a altura do painel JTelaNotas
+                int novaAlturaPainel = getPreferredSize().height;
+                novaAlturaPainel = novaAlturaPainel+20;
+                setPreferredSize(new Dimension(getWidth(), novaAlturaPainel));
+                setMaximumSize(new Dimension(getWidth(), novaAlturaPainel));
+
+                novaPosicao = novaPosicao + 20;
+
+                btnLembrar.setBounds(15, novaPosicao, 21, 28);
+                btnCor.setBounds(46, novaPosicao, 21, 28);
+                btnAddImagem.setBounds(77, novaPosicao, 21, 28);
+                btnArquivar.setBounds(108, novaPosicao, 21, 28);
+                btn3pontos.setBounds(139, novaPosicao, 21, 28);
+                btnFechar.setBounds(535, novaPosicao, 60, 17);
+
+                revalidate();
+                repaint();
+            }
+        
+        
+        
+        private void diminuirAltura() {
+            int novaAltura = taConteudo.getPreferredSize().height;
+                // Ajusta a altura do JTextArea
+                novaAltura = novaAltura - 17;
+                taConteudo.setBounds(15, 45, 580, novaAltura);
+
+                // Ajusta a altura do painel JTelaNotas
+                int novaAlturaPainel = getPreferredSize().height;
+                novaAlturaPainel = novaAlturaPainel-17;
+                setPreferredSize(new Dimension(getWidth(), novaAlturaPainel));
+                setMaximumSize(new Dimension(getWidth(), novaAlturaPainel));
+
+                novaPosicao = novaPosicao - 17;
+
+                btnLembrar.setBounds(15, novaPosicao, 21, 28);
+                btnCor.setBounds(46, novaPosicao, 21, 28);
+                btnAddImagem.setBounds(77, novaPosicao, 21, 28);
+                btnArquivar.setBounds(108, novaPosicao, 21, 28);
+                btn3pontos.setBounds(139, novaPosicao, 21, 28);
+                btnFechar.setBounds(535, novaPosicao, 60, 17);
+
+                revalidate();
+                repaint();
+            }
+        
+        });
+        taConteudo.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                // Lógica ao inserir texto
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            	 SwingUtilities.invokeLater(() -> {
+                     try {
+                         String text = taConteudo.getText();
+                         String[] linesBefore = e.getDocument().getText(0, e.getDocument().getLength()).split("\n");
+                         String[] linesAfter = text.split("\n");
+
+                         System.out.println("Lines Before: " + Arrays.toString(linesBefore));
+                         System.out.println("Lines After: " + Arrays.toString(linesAfter));
+                         // Verifica se uma quebra de linha foi removida
+                         if (linesAfter.length < linesBefore.length) {
+                             diminuirAltura();
+                         }
+                     } catch (BadLocationException ex) {
+                         ex.printStackTrace();
+                     }
+               
+                });
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // Lógica ao alterar texto
+            }
+            
+        });
+        
+    }
+    private void diminuirAltura() {
+    	 try {
+    		 System.out.println("Diminuindo Altura...");
+    	        int novaAltura = taConteudo.getPreferredSize().height;
+    	       // if (novaAltura >= 20) {
+    	        	System.out.println("Diminuindo Altura...");
+    	        	  System.out.println("Antes de ajustar altura: " + novaAltura);
+    	            novaAltura = novaAltura - 13;
+    	            System.out.println("Depois de ajustar altura: " + novaAltura);
+    	            taConteudo.setBounds(15, 45, 580, novaAltura);
+
+    	            // Ajusta a altura do painel JTelaNotas
+    	            int novaAlturaPainel = getPreferredSize().height;
+    	            novaAlturaPainel = novaAlturaPainel-10;
+    	            setPreferredSize(new Dimension(getWidth(), novaAlturaPainel));
+    	            setMaximumSize(new Dimension(getWidth(), novaAlturaPainel));
+
+    	            novaPosicao = novaPosicao - 10;
+
+    	            btnLembrar.setBounds(15, novaPosicao, 21, 28);
+    	            btnCor.setBounds(46, novaPosicao, 21, 28);
+    	            btnAddImagem.setBounds(77, novaPosicao, 21, 28);
+    	            btnArquivar.setBounds(108, novaPosicao, 21, 28);
+    	            btn3pontos.setBounds(139, novaPosicao, 21, 28);
+    	            btnFechar.setBounds(535, novaPosicao, 60, 17);
+
+    	            revalidate();
+    	            repaint();
+    	            
+    	    }  catch (Exception ex) {
+    	        ex.printStackTrace();
+    	    }
+    	
+        }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        int width = getWidth();
+        int height = getHeight();
+
+        // Crie um formato com bordas curvas
+        RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(0, 0, width, height, 20, 20);
+
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(getBackground());
+        g2d.fill(roundedRectangle);
+    }
+    public static void main(String[] args) {
+    	 JFrame frame = new JFrame("Teste CurvedJTelaListaNotas");
+    	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	    frame.setPreferredSize(new Dimension(1366, 640));
+    	    
+    	    
+    	    ContaVO nota = new ContaVO();
+    	    nota.setId_conta(1);
+    	    nota.setNome_perfil("One piece");
+    	    nota.setSenha("oi");
+    	    nota.setFoto("D:\\projetoENjoyNotes\\botaoCronometro.png");
+    	    JTelaSessoes sessoes = new JTelaSessoes(); 
+    	    JTelaNotas curvedListaNotas = new JTelaNotas(nota, sessoes);
+    	    
+    	    // Configura o layout do JFrame para FlowLayout
+    	    frame.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+    	    frame.add(curvedListaNotas);
+    	    frame.pack();
+    	    frame.setVisible(true);
+	}
 }
+

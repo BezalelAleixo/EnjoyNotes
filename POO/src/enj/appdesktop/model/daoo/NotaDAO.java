@@ -75,7 +75,7 @@ public class NotaDAO {
 		Connection conexao = new ConexaoDAO().conexaoBD();
 		PreparedStatement PSTM = null;
 		ResultSet RS = null;
-		String select = "SELECT N.id, N.titulo, N.conteudo, N.data_criac FROM NOTA as N INNER JOIN CONTA as C WHERE C.nome_perfil = ?";
+		String select = "SELECT N.* FROM NOTA as N INNER JOIN CONTA as C ON N.id_conta = C.id_conta WHERE C.nome_perfil = ?";
 		
 		try {
 			PSTM = conexao.prepareStatement(select);
