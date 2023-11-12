@@ -47,7 +47,6 @@ import enj.appdesktop.model.vo.NotasVO;
 		private String nome_perfil;
 		private JTelaSessoes sessoes;
 		private ContaVO conta;
-		
 		public JTelaMenu (ContaVO conta, String nome_perfil, JTelaSessoes sessoes) {
 			this.conta = conta;
 			this.nome_perfil = nome_perfil;
@@ -213,7 +212,7 @@ import enj.appdesktop.model.vo.NotasVO;
 			List<NotasVO> NotasProntas =notacontroller.NotasPreparadasdaCOnta();
 			
 			for(NotasVO notas : NotasProntas) {
-				JTelaListaNotas blocos = new JTelaListaNotas(notas, sessoes);
+				JTelaListaNotas blocos = new JTelaListaNotas(notas, sessoes, conta, this);
 				notasPreparadas.add(blocos);
 			}
 
@@ -389,5 +388,16 @@ import enj.appdesktop.model.vo.NotasVO;
 					
 				}
 			});
+		}
+		public JPanel getPanel(){
+			return pnPrincipal;
+			}
+		public void AddTela(JTelaNotas notas) {
+			pnPrincipal.add(pnListas, FlowLayout.LEFT);
+			pnPrincipal.add(pnNotas, FlowLayout.LEFT);
+			pnPrincipal.add(notas, FlowLayout.LEFT);
+			pnPrincipal.add(pnOpcoes, FlowLayout.LEFT);
+			pnPrincipal.revalidate();
+			pnPrincipal.repaint();
 		}
 		}

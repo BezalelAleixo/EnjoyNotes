@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
+import enj.appdesktop.model.vo.ContaVO;
 import enj.appdesktop.model.vo.NotasVO;
 
 public class JTelaListaNotas extends JPanel {
@@ -18,10 +19,14 @@ public class JTelaListaNotas extends JPanel {
     private JTextArea taConteudo;
     private NotasVO nota;
     private JTelaSessoes telaSessoes;
+    private ContaVO conta;
+    private JTelaMenu menu;
 
-    public JTelaListaNotas(NotasVO nota, JTelaSessoes telaSessoes) {
+    public JTelaListaNotas(NotasVO nota, JTelaSessoes telaSessoes, ContaVO conta, JTelaMenu menu) {
         this.nota = nota;
         this.telaSessoes = telaSessoes;
+        this.conta = conta;
+        this.menu = menu;
         inicializarComponentes();
         posicionandoComponentes();
         definirEventos();
@@ -59,6 +64,39 @@ public class JTelaListaNotas extends JPanel {
     }
 
     private void definirEventos() {
+    	addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JTelaNotas note = new JTelaNotas(conta, telaSessoes, nota);
+				menu.AddTela(note);
+			}
+		});
+    	
         tfTitulo.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -89,7 +127,8 @@ public class JTelaListaNotas extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
+				JTelaNotas note = new JTelaNotas(conta, telaSessoes, nota);
+				menu.AddTela(note);
 				
 			}
 		});
@@ -123,10 +162,14 @@ public class JTelaListaNotas extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
+				JTelaNotas note = new JTelaNotas(conta, telaSessoes, nota);
+				menu.AddTela(note);
 				
 			}
 		});
+    }
+    public NotasVO getNotas() {
+    	return nota;
     }
 
     @Override
@@ -151,12 +194,12 @@ public class JTelaListaNotas extends JPanel {
     	    nota.setTitulo("Bezalel");
     	    nota.setContent("One piece");
     	    JTelaSessoes sessoes = new JTelaSessoes(); // Substitua isso pelo construtor correto da sua classe JTelaSessoes
-    	    JTelaListaNotas curvedListaNotas = new JTelaListaNotas(nota, sessoes);
+    	  //  JTelaListaNotas curvedListaNotas = new JTelaListaNotas(nota, sessoes);
     	    
     	    // Configura o layout do JFrame para FlowLayout
     	    frame.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-    	    frame.add(curvedListaNotas);
+    	    //frame.add(curvedListaNotas);
     	    frame.pack();
     	    frame.setVisible(true);
 	}

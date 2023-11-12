@@ -97,12 +97,15 @@ public class JTelaSessoes extends JFrame{
 		btnIncio.setBackground(new Color(0x2a4674));
 		btnIncio.setForeground(Color.WHITE);
 		
+		
+		
 		pnBarra.add(lblMockupLogo);
 		pnBarra.add(btnEntrar);
 		pnBarra.add(btnCadastre);
 		pnBarra.add(btnIncio);
 		pnPrincipal.add(lblPergunta);
 		pnPrincipal.add(pnBlocosContas);
+		
 	}
 
 	private void definirEventos() {
@@ -149,12 +152,17 @@ public class JTelaSessoes extends JFrame{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getContentpane().removeAll();
-	            JTelaEntrar entrar = new JTelaEntrar(JTelaSessoes.this);
-	            getContentpane().add(entrar, BorderLayout.CENTER);
-	            revalidate();
-	            repaint();
+			//	getContentpane().removeAll();
+	          //  JTelaEntrar entrar = new JTelaEntrar(JTelaSessoes.this);
+	        //    getContentpane().add(entrar, BorderLayout.CENTER);
+	          //  revalidate();
+	            //repaint();
+				JPanel pn = new JPanel();
+				pn.setBackground(Color.pink);
 				
+				pnPrincipal.add(pn).setBounds(310, 0, 610, 20);;
+				pnPrincipal.revalidate();
+				pnPrincipal.repaint();
 			}
 		});
 			btnCadastre.addMouseListener(new MouseListener() {
@@ -234,7 +242,7 @@ public class JTelaSessoes extends JFrame{
 	
 	public Container getContentpane() {
 	    return contentpane;
-	}	
+	}
 
 	public static void abrir(){
 		JTelaSessoes frame = new JTelaSessoes();

@@ -24,6 +24,7 @@ import java.awt.event.*;
 
 
 import enj.appdesktop.model.vo.ContaVO;
+import enj.appdesktop.model.vo.NotasVO;
 
 
 public class JTelaNotas extends JPanel {
@@ -31,12 +32,14 @@ public class JTelaNotas extends JPanel {
     private JTextArea taConteudo;
     private ContaVO conta;
     private JTelaSessoes telaSessoes;
+    private NotasVO nota;
     private JButton btnLembrar, btnCor, btnAddImagem, btnArquivar, btn3pontos, btnFechar, btnFixarNota;
     int novaPosicao = 70;
 
-    public JTelaNotas(ContaVO conta, JTelaSessoes telaSessoes) {
+    public JTelaNotas(ContaVO conta, JTelaSessoes telaSessoes, NotasVO nota) {
         this.conta = conta;
         this.telaSessoes = telaSessoes;
+        this.nota = nota;
         inicializarComponentes();
         posicionandoComponentes();
         definirEventos();
@@ -52,26 +55,26 @@ public class JTelaNotas extends JPanel {
 
     private void posicionandoComponentes() {
     	 Font fonte = new Font("Garet", Font.PLAIN, 20);
-         tfTitulo = new JTextField("Título");
+         tfTitulo = new JTextField(nota.getTitulo());
          tfTitulo.setFont(fonte);
          tfTitulo.setPreferredSize(new Dimension(515,20));
          tfTitulo.setBounds(15, 10, 515, 20);
          tfTitulo.setBackground(new Color(0x84CAED));
-         tfTitulo.setBorder(new LineBorder(Color.WHITE));
+         tfTitulo.setBorder(new LineBorder(new Color(0x84CAED)));
          
          Font fonte2 = new Font("Garet", Font.PLAIN, 17);
-         taConteudo = new JTextArea("radwimps");
+         taConteudo = new JTextArea(nota.getContent());
          taConteudo.setFont(fonte2);
-         taConteudo.setBounds(15, 45, 580, 20);
+         taConteudo.setBounds(15, 45, 580, 21);
          taConteudo.setBackground(new Color(0x84CAED));
-         taConteudo.setBorder(new LineBorder(Color.WHITE));
+      //   taConteudo.setBorder(new LineBorder(Color.WHITE));
          
          btnFixarNota = new JButton("Fixar");
          btnFixarNota.setFont(fonte2);
          btnFixarNota.setPreferredSize(new Dimension(60, 17));
          btnFixarNota.setBounds(535, 10, 60,17);
          btnFixarNota.setBackground(new Color(0x84CAED));
-         btnFixarNota.setBorder(new LineBorder(Color.WHITE));
+         btnFixarNota.setBorder(new LineBorder(new Color(0x84CAED)));
          
          btnLembrar = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\btnLembrar.png"));
          btnLembrar.setPreferredSize(new Dimension(21, 28));
@@ -108,7 +111,17 @@ public class JTelaNotas extends JPanel {
          btnFechar.setFont(fonte2);
          btnFechar.setBounds(535, 70, 60, 17);
          btnFechar.setBackground(new Color(0x84CAED));
-         btnFechar.setBorder(new LineBorder(Color.WHITE));
+         btnFechar.setBorder(new LineBorder(new Color(0x84CAED)));
+         
+         Font fonte3 = new Font("Arial", Font.PLAIN, 17);
+         taConteudo.setFont(fonte3);
+
+         // Obtém a altura da fonte
+         //FontMetrics fontMetrics = taConteudo.getFontMetrics(fonte3);
+         //int alturaDaLinha = fontMetrics.getHeight();
+
+         // Agora, alturaDaLinha conterá a altura aproximada de uma linha
+        // System.out.println("Altura da Linha: " + alturaDaLinha);
          
 
          
@@ -140,15 +153,15 @@ public class JTelaNotas extends JPanel {
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				tfTitulo.setForeground(Color.BLACK);
-				taConteudo.setForeground(Color.BLACK);
+				//tfTitulo.setForeground(Color.BLACK);
+			///	taConteudo.setForeground(Color.BLACK);
 				
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				tfTitulo.setForeground(Color.WHITE);
-				taConteudo.setForeground(Color.WHITE);
+				//tfTitulo.setForeground(Color.WHITE);
+				//taConteudo.setForeground(Color.WHITE);
 				
 			}
 			
@@ -174,15 +187,15 @@ public class JTelaNotas extends JPanel {
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				tfTitulo.setForeground(Color.BLACK);
-				taConteudo.setForeground(Color.BLACK);
+				///tfTitulo.setForeground(Color.BLACK);
+				//taConteudo.setForeground(Color.BLACK);
 				
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				tfTitulo.setForeground(Color.WHITE);
-				taConteudo.setForeground(Color.WHITE);
+				//tfTitulo.setForeground(Color.WHITE);
+				//taConteudo.setForeground(Color.WHITE);
 				
 			}
 			
@@ -204,43 +217,16 @@ public class JTelaNotas extends JPanel {
         private void aumentarAltura() {
             int novaAltura = taConteudo.getPreferredSize().height;
                 // Ajusta a altura do JTextArea
-                novaAltura = novaAltura + 20;
+                novaAltura = novaAltura + 21;
                 taConteudo.setBounds(15, 45, 580, novaAltura);
 
                 // Ajusta a altura do painel JTelaNotas
                 int novaAlturaPainel = getPreferredSize().height;
-                novaAlturaPainel = novaAlturaPainel+20;
+                novaAlturaPainel = novaAlturaPainel+21;
                 setPreferredSize(new Dimension(getWidth(), novaAlturaPainel));
                 setMaximumSize(new Dimension(getWidth(), novaAlturaPainel));
 
-                novaPosicao = novaPosicao + 20;
-
-                btnLembrar.setBounds(15, novaPosicao, 21, 28);
-                btnCor.setBounds(46, novaPosicao, 21, 28);
-                btnAddImagem.setBounds(77, novaPosicao, 21, 28);
-                btnArquivar.setBounds(108, novaPosicao, 21, 28);
-                btn3pontos.setBounds(139, novaPosicao, 21, 28);
-                btnFechar.setBounds(535, novaPosicao, 60, 17);
-
-                revalidate();
-                repaint();
-            }
-        
-        
-        
-        private void diminuirAltura() {
-            int novaAltura = taConteudo.getPreferredSize().height;
-                // Ajusta a altura do JTextArea
-                novaAltura = novaAltura - 17;
-                taConteudo.setBounds(15, 45, 580, novaAltura);
-
-                // Ajusta a altura do painel JTelaNotas
-                int novaAlturaPainel = getPreferredSize().height;
-                novaAlturaPainel = novaAlturaPainel-17;
-                setPreferredSize(new Dimension(getWidth(), novaAlturaPainel));
-                setMaximumSize(new Dimension(getWidth(), novaAlturaPainel));
-
-                novaPosicao = novaPosicao - 17;
+                novaPosicao = novaPosicao + 21;
 
                 btnLembrar.setBounds(15, novaPosicao, 21, 28);
                 btnCor.setBounds(46, novaPosicao, 21, 28);
@@ -254,59 +240,35 @@ public class JTelaNotas extends JPanel {
             }
         
         });
-        taConteudo.getDocument().addDocumentListener(new DocumentListener() {
+        taConteudo.addKeyListener(new KeyAdapter() {
             @Override
-            public void insertUpdate(DocumentEvent e) {
-                // Lógica ao inserir texto
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    String text = taConteudo.getText();
+                    int caretPosition = taConteudo.getCaretPosition();
+                    
+                    // Verifica se uma quebra de linha foi removida
+                    if (text.contains("\n") && text.charAt(caretPosition - 1) == '\n') {
+                        diminuirAltura();
+                    } else {
+                    }
+                }
             }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-            	 SwingUtilities.invokeLater(() -> {
-                     try {
-                         String text = taConteudo.getText();
-                         String[] linesBefore = e.getDocument().getText(0, e.getDocument().getLength()).split("\n");
-                         String[] linesAfter = text.split("\n");
-
-                         System.out.println("Lines Before: " + Arrays.toString(linesBefore));
-                         System.out.println("Lines After: " + Arrays.toString(linesAfter));
-                         // Verifica se uma quebra de linha foi removida
-                         if (linesAfter.length < linesBefore.length) {
-                             diminuirAltura();
-                         }
-                     } catch (BadLocationException ex) {
-                         ex.printStackTrace();
-                     }
-               
-                });
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                // Lógica ao alterar texto
-            }
-            
         });
         
     }
     private void diminuirAltura() {
     	 try {
-    		 System.out.println("Diminuindo Altura...");
     	        int novaAltura = taConteudo.getPreferredSize().height;
-    	       // if (novaAltura >= 20) {
-    	        	System.out.println("Diminuindo Altura...");
-    	        	  System.out.println("Antes de ajustar altura: " + novaAltura);
-    	            novaAltura = novaAltura - 13;
-    	            System.out.println("Depois de ajustar altura: " + novaAltura);
+    	            novaAltura = novaAltura - 21;
     	            taConteudo.setBounds(15, 45, 580, novaAltura);
 
-    	            // Ajusta a altura do painel JTelaNotas
     	            int novaAlturaPainel = getPreferredSize().height;
-    	            novaAlturaPainel = novaAlturaPainel-10;
+    	            novaAlturaPainel = novaAlturaPainel-21;
     	            setPreferredSize(new Dimension(getWidth(), novaAlturaPainel));
     	            setMaximumSize(new Dimension(getWidth(), novaAlturaPainel));
 
-    	            novaPosicao = novaPosicao - 10;
+    	            novaPosicao = novaPosicao - 21;
 
     	            btnLembrar.setBounds(15, novaPosicao, 21, 28);
     	            btnCor.setBounds(46, novaPosicao, 21, 28);
@@ -349,7 +311,8 @@ public class JTelaNotas extends JPanel {
     	    nota.setSenha("oi");
     	    nota.setFoto("D:\\projetoENjoyNotes\\botaoCronometro.png");
     	    JTelaSessoes sessoes = new JTelaSessoes(); 
-    	    JTelaNotas curvedListaNotas = new JTelaNotas(nota, sessoes);
+    	    NotasVO nn = new NotasVO();
+    	    JTelaNotas curvedListaNotas = new JTelaNotas(nota, sessoes, nn);
     	    
     	    // Configura o layout do JFrame para FlowLayout
     	    frame.setLayout(new FlowLayout(FlowLayout.CENTER));
