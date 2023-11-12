@@ -92,7 +92,7 @@ public class JTelaListaNotas extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JTelaNotas note = new JTelaNotas(conta, telaSessoes, nota);
+				JTelaAtualizaNotas note = new JTelaAtualizaNotas(conta, telaSessoes, nota);
 				menu.AddTela(note);
 			}
 		});
@@ -127,7 +127,7 @@ public class JTelaListaNotas extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JTelaNotas note = new JTelaNotas(conta, telaSessoes, nota);
+				JTelaAtualizaNotas note = new JTelaAtualizaNotas(conta, telaSessoes, nota);
 				menu.AddTela(note);
 				
 			}
@@ -162,7 +162,7 @@ public class JTelaListaNotas extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JTelaNotas note = new JTelaNotas(conta, telaSessoes, nota);
+				JTelaAtualizaNotas note = new JTelaAtualizaNotas(conta, telaSessoes, nota);
 				menu.AddTela(note);
 				
 			}

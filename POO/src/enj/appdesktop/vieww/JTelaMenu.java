@@ -392,7 +392,7 @@ import enj.appdesktop.model.vo.NotasVO;
 		public JPanel getPanel(){
 			return pnPrincipal;
 			}
-		public void AddTela(JTelaNotas notas) {
+		public void AddTela(JTelaAtualizaNotas notas) {
 			pnPrincipal.add(pnListas, FlowLayout.LEFT);
 			pnPrincipal.add(pnNotas, FlowLayout.LEFT);
 			pnPrincipal.add(notas, FlowLayout.LEFT);

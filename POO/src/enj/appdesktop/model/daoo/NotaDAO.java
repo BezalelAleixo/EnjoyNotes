@@ -45,8 +45,7 @@ public class NotaDAO {
 			PSTM.setString(2, notas.getContent());
 			PSTM.setInt(3, notas.getId());
 			PSTM.executeUpdate();
-
-			JOptionPane.showMessageDialog(null, "Editado com sucesso!");
+			
 		}catch (Exception e) {
 			System.out.println(e);
 		}
