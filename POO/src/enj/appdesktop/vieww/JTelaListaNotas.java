@@ -37,7 +37,7 @@ public class JTelaListaNotas extends JPanel {
         setOpaque(false); // Tornar o painel transparente
         setPreferredSize(new Dimension(150, 150));
         setMaximumSize(new Dimension(150,150));
-        setBackground(new Color(0x84CAED));
+        setBackground(Color.decode(nota.getCor()));
     }
 
     private void posicionandoComponentes() {
@@ -46,18 +46,18 @@ public class JTelaListaNotas extends JPanel {
          tfTitulo.setFont(fonte);
          tfTitulo.setPreferredSize(new Dimension(150,20));
          tfTitulo.setBounds(5, 5, 140, 20);
-         tfTitulo.setBackground(new Color(0x84CAED));
+         tfTitulo.setBackground(Color.decode(nota.getCor()));
          tfTitulo.setEditable(false);
-         tfTitulo.setBorder(new LineBorder(new Color(0x84CAED)));
+         tfTitulo.setBorder(new LineBorder(Color.decode(nota.getCor())));
          
          Font fonte2 = new Font("Garet", Font.PLAIN, 17);
          taConteudo = new JTextArea(nota.getContent());
          taConteudo.setFont(fonte2);
          taConteudo.setPreferredSize(new Dimension(150,130));
          taConteudo.setBounds(5, 25, 140, 120);
-         taConteudo.setBackground(new Color(0x84CAED));
+         taConteudo.setBackground(Color.decode(nota.getCor()));
          taConteudo.setEditable(false);
-         taConteudo.setBorder(new LineBorder(new Color(0x84CAED)));
+         taConteudo.setBorder(new LineBorder(Color.decode(nota.getCor())));
          
          add(tfTitulo);
          add(taConteudo);

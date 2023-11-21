@@ -179,7 +179,7 @@ public class JTelaSelecionarFoto extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String foto = tfLocalImage.getText();
+				String foto = tfLocalImage.getText().replace("\\", "\\\\");
 				ContaController conta = new ContaController();
 				conta.cadastrarConta(nome_perfil, senha, foto);
 				UsuarioController user = new UsuarioController();

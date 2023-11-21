@@ -9,16 +9,19 @@ import enj.appdesktop.model.vo.NotasVO;
 public class NotaController {
     private NotaBO notaBO = new NotaBO();
 
-    public void salvarNota(String titulo, String conteudo) {
+    public void salvarNota(String titulo, String conteudo, String foto, String cor, int id_conta) {
         NotasVO nota = new NotasVO();
         nota.setTitulo(titulo);
         nota.setContent(conteudo);
+        nota.setFoto(foto);
+        nota.setCor(cor);
+        nota.setId_conta(id_conta);
 
         notaBO.salvarNota(nota);
     }
 
-    public void atualizarNota(int id, String titulo, String conteudo) {
-        NotasVO nota = new NotasVO(id, titulo, conteudo);
+    public void atualizarNota(int id, String titulo, String conteudo, String foto, String cor) {
+        NotasVO nota = new NotasVO(id, titulo, conteudo, foto, cor);
 
         notaBO.atualizarNota(nota);
     }

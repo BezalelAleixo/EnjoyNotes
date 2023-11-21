@@ -123,7 +123,6 @@ public class JTelaSessoes extends JFrame{
 			blocosProntos.setPreferredSize(new Dimension(193,263));
 			pnBlocosContas.add(blocosProntos);
 		}
-		
 		btnEntrar.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -237,7 +236,7 @@ public class JTelaSessoes extends JFrame{
 					
 				}
 			});
-				
+		
 	}
 	
 	public Container getContentpane() {

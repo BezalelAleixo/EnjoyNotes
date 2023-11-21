@@ -10,4 +10,6 @@ module POO{
 	requires jcalendar;
 	requires javafx.swing;
 	requires javafx.media;
+	requires swing.jnafilechooser;
+
 }

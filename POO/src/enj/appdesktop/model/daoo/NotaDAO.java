@@ -19,12 +19,15 @@ public class NotaDAO {
 	public void SalvarNotaDAO(NotasVO notas) {
 		Connection conexao = null;
 		PreparedStatement PSTM;
-		String comandoSQL = "INSERT INTO NOTA (titulo, conteudo, data_criac) VALUES (?,?, now())";
+		String comandoSQL = "INSERT INTO NOTA (titulo, conteudo, data_criac, id_conta, foto, cor) VALUES (?,?, now(),?,?,?)";
 		conexao = new ConexaoDAO().conexaoBD();
 		try {
 			PSTM = conexao.prepareStatement(comandoSQL);
 			PSTM.setString(1, notas.getTitulo());
 			PSTM.setString(2, notas.getContent());
+			PSTM.setInt(3, notas.getId_conta());
+			PSTM.setString(4, notas.getFoto());
+			PSTM.setString(5, notas.getCor());
 			PSTM.execute();
 			PSTM.close();
 		}catch (Exception e) {
@@ -37,13 +40,15 @@ public class NotaDAO {
 		Connection conexao = null;
 		PreparedStatement PSTM = null;
 		//ResultSet RS = null;
-		String comandoSQL = "UPDATE NOTA SET titulo = ?, conteudo = ? WHERE id = ?";
+		String comandoSQL = "UPDATE NOTA SET titulo = ?, conteudo = ? , foto = ?, cor = ? WHERE id = ?";
 		conexao = new ConexaoDAO().conexaoBD();
 		try {
 			PSTM = conexao.prepareStatement(comandoSQL);
 			PSTM.setString(1, notas.getTitulo());
 			PSTM.setString(2, notas.getContent());
-			PSTM.setInt(3, notas.getId());
+			PSTM.setString(3, notas.getFoto());
+			PSTM.setString(4, notas.getCor());
+			PSTM.setInt(5, notas.getId());
 			PSTM.executeUpdate();
 			
 		}catch (Exception e) {
@@ -87,10 +92,16 @@ public class NotaDAO {
 				String titulo = RS.getString("N.titulo");
 				String conteudo = RS.getString("N.conteudo");
 				String data_criacao = RS.getString("n.data_criac");
+				String foto = RS.getString("N.foto");
+				String cor = RS.getString("N.cor");
+				int id_conta = RS.getInt("N.id_conta");
 				notas.setId(id);
 				notas.setTitulo(titulo);
 				notas.setContent(conteudo);
 				notas.setData_criacao(data_criacao);
+				notas.setFoto(foto);
+				notas.setCor(cor);
+				notas.setId_conta(id_conta);
 				notasPreparadas.add(notas);
 			}
 		}catch (SQLException e) {

@@ -6,10 +6,15 @@
 	import java.awt.Dimension;
 	import java.awt.FlowLayout;
 	import java.awt.Font;
-	import java.awt.GridLayout;
-	import java.awt.event.MouseEvent;
+import java.awt.FontFormatException;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 	import java.awt.event.MouseListener;
-	import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 	import java.util.List;
 import java.util.concurrent.Flow;
 
@@ -40,6 +45,7 @@ import enj.appdesktop.model.vo.NotasVO;
 		private JButton btn3linhas, btnCronometro, btnAgenda, btnPesquisar, btnConfiguracoes, btnConta;
 		private JPanel pnLBLNotas, pnListaNotas;
 		private JLabel lblNotas;
+		private JButton btnCriarNota;
 		private JPanel pnLBLListas, pnListaListas;
 		private JLabel lblListas;
 		private JPanel pnLBLQuadros, pnListaQuadros;
@@ -47,6 +53,7 @@ import enj.appdesktop.model.vo.NotasVO;
 		private String nome_perfil;
 		private JTelaSessoes sessoes;
 		private ContaVO conta;
+		private Font fontIcon;
 		public JTelaMenu (ContaVO conta, String nome_perfil, JTelaSessoes sessoes) {
 			this.conta = conta;
 			this.nome_perfil = nome_perfil;
@@ -80,6 +87,12 @@ import enj.appdesktop.model.vo.NotasVO;
 	        Font fonte2 = new Font("Garet", Font.PLAIN, 18);
 	        Font fonte3 = new Font("Garet", Font.PLAIN, 12);
 			
+	        try {
+	             fontIcon = Font.createFont(Font.TRUETYPE_FONT, new File("D:\\AleixoUNI\\BEZALEL\\Fontes\\font-awesome-4.7.0\\font-awesome-4.7.0\\fonts\\FontAwesome.otf")).deriveFont(30f);       
+	         } catch (IOException | FontFormatException e) {
+	             e.printStackTrace();
+	         }
+	        
 			lblMockupLogo = new JLabel(new ImageIcon("D:\\projetoENjoyNotes\\logo01.png"));	
 			lblMockupLogo.setBounds(51, 29, 139, 77);
 			
@@ -146,9 +159,15 @@ import enj.appdesktop.model.vo.NotasVO;
 	        lblNotas.setBackground(Color.WHITE);
 	        lblNotas.setForeground(Color.BLACK);
 	        MatteBorder emptyBorder7 = BorderFactory.createMatteBorder(0, 0, 0, 0, new Color(0x2a4674));
-			MatteBorder redBottomBorder7 = BorderFactory.createMatteBorder(0, 40, 0, 0, Color.WHITE);
+			MatteBorder redBottomBorder7 = BorderFactory.createMatteBorder(0, 40, 0, 10, Color.WHITE);
 		    Border compoundBorder7 = BorderFactory.createCompoundBorder(emptyBorder7, redBottomBorder7);
 			lblNotas.setBorder(compoundBorder7);
+			
+			btnCriarNota = new JButton("\uf067");
+			btnCriarNota.setFont(fontIcon);
+			btnCriarNota.setBackground(Color.WHITE);
+	        btnCriarNota.setForeground(Color.BLACK);
+	        btnCriarNota.setBorder(new LineBorder(Color.WHITE));
 	       
 			pnListaNotas = new JPanel();
 			FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, 20, 0); // 20 pixels de espaçamento horizontal
@@ -196,6 +215,7 @@ import enj.appdesktop.model.vo.NotasVO;
 			pnOpcoes.add(btnConfiguracoes);
 			pnOpcoes.add(btnConta);
 			pnLBLNotas.add(lblNotas);
+			pnLBLNotas.add(btnCriarNota);
 			pnNotas.add(pnLBLNotas);
 			pnNotas.add(pnListaNotas);
 			pnLBLListas.add(lblListas);
@@ -244,6 +264,14 @@ import enj.appdesktop.model.vo.NotasVO;
 		} else {
 			pnListaListas.add(new JLabel("Adicione"));
 		}
+			btnCriarNota.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					JTelaNotas nota = new JTelaNotas(conta, sessoes);
+					AddTelaNota(nota);
+				}
+			});
 			btnConfiguracoes.addMouseListener(new MouseListener() {
 				
 				@Override
@@ -393,6 +421,14 @@ import enj.appdesktop.model.vo.NotasVO;
 			return pnPrincipal;
 			}
 		public void AddTela(JTelaAtualizaNotas notas) {
+			pnPrincipal.add(pnListas, FlowLayout.LEFT);
+			pnPrincipal.add(pnNotas, FlowLayout.LEFT);
+			pnPrincipal.add(notas, FlowLayout.LEFT);
+			pnPrincipal.add(pnOpcoes, FlowLayout.LEFT);
+			pnPrincipal.revalidate();
+			pnPrincipal.repaint();
+		}
+		public void AddTelaNota(JTelaNotas notas) {
 			pnPrincipal.add(pnListas, FlowLayout.LEFT);
 			pnPrincipal.add(pnNotas, FlowLayout.LEFT);
 			pnPrincipal.add(notas, FlowLayout.LEFT);
