@@ -26,7 +26,6 @@ import javax.swing.border.MatteBorder;
 import enj.appdesktop.model.vo.ContaVO;
 
 public class JTelaConfigurações extends JPanel{
-	private Container contentpane;
 	private JPanel pnBarra, pnPrincipal, pnColuna;
 	private JLabel lblMockupLogo;
 	private JButton btnConta, btnNotificacoes, btnAparencia, btnDesempenho, btnRegiao, btnData, btnManual, btnSobre;
