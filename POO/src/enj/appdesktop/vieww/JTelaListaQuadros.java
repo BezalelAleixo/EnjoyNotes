@@ -6,61 +6,59 @@ import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
-import enj.appdesktop.model.vo.ListaVO;
+import enj.appdesktop.model.vo.ContaVO;
 import enj.appdesktop.model.vo.NotasVO;
+import enj.appdesktop.model.vo.QuadroVO;
 
-public class JTelaListaDeListas extends JPanel {
-    private JTextField tfTitulo;
-    private JTextArea taConteudo;
-    private ListaVO lista;
+public class JTelaListaQuadros extends JPanel {
+    private JLabel lblTitulo;
     private JTelaSessoes telaSessoes;
+    private ContaVO conta;
+    private QuadroVO quadro;
+    private JTelaQuadros telaquadros;
 
-    public JTelaListaDeListas(ListaVO lista, JTelaSessoes telaSessoes) {
-        this.lista = lista;
+    public JTelaListaQuadros(ContaVO conta, QuadroVO quadro, JTelaSessoes telaSessoes, JTelaQuadros telaquadros) {
+        this.conta = conta;
+        this.quadro = quadro;
         this.telaSessoes = telaSessoes;
+        this.telaquadros = telaquadros;
         inicializarComponentes();
         posicionandoComponentes();
         definirEventos();
     }
 
-    private void inicializarComponentes() {
+
+	private void inicializarComponentes() {
         setLayout(null);
-        setOpaque(false); // Tornar o painel transparente
-        setPreferredSize(new Dimension(150, 150));
-        setMaximumSize(new Dimension(150,150));
-        setBackground(new Color(0x84CAED));
+        setOpaque(false); 
+        setPreferredSize(new Dimension(225, 50));
+        setMaximumSize(new Dimension(225, 50));
+        setBackground(Color.decode("0xFFFFFF"));
     }
 
     private void posicionandoComponentes() {
     	 Font fonte = new Font("Garet", Font.PLAIN, 20);
-         tfTitulo = new JTextField(lista.getTitulo_list());
-         tfTitulo.setFont(fonte);
-         tfTitulo.setPreferredSize(new Dimension(150,20));
-         tfTitulo.setBounds(5, 5, 140, 20);
-         tfTitulo.setBackground(new Color(0x84CAED));
-         tfTitulo.setEditable(false);
-         tfTitulo.setBorder(new LineBorder(new Color(0x84CAED)));
+         lblTitulo = new JLabel(quadro.getNome_quad());
+         lblTitulo.setFont(fonte);
+         lblTitulo.setPreferredSize(new Dimension(150,20));
+         lblTitulo.setBounds(5, 5, 150, 30);
+         lblTitulo.setBackground(Color.decode("0x000000"));
+         lblTitulo.setBorder(new LineBorder(Color.decode("0xFFFFFF")));
          
-         Font fonte2 = new Font("Garet", Font.PLAIN, 17);
-         taConteudo = new JTextArea(lista.getItens());
-         taConteudo.setFont(fonte2);
-         taConteudo.setPreferredSize(new Dimension(150,130));
-         taConteudo.setBounds(5, 25, 140, 120);
-         taConteudo.setBackground(new Color(0x84CAED));
-         taConteudo.setEditable(false);
-         taConteudo.setBorder(new LineBorder(new Color(0x84CAED)));
+        
          
-         add(tfTitulo);
-         add(taConteudo);
+         add(lblTitulo);
+      
     }
 
     private void definirEventos() {
-tfTitulo.addMouseListener(new MouseListener() {
+    	addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -76,25 +74,27 @@ tfTitulo.addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				tfTitulo.setForeground(Color.BLACK);
-				taConteudo.setForeground(Color.BLACK);
+				// TODO Auto-generated method stub
 				
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				tfTitulo.setForeground(Color.WHITE);
-				taConteudo.setForeground(Color.WHITE);
+				// TODO Auto-generated method stub
 				
 			}
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				telaquadros.getPrincipal().removeAll();
+				JTelaListaDeCartoes list_cartoes = new JTelaListaDeCartoes(telaquadros, telaSessoes, quadro);
+				telaquadros.getPrincipal().add(list_cartoes);
+				telaquadros.revalidate();
+				telaquadros.repaint();
 			}
 		});
-        taConteudo.addMouseListener(new MouseListener() {
+    	
+        lblTitulo.addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -110,25 +110,30 @@ tfTitulo.addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				tfTitulo.setForeground(Color.BLACK);
-				taConteudo.setForeground(Color.BLACK);
+				lblTitulo.setForeground(Color.BLACK);
+			
 				
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				tfTitulo.setForeground(Color.WHITE);
-				taConteudo.setForeground(Color.WHITE);
+				lblTitulo.setForeground(Color.WHITE);
+				
 				
 			}
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+				telaquadros.getPrincipal().removeAll();
+				JTelaListaDeCartoes list_cartoes = new JTelaListaDeCartoes(telaquadros, telaSessoes, quadro);
+				telaquadros.getPrincipal().add(list_cartoes);
+				telaquadros.revalidate();
+				telaquadros.repaint();
 			}
 		});
+    
     }
+    
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -148,16 +153,16 @@ tfTitulo.addMouseListener(new MouseListener() {
     	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	    frame.setPreferredSize(new Dimension(300, 300));
     	    
-    	    ListaVO lista = new ListaVO();
-    	    lista.setTitulo_list("Bezalel Aleixo");
-    	    lista.setItens("One piece");
+    	    NotasVO nota = new NotasVO();
+    	    nota.setTitulo("Bezalel");
+    	    nota.setContent("One piece");
     	    JTelaSessoes sessoes = new JTelaSessoes(); // Substitua isso pelo construtor correto da sua classe JTelaSessoes
-    	    JTelaListaDeListas curvedListaNotas = new JTelaListaDeListas(lista, sessoes);
+    	  //  JTelaListaNotas curvedListaNotas = new JTelaListaNotas(nota, sessoes);
     	    
     	    // Configura o layout do JFrame para FlowLayout
     	    frame.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-    	    frame.add(curvedListaNotas);
+    	    //frame.add(curvedListaNotas);
     	    frame.pack();
     	    frame.setVisible(true);
 	}

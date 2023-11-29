@@ -2,15 +2,15 @@ package enj.appdesktop.model.bo;
 
 import java.util.List;
 
-import enj.appdesktop.model.daoo.ListaDAO;
-import enj.appdesktop.model.vo.ListaVO;
+import enj.appdesktop.model.daoo.Lista_CartaoDAO;
+import enj.appdesktop.model.vo.Lista_CartaoVO;
 import enj.appdesktop.model.vo.NotasVO;
 
-public class ListaBO {
-    private ListaDAO listaDAO = new ListaDAO();
+public class Lista_CartaoBO {
+    private Lista_CartaoDAO listaDAO = new Lista_CartaoDAO();
 
-    public void salvarLista(String titulo, String itens) {
-        ListaVO lista = new ListaVO(titulo, itens); // O ID pode ser 0 porque será atribuído automaticamente no banco de dados.
+    public void salvarLista(String titulo, int id_quadro) {
+        Lista_CartaoVO lista = new Lista_CartaoVO(titulo, id_quadro); // O ID pode ser 0 porque será atribuído automaticamente no banco de dados.
 
         try {
             listaDAO.SalvarListaDAO(lista);
@@ -20,8 +20,8 @@ public class ListaBO {
         }
     }
 
-    public void atualizarLista(int id, String titulo, String itens) {
-        ListaVO lista = new ListaVO(titulo, itens, id);
+    public void atualizarLista(int id, String titulo, int id_quadro) {
+        Lista_CartaoVO lista = new Lista_CartaoVO(id, titulo, id_quadro);
 
         try {
             listaDAO.AtualizarListaDAO(lista);
@@ -32,7 +32,7 @@ public class ListaBO {
     }
 
     public void deletarLista(int id) {
-        ListaVO lista = new ListaVO(id);
+        Lista_CartaoVO lista = new Lista_CartaoVO(id);
 
         try {
             listaDAO.DeletarListaDAO(lista);
@@ -41,17 +41,14 @@ public class ListaBO {
             // Trate o erro de acordo com as necessidades do aplicativo.
         }
     }
-    public List<ListaVO> listarLISTAS(String nome_perfil) {
+    public List<Lista_CartaoVO> listarLISTAS(String nome_perfil) {
         // Adicione a lógica para listar todas as notas associadas a uma conta específica
-        List<ListaVO> listas = listaDAO.todasListas(nome_perfil);
+        List<Lista_CartaoVO> listas = listaDAO.todasListas(nome_perfil);
         return listas;
     }
-    public List<ListaVO> ListasProntas() {
+    public List<Lista_CartaoVO> ListasProntas() {
         // Adicione a lógica para listar todas as notas associadas a uma conta específica
         return listaDAO.PreparadListas();
-    }
-    public boolean verificarSeTemListas(String nome_perfil) {
-        return listaDAO.verificarseTemNota(nome_perfil);
     }
   
 }

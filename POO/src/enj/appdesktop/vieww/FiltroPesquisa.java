@@ -21,8 +21,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
-import enj.appdesktop.model.daoo.ConsultaDAO;
-import enj.appdesktop.model.vo.ListaVO;
 import enj.appdesktop.model.vo.NotasVO;
 
 public class FiltroPesquisa extends JPanel{
@@ -111,97 +109,25 @@ public class FiltroPesquisa extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String pesquisa = tfpesquisa.getText();
-				ConsultaDAO buscar = new ConsultaDAO();
-				if(!pesquisa.isEmpty() && buscar.verificarPesquisa(pesquisa)) {
-					buscar.consultar(pesquisa);
-					 modeloTabela.setRowCount(0); // Limpa a tabela
-			            for (NotasVO nota : buscar.getNotasList()) {
-			                modeloTabela.addRow(new Object[]{nota.getTitulo(), nota.getContent()});
-				}
-			            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
-			           
-			} else if (!pesquisa.isEmpty() && buscar.verificarPesquisaLIS(pesquisa)) {
-				buscar.consultarLIS(pesquisa);
-				modeloTabela.setRowCount(0); // Limpa a tabela
-	            for (ListaVO lista : buscar.getListResult()) {
-	                modeloTabela.addRow(new Object[]{lista.getTitulo_list(), lista.getItens()});
-		}
-	            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
-			} else {
-				JOptionPane.showMessageDialog(null, "Nada foi encontrado");
-			}
-				
+						
 			}
 		});
 		tfpesquisa.getDocument().addDocumentListener(new DocumentListener() {
 			
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				String pesquisa = tfpesquisa.getText();
-				ConsultaDAO buscar = new ConsultaDAO();
-				if(pesquisa != null  && buscar.verificarPesquisa(pesquisa)) {
-					buscar.consultar(pesquisa);
-					 modeloTabela.setRowCount(0); // Limpa a tabela
-			            for (NotasVO nota : buscar.getNotasList()) {
-			                modeloTabela.addRow(new Object[]{nota.getTitulo(), nota.getContent()});
-				}
-			            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
-			           
-			} else if (!pesquisa.isEmpty() && buscar.verificarPesquisaLIS(pesquisa)) {
-				buscar.consultarLIS(pesquisa);
-				modeloTabela.setRowCount(0); // Limpa a tabela
-	            for (ListaVO lista : buscar.getListResult()) {
-	                modeloTabela.addRow(new Object[]{lista.getTitulo_list(), lista.getItens()});
-		}
-	            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
-			}
+			
 				
 			}
 			
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				String pesquisa = tfpesquisa.getText();
-				ConsultaDAO buscar = new ConsultaDAO();
-				if(!pesquisa.isEmpty() && buscar.verificarPesquisa(pesquisa)) {
-					buscar.consultar(pesquisa);
-					 modeloTabela.setRowCount(0); // Limpa a tabela
-			            for (NotasVO nota : buscar.getNotasList()) {
-			                modeloTabela.addRow(new Object[]{nota.getTitulo(), nota.getContent()});
-				}
-			            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
-			           
-			} else if (!pesquisa.isEmpty() && buscar.verificarPesquisaLIS(pesquisa)) {
-				buscar.consultarLIS(pesquisa);
-				modeloTabela.setRowCount(0); // Limpa a tabela
-	            for (ListaVO lista : buscar.getListResult()) {
-	                modeloTabela.addRow(new Object[]{lista.getTitulo_list(), lista.getItens()});
-		}
-	            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
-			}
 				
 			}
 			
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				String pesquisa = tfpesquisa.getText();
-				ConsultaDAO buscar = new ConsultaDAO();
-				if(!pesquisa.isEmpty() && buscar.verificarPesquisa(pesquisa)) {
-					buscar.consultar(pesquisa);
-					 modeloTabela.setRowCount(0); // Limpa a tabela
-			            for (NotasVO nota : buscar.getNotasList()) {
-			                modeloTabela.addRow(new Object[]{nota.getTitulo(), nota.getContent()});
-				}
-			            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
-			           
-			} else if (!pesquisa.isEmpty() && buscar.verificarPesquisaLIS(pesquisa)) {
-				buscar.consultarLIS(pesquisa);
-				modeloTabela.setRowCount(0); // Limpa a tabela
-	            for (ListaVO lista : buscar.getListResult()) {
-	                modeloTabela.addRow(new Object[]{lista.getTitulo_list(), lista.getItens()});
-		}
-	            modeloTabela.fireTableDataChanged(); // Atualiza a tabela
-			}
+				
 				
 			}
 		});
@@ -209,31 +135,6 @@ public class FiltroPesquisa extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ConsultaDAO buscar = new ConsultaDAO();
-				if(cbFiltro.getSelectedIndex() == 0) {
-					buscar.filtro1();
-					modeloTabela.setRowCount(0); // Limpa a tabela
-		            for (NotasVO nota : buscar.getTodasNotas1()) {
-		                modeloTabela.addRow(new Object[]{nota.getTitulo(), nota.getContent()});
-			}
-		            modeloTabela.fireTableDataChanged();
-				}
-				else if(cbFiltro.getSelectedIndex() == 1) {
-					buscar.filtro2();
-					modeloTabela.setRowCount(0); // Limpa a tabela
-		            for (NotasVO nota : buscar.getTodasNotas2()) {
-		                modeloTabela.addRow(new Object[]{nota.getTitulo(), nota.getContent()});
-			}
-		            modeloTabela.fireTableDataChanged();
-				}
-				else if(cbFiltro.getSelectedIndex() == 2) {
-					buscar.filtro3();
-					modeloTabela.setRowCount(0); // Limpa a tabela
-		            for (NotasVO nota : buscar.getTodasNotas3()) {
-		                modeloTabela.addRow(new Object[]{nota.getTitulo(), nota.getContent()});
-			}
-		            modeloTabela.fireTableDataChanged();
-				}
 				
 			}
 		});

@@ -13,7 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import enj.appdesktop.model.daoo.ConsultaDAO;
 import enj.appdesktop.model.vo.ContaVO;
 
 import java.lang.String;

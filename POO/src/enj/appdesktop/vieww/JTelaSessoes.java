@@ -60,7 +60,7 @@ public class JTelaSessoes extends JFrame{
 	private void posicionandoComponentes() {
 		Font fonte = new Font("Bernoru", Font.BOLD, 50);
 		
-		lblMockupLogo = new JLabel(new ImageIcon("D:\\projetoENjoyNotes\\logo01.png"));	
+		lblMockupLogo = new JLabel(new ImageIcon("C:\\Users\\AleixoUNI\\git\\EnjoyNotes\\projetoENjoyNotes\\logo01.png"));	
 		lblMockupLogo.setBounds(51, 29, 139, 77);
 		
 		lblPergunta = new JLabel("Quem está acessando?");

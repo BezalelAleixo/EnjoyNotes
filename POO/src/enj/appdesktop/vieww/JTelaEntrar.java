@@ -21,7 +21,6 @@ import javax.swing.JTextField;
 import enj.appdesktop.controller.ContaController;
 import enj.appdesktop.controller.SessaoController;
 import enj.appdesktop.controller.UsuarioController;
-import enj.appdesktop.model.daoo.ConsultaDAO;
 import enj.appdesktop.model.daoo.LoginDAO;
 import enj.appdesktop.model.vo.ContaVO;
 

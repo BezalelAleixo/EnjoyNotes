@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import enj.appdesktop.model.vo.ContaVO;
-import enj.appdesktop.model.vo.ListaVO;
 import enj.appdesktop.model.vo.SessaoVO;
 
 public class SessaoDAO {
@@ -67,8 +66,8 @@ public class SessaoDAO {
 				check = true;
 			}
 		} catch (SQLException e) {
-			java.util.logging.Logger.getLogger(ConsultaDAO.class.getName()).log(java.util.logging.Level.SEVERE, null,
-					e);
+			System.out.print(e);
+			
 		}
 		return check;
 	}

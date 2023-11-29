@@ -1,39 +1,40 @@
 package enj.appdesktop.model.vo;
 
-public class ListaVO {
+public class Lista_CartaoVO{
 	private int id;
     private String titulo_list;
-    private String itens;
+    private String descricao;
     private String data_de_criacao;
+    private int id_quadro;
     
-	public ListaVO() {
+	public Lista_CartaoVO() {
 		super();
 	}
 
-	public ListaVO(String itens, String titulo_list, int id) {
+	public Lista_CartaoVO(String titulo_list, int id_quadro) {
 		super();
-		this.id = id;
 		this.titulo_list = titulo_list;
-		this.itens = itens;
+		this.id_quadro = id_quadro;
 	}
 
-	public ListaVO(int id, String titulo_list, String itens, String data_de_criacao) {
+	public Lista_CartaoVO(int id, String titulo_list, int id_quadro) {
 		super();
 		this.id = id;
 		this.titulo_list = titulo_list;
-		this.itens = itens;
+		this.id_quadro = id_quadro;
+	}
+
+	public Lista_CartaoVO(int id) {
+		super();
+		this.id = id;
+	}
+	
+	public Lista_CartaoVO(int id, String titulo_list, String data_de_criacao, int id_quadro) {
+		super();
+		this.id = id;
+		this.titulo_list = titulo_list;
 		this.data_de_criacao = data_de_criacao;
-	}
-
-	public ListaVO(int id) {
-		super();
-		this.id = id;
-	}
-
-	public ListaVO(String titulo_list, String itens) {
-		super();
-		this.titulo_list = titulo_list;
-		this.itens = itens;
+		this.id_quadro = id_quadro;
 	}
 
 	public int getId() {
@@ -52,14 +53,6 @@ public class ListaVO {
 		this.titulo_list = titulo_list;
 	}
 
-	public String getItens() {
-		return itens;
-	}
-
-	public void setItens(String itens) {
-		this.itens = itens;
-	}
-
 	public String getData_de_criacao() {
 		return data_de_criacao;
 	}
@@ -67,6 +60,16 @@ public class ListaVO {
 	public void setData_de_criacao(String data_de_criacao) {
 		this.data_de_criacao = data_de_criacao;
 	}
+
+	public int getId_quadro() {
+		return id_quadro;
+	}
+
+	public void setId_quadro(int id_quadro) {
+		this.id_quadro = id_quadro;
+	}
+
+	
     
 
 }

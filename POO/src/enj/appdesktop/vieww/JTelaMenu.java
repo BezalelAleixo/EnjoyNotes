@@ -31,18 +31,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
-import enj.appdesktop.controller.ListaController;
 import enj.appdesktop.controller.NotaController;
 import enj.appdesktop.controller.SessaoController;
 import enj.appdesktop.model.vo.ContaVO;
-import enj.appdesktop.model.vo.ListaVO;
 import enj.appdesktop.model.vo.NotasVO;
 	
 	public class JTelaMenu extends JPanel{
 	
 		private JPanel pnPrincipal, pnBarra;
-		private JPanel pnOpcoes, pnNotas, pnListas, pnQuadros;
-		private JButton btn3linhas, btnCronometro, btnAgenda, btnPesquisar, btnConfiguracoes, btnConta;
+		private JPanel pnOpcoes, pnNotas, pnListas;
+		private JButton btn3linhas, btnCronometro, btnAgenda, btnPesquisar, btnConfiguracoes, btnConta, btnQuadro, btnVideos;
 		private JPanel pnLBLNotas, pnListaNotas;
 		private JLabel lblNotas;
 		private JButton btnCriarNota;
@@ -88,7 +86,7 @@ import enj.appdesktop.model.vo.NotasVO;
 	        Font fonte3 = new Font("Garet", Font.PLAIN, 12);
 			
 	        try {
-	             fontIcon = Font.createFont(Font.TRUETYPE_FONT, new File("D:\\AleixoUNI\\BEZALEL\\Fontes\\font-awesome-4.7.0\\font-awesome-4.7.0\\fonts\\FontAwesome.otf")).deriveFont(30f);       
+	             fontIcon = Font.createFont(Font.TRUETYPE_FONT, new File("D:\\AleixoUNI\\BEZALEL\\Fontes\\font-awesome-4.7.0\\font-awesome-4.7.0\\fonts\\FontAwesome.otf")).deriveFont(45f);       
 	         } catch (IOException | FontFormatException e) {
 	             e.printStackTrace();
 	         }
@@ -101,42 +99,54 @@ import enj.appdesktop.model.vo.NotasVO;
 			pnOpcoes.setPreferredSize(new Dimension(1366,115));
 			pnOpcoes.setBackground(Color.WHITE);
 			
-			btn3linhas = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\3linhas.png"));
+			btn3linhas = new JButton("\uf0c9");
+			btn3linhas.setFont(fontIcon);
+			btn3linhas.setBackground(Color.WHITE);
 			btn3linhas.setPreferredSize(new Dimension(52,41));
 			MatteBorder emptyBorder1 = BorderFactory.createMatteBorder(0, 40, 0, 900, Color.WHITE);
 			MatteBorder redBottomBorder1 = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE);
 		    Border compoundBorder1 = BorderFactory.createCompoundBorder(emptyBorder1, redBottomBorder1);
 			btn3linhas.setBorder(compoundBorder1);
 			
-			btnCronometro = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\botaoCronometro.png"));
-			btnCronometro.setPreferredSize(new Dimension(54,50));
+			btnCronometro = new JButton("\uf017");
+			btnCronometro.setFont(fontIcon);
+			btnCronometro.setBackground(Color.WHITE);
+			btnCronometro.setPreferredSize(new Dimension(52,52));
 			MatteBorder emptyBorder2 = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE);
-			MatteBorder redBottomBorder2 = BorderFactory.createMatteBorder(0, 0, 0, 10, Color.WHITE);
+			MatteBorder redBottomBorder2 = BorderFactory.createMatteBorder(0, 0, 0, 20, Color.WHITE);
 		    Border compoundBorder2 = BorderFactory.createCompoundBorder(emptyBorder2, redBottomBorder2);
 			btnCronometro.setBorder(compoundBorder2);
 			
-			btnAgenda = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\botaoAgenda.png"));
+			btnAgenda = new JButton("\uf073");
+			btnAgenda.setFont(fontIcon);
+			btnAgenda.setBackground(Color.WHITE);
 			btnAgenda.setPreferredSize(new Dimension(52,52));
 			MatteBorder emptyBorder3 = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE);
-			MatteBorder redBottomBorder3 = BorderFactory.createMatteBorder(0, 0, 0, 10, Color.WHITE);
+			MatteBorder redBottomBorder3 = BorderFactory.createMatteBorder(0, 0, 0, 20, Color.WHITE);
 		    Border compoundBorder3 = BorderFactory.createCompoundBorder(emptyBorder3, redBottomBorder3);
 			btnAgenda.setBorder(compoundBorder3);
 			
-			btnPesquisar = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\botaoPesquisar.png"));
+			btnPesquisar = new JButton("\uf002");
+			btnPesquisar.setFont(fontIcon);
+			btnPesquisar.setBackground(Color.WHITE);
 			btnPesquisar.setPreferredSize(new Dimension(52,52));
 			MatteBorder emptyBorder4 = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE);
-			MatteBorder redBottomBorder4 = BorderFactory.createMatteBorder(0, 0, 0, 10, Color.WHITE);
+			MatteBorder redBottomBorder4 = BorderFactory.createMatteBorder(0, 0, 0, 20, Color.WHITE);
 		    Border compoundBorder4 = BorderFactory.createCompoundBorder(emptyBorder4, redBottomBorder4);
 			btnPesquisar.setBorder(compoundBorder4);
 			
-			btnConfiguracoes = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\botaoConfiguracoes.png"));
+			btnConfiguracoes = new JButton("\uf013");
+			btnConfiguracoes.setFont(fontIcon);
+			btnConfiguracoes.setBackground(Color.WHITE);
 			btnConfiguracoes.setPreferredSize(new Dimension(52,52));
 			MatteBorder emptyBorder5 = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE);
-			MatteBorder redBottomBorder5 = BorderFactory.createMatteBorder(0, 0, 0, 10, Color.WHITE);
+			MatteBorder redBottomBorder5 = BorderFactory.createMatteBorder(0, 0, 0, 20, Color.WHITE);
 		    Border compoundBorder5 = BorderFactory.createCompoundBorder(emptyBorder5, redBottomBorder5);
 			btnConfiguracoes.setBorder(compoundBorder5);
 			
-			btnConta = new JButton(new ImageIcon("D:\\projetoENjoyNotes\\botaoUsuario.png"));
+			btnConta = new JButton("\uf2bd");
+			btnConta.setFont(fontIcon);
+			btnConta.setBackground(Color.WHITE);
 			btnConta.setPreferredSize(new Dimension(52,52));
 			MatteBorder emptyBorder6 = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE);
 			MatteBorder redBottomBorder6 = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE);
@@ -170,7 +180,7 @@ import enj.appdesktop.model.vo.NotasVO;
 	        btnCriarNota.setBorder(new LineBorder(Color.WHITE));
 	       
 			pnListaNotas = new JPanel();
-			FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, 20, 0); // 20 pixels de espaçamento horizontal
+			FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT, 20, 5); // 20 pixels de espaçamento horizontal
 			pnListaNotas.setLayout(flowLayout);
 			pnListaNotas.setPreferredSize(new Dimension(1366, 160));
 			pnListaNotas.setMaximumSize(new Dimension(1366,160));
@@ -202,6 +212,24 @@ import enj.appdesktop.model.vo.NotasVO;
 			pnListaListas.setPreferredSize(new Dimension(1600, 160));
 			pnListaListas.setMaximumSize(new Dimension(1366,160));
 			pnListaListas.setBackground(Color.WHITE);
+			
+			btnQuadro = new JButton("Quadros");
+			btnQuadro.setFont(fonte);
+			btnQuadro.setBackground(Color.WHITE);
+			btnQuadro.setPreferredSize(new Dimension(52,52));
+			MatteBorder emptyBorder9 = BorderFactory.createMatteBorder(0, 0, 0, 20, Color.WHITE);
+			MatteBorder redBottomBorder9 = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE);
+		    Border compoundBorder9 = BorderFactory.createCompoundBorder(emptyBorder9, redBottomBorder9);
+			btnQuadro.setBorder(compoundBorder9);
+			
+			btnVideos = new JButton("Videos");
+			btnVideos.setFont(fonte);
+			btnVideos.setBackground(Color.WHITE);
+			btnVideos.setPreferredSize(new Dimension(52,52));
+			MatteBorder emptyBorder10 = BorderFactory.createMatteBorder(0, 0, 0, 720, Color.WHITE);
+			MatteBorder redBottomBorder10 = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE);
+		    Border compoundBorder10 = BorderFactory.createCompoundBorder(emptyBorder10, redBottomBorder10);
+			btnVideos.setBorder(compoundBorder10);
 	
 			
 			pnBarra.add(lblMockupLogo);
@@ -243,27 +271,117 @@ import enj.appdesktop.model.vo.NotasVO;
 			}
 			
 			}
-			ListaController listacontroller = new ListaController();
-			if(listacontroller.verificarSeTemLista(nome_perfil)) {
-			listacontroller.listarListas(nome_perfil);
-			List<JTelaListaDeListas> ListasPreparadas;
-			ListasPreparadas = new ArrayList<>();
-			List<ListaVO> ListasProntas = listacontroller.ListasPreparadasdaCOnta();
+			btnVideos.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sessoes.getContentpane().removeAll();
+					JTelaVideos videos = new JTelaVideos(conta, sessoes);
+	                sessoes.getContentpane().add(videos, BorderLayout.CENTER);
+	                sessoes.revalidate();
+	                sessoes.repaint();
+				}
+			});
+			btnQuadro.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					sessoes.getContentpane().removeAll();
+					JTelaQuadros quadros = new JTelaQuadros(conta, sessoes);
+	                sessoes.getContentpane().add(quadros, BorderLayout.CENTER);
+	                sessoes.revalidate();
+	                sessoes.repaint();
+					
+				}
+			});
 			
-			for(ListaVO listas : ListasProntas) {
-				JTelaListaDeListas blocos = new JTelaListaDeListas(listas, sessoes);
-				ListasPreparadas.add(blocos);
-			}
-
-			for (JTelaListaDeListas blocosProntos : ListasPreparadas) {
-			    blocosProntos.setPreferredSize(new Dimension(150, 150));
-			    blocosProntos.setMaximumSize(new Dimension(150,150));
-			    pnListaListas.add(blocosProntos);
-			}
 			
-		} else {
-			pnListaListas.add(new JLabel("Adicione"));
-		}
+			btn3linhas.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					MatteBorder emptyBorder1 = BorderFactory.createMatteBorder(0, 40, 0, 20, Color.WHITE);
+					MatteBorder redBottomBorder1 = BorderFactory.createMatteBorder(0, 0, 0, 0, Color.WHITE);
+				    Border compoundBorder1 = BorderFactory.createCompoundBorder(emptyBorder1, redBottomBorder1);
+					btn3linhas.setBorder(compoundBorder1);
+					AddMaisOpcoes(btnQuadro, btnVideos);
+					revalidate();
+					repaint();
+				}
+			});
+			
 			btnCriarNota.addActionListener(new ActionListener() {
 				
 				@Override
@@ -435,5 +553,15 @@ import enj.appdesktop.model.vo.NotasVO;
 			pnPrincipal.add(pnOpcoes, FlowLayout.LEFT);
 			pnPrincipal.revalidate();
 			pnPrincipal.repaint();
+		}
+		public void AddMaisOpcoes(JButton btnQuadros, JButton btnVideos) {
+			pnOpcoes.add(btn3linhas); 
+			pnOpcoes.add(btnQuadros); 
+			pnOpcoes.add(btnVideos); 
+			pnOpcoes.add(btnCronometro);
+			pnOpcoes.add(btnAgenda);
+			pnOpcoes.add(btnPesquisar);
+			pnOpcoes.add(btnConfiguracoes);
+			pnOpcoes.add(btnConta);
 		}
 		}
